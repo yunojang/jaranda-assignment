@@ -16,13 +16,15 @@ const HeaderWrap = styled.div`
   z-index: 10;
   background-color: #f9f9f9;
 `;
-const RecentListLink = styled(Link)`
-  display: ${props => (props.hidden ? 'none' : 'block')};
-  margin-right: 10%;
-`;
-
 const LeftLink = styled(Link)`
   margin-left: 10%;
+`;
+const RightLink = styled(Link)`
+  margin-Right: 10px;
+`;
+const Account = styled.div`
+  display:flex;
+  margin-right: 10%;
 `;
 
 class Header extends React.Component {
@@ -33,10 +35,14 @@ class Header extends React.Component {
         <LeftLink to="/">
           <Button select={pathname === '/'}>Main</Button>
         </LeftLink>
-        <RecentListLink
-          hidden={pathname === '/recentList'}
-          to="/recentList"
-        ></RecentListLink>
+        <Account>
+          <RightLink to="/login">
+            <Button select={pathname === '/login'}>Login</Button>
+          </RightLink>
+          <RightLink to="/signup">
+            <Button select={pathname === '/signup'}>Sign Up</Button>
+          </RightLink>
+        </Account>
       </HeaderWrap>
     );
   }
