@@ -7,10 +7,20 @@ import Card from './Card';
 import Policy from './Policy';
 import Input from 'Components/input';
 
+import COLOR from 'constant/colorCode';
+
 
 const Container = styled.form`
   display: flex;
   flex-direction: column;
+`;
+
+const Submit = styled.input.attrs({ type: 'submit' })`
+  height: 44px;
+  background : ${COLOR.SINGUP_MAIN};
+  color: #fff;
+  border : none;
+  border-radius: 6px;
 `;
 
 function Form() {
@@ -24,6 +34,10 @@ function Form() {
       <Adress />
       <Card />
       <Policy />
+      <Submit 
+        type='submit' 
+        value='가입하기' 
+      />
     </Container>
   )
 }

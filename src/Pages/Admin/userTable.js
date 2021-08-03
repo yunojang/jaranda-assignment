@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
+
 import PageButton from 'Components/pageButton';
 import UserModal from './userModal';
 import { ROLE } from 'asset/role';
 import { cardNumberFormat } from 'utils/format';
+import OptionalAccount from './optionalAccount';
 
 const Container = styled.div`
   margin-top: 30px;
@@ -97,11 +99,11 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ users, userList }) => {
+const UserTable = ({ users, setUsers }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const [limit] = useState(10);
-  const [showUsers, setShowUsers] = useState([]);
+  const [limit] = useState(3);
+  const [showUsers, setShowUsers] = useState(users.slice(0, limit));
   const openModal = idx => {
     setIsModal(true);
     setModalId(idx);
@@ -110,10 +112,6 @@ const UserTable = ({ users, userList }) => {
   const toggleModal = () => {
     setIsModal(!isModal);
   };
-
-  useEffect(() => {
-    setShowUsers(users.slice(0, limit));
-  }, []);
 
   return (
     <Container>
@@ -143,11 +141,11 @@ const UserTable = ({ users, userList }) => {
         limit={limit}
         size={5}
       />
-      <UserModal
-        user={users[modalId]}
-        show={isModal}
-        toggleModal={toggleModal}
-      ></UserModal>
+
+      {isModal && (
+        <UserModal user={showUsers[modalId]} toggleModal={toggleModal} />
+      )}
+      <OptionalAccount setUsers={setUsers} lastId={users.length} />
     </Container>
   );
 };
