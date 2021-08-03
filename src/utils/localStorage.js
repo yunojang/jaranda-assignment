@@ -23,7 +23,7 @@ class Storage {
 		const loadedData = this.load() ?? [];
 
 		if (!Array.isArray(loadedData)) {
-			console.error('Array');
+			console.error('You can push only on Array');
 			return;
 		}
 

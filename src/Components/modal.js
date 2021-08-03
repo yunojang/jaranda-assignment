@@ -15,11 +15,9 @@ const ModalWrap = styled.div`
 `;
 
 const Container = styled.div`
-  position: relative;
-  width: ${props => (props.Small ? '30%' : '50%')};
-  height: ${props => (props.Small ? '20%' : '40%')};
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
   background-color: white;
-  padding: 16px;
+  padding: 2rem;
   border-radius: 10px;
   z-index: 10;
 `;
@@ -33,10 +31,10 @@ const OutLayer = styled.div`
   z-index: 0;
 `;
 
-function Modal({show,Small,toggle,children}){
+function Modal({show,width,height,toggle,children}){
   return (
     <ModalWrap show={show}>
-      <Container Small={Small}>{children}</Container>
+      <Container height={height} width={width}>{children}</Container>
       <OutLayer onClick={toggle}></OutLayer>
     </ModalWrap>
   );

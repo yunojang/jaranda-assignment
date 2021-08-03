@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './button';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import LoginModal from '../Pages/Main/loginModal';
 
 const HeaderWrap = styled.div`
   top: 0;
@@ -29,15 +30,28 @@ const Account = styled.div`
 
 function Header({ history }){
   const pathname = history.location.pathname;
+  const [modal, setModal] = useState(false);
+
+  const toggleModal = () => {
+    setModal(!modal);
+  }
+
   return (
     <HeaderWrap>
       <LeftLink to="/">
         <Button select={pathname === '/'}>Main</Button>
       </LeftLink>
       <Account>
-        <RightLink to="/login">
-          <Button select={pathname === '/login'}>Login</Button>
-        </RightLink>
+      <RightLink to="/">
+        <Button onClick={toggleModal} select={pathname === '/login'}>Login</Button>
+      </RightLink>
+        <div>
+          <LoginModal
+              show={modal}
+              toggle={toggleModal}
+          >
+          </LoginModal>
+        </div>
         <RightLink to="/signup">
           <Button select={pathname === '/signup'}>Sign Up</Button>
         </RightLink>

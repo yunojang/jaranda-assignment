@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { ROUTES_PATH } from 'constant/routesPath';
 import Admin from 'Pages/Admin';
 import Main from 'Pages/Main';
-import Login from 'Pages/Login';
 import Signup from 'Pages/Signup';
 import Header from './Components/header';
 
@@ -16,7 +15,6 @@ class Routes extends React.Component {
         <Switch>
           <Route exact path={ROUTES_PATH.MAIN} component={Main}></Route>
           <Route path={ROUTES_PATH.ADMIN} component={Admin}></Route>
-          <Route path={ROUTES_PATH.LOGIN} component={Login}></Route>
           <Route path={ROUTES_PATH.SIGNUP} component={Signup}></Route>
         </Switch>
       </Router>
