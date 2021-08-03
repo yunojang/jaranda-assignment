@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from './button';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import LoginModal from '../Pages/Main/loginModal';
+import LoginModal from '../Pages/Main/LoginModal';
 
 const HeaderWrap = styled.div`
   top: 0;
@@ -23,6 +23,11 @@ const LeftLink = styled(Link)`
 const RightLink = styled(Link)`
   margin-Right: 10px;
 `;
+const PageLink = styled(Link)`
+  margin-Right: 10px;
+  text-decoration:none;
+  color:#a9a3a9;
+`;
 const Account = styled.div`
   display:flex;
   margin-right: 10%;
@@ -31,9 +36,16 @@ const Account = styled.div`
 function Header({ history }){
   const pathname = history.location.pathname;
   const [modal, setModal] = useState(false);
+  const [isLoggedIn,setIsLoggedIn] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
+  }
+ 
+  const onLogout = () => {
+    setModal(false);
+    setIsLoggedIn(false);
+    console.log('로그아웃')
   }
 
   return (
@@ -42,19 +54,31 @@ function Header({ history }){
         <Button select={pathname === '/'}>Main</Button>
       </LeftLink>
       <Account>
-      <RightLink to="/">
-        <Button onClick={toggleModal} select={pathname === '/login'}>Login</Button>
+        {isLoggedIn ?
+        <>
+          <PageLink to="/admin">관리페이지</PageLink>
+          <PageLink to="/">마이페이지</PageLink>
+          <Button onClick={onLogout}>
+            <PageLink to="/">
+              Logout
+            </PageLink>
+          </Button>
+        </>
+        : 
+        <Button onClick={toggleModal} select={pathname === '/login'}>
+          <PageLink to="/">
+            Login
+          </PageLink>
+        </Button>}
+      <LoginModal
+        show={modal}
+        toggle={toggleModal}
+        setIsLoggedIn={setIsLoggedIn}
+      >
+      </LoginModal>
+      <RightLink to="/signup">
+        <Button select={pathname === '/signup'}>Sign Up</Button>
       </RightLink>
-        <div>
-          <LoginModal
-              show={modal}
-              toggle={toggleModal}
-          >
-          </LoginModal>
-        </div>
-        <RightLink to="/signup">
-          <Button select={pathname === '/signup'}>Sign Up</Button>
-        </RightLink>
       </Account>
     </HeaderWrap>
   );
