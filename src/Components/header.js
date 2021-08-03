@@ -20,13 +20,10 @@ const HeaderWrap = styled.div`
 const LeftLink = styled(Link)`
   margin-left: 10%;
 `;
-const RightLink = styled(Link)`
-  margin-Right: 10px;
-`;
+
 const PageLink = styled(Link)`
   margin-Right: 10px;
-  text-decoration:none;
-  color:#a9a3a9;
+
 `;
 const Account = styled.div`
   display:flex;
@@ -58,27 +55,33 @@ function Header({ history }){
         <>
           <PageLink to="/admin">관리페이지</PageLink>
           <PageLink to="/">마이페이지</PageLink>
-          <Button onClick={onLogout}>
-            <PageLink to="/">
+          <PageLink to="/">
+            <Button onClick={onLogout}>
               Logout
-            </PageLink>
-          </Button>
+            </Button>
+          </PageLink>
         </>
         : 
-        <Button onClick={toggleModal} select={pathname === '/login'}>
+        <>
           <PageLink to="/">
-            Login
+            <Button onClick={toggleModal} select={pathname === '/login'}>
+              Login
+            </Button>
           </PageLink>
-        </Button>}
+          <PageLink to="/signup">
+            <Button select={pathname === '/signup'}>
+              Sign Up
+            </Button>
+          </PageLink>
+        </>
+        }
+        
       <LoginModal
         show={modal}
         toggle={toggleModal}
         setIsLoggedIn={setIsLoggedIn}
       >
       </LoginModal>
-      <RightLink to="/signup">
-        <Button select={pathname === '/signup'}>Sign Up</Button>
-      </RightLink>
       </Account>
     </HeaderWrap>
   );
