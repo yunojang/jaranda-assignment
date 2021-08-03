@@ -2,29 +2,23 @@ import React from 'react';
 import styled from 'styled-components'
 import Modal from '../../Components/modal'
 import Button from '../../Components/button'
+import useInput from '../../hooks/useInput'
 
-const FormWrap = styled.form`
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
+const FormWrap = styled.form` 
   padding: 2rem;
-  width: 360px;
-  background: white;
-  border-radius: 2px;
 `
 const Body = styled.div`
  	margin: 0;
  	margin-bottom: 1rem;
   justify-content: center;
 	text-align: center;
-  display: flex;
-  flex-direction: column;
-  height: 70%;
 `
 const Label = styled.label`
   display: block;
-    padding-bottom: 2rem;
-    text-align: center;
-    font-weight: bold;
-    letter-spacing: 2px;
+  padding-bottom: 2rem;
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 2px;
 	font-size: 30px;
 `
 const Input = styled.input`
@@ -42,49 +36,64 @@ const Input = styled.input`
   }
 `;
 const Footer = styled.div`
-  margin-top:auto;
   display:flex;
   justify-content:space-around;
-`
-const loginModal = ({ show,toggle }) =>{
-    return (
-      <Modal 
-        Small
-        show={show}
-        toggle={toggle}
-			>
-        <FormWrap>
-          <Label>
+`;
+
+function LoginModal({ show,toggle,setIsLoggedIn }) {
+  const [id, onChangeId] = useInput('');
+  const [password, onChangePassword] = useInput('');
+
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    setIsLoggedIn(true);
+    console.log(id,password);
+  }
+
+  return (
+    <Modal 
+      Small
+      show={show}
+      toggle={toggle}
+    >
+      <FormWrap onSubmit={onSubmitForm}>
+        <Label>
+          로그인
+        </Label>
+        <Body>
+          <Input
+            type="text"
+            placeholder="아이디를 입력하세요."
+            name="id"
+            value={id}
+            onChange={onChangeId}
+            required
+          />
+          <Input
+            type="password"
+            placeholder="비밀번호를 입력하세요."
+            name="password"
+            value={password}
+            onChange={onChangePassword}
+            required
+          />
+        </Body>
+        <Footer>
+          <Button
+            type="submit"
+            onClick={toggle}
+          >
             로그인
-          </Label>
-					<Body>
-						<Input
-							type="text"
-							placeholder="아이디를 입력하세요."
-							name="id"
-						/>
-						<Input
-							type="password"
-							placeholder="비밀번호를 입력하세요."
-							name="password"
-						/>
-          </Body>
-          <Footer>
-						<Button
-							type="button"
-							onClick={toggle}
-						>
-							로그인
-						</Button>
-						<Button
-							type="button"
-							onClick={toggle}
-						>
-							닫기
-						</Button>
-          </Footer>
-        </FormWrap>
-      </Modal>
-    )
+          </Button>
+          <Button
+            type="button"
+            onClick={toggle}
+          >
+            닫기
+          </Button>
+        </Footer>
+      </FormWrap>
+    </Modal>
+  )
 }
-export default loginModal;
+export default LoginModal;
