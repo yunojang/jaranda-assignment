@@ -7,11 +7,11 @@ const userData = new LocalStorage(KEYNAME.USERDATA);
 if (userData.load() === null) {
   const admin = {
     id: 1,
-    userName: 'eric',
+    userName: 'admin',
     address: '104동 101 호',
     cardNumber: '1234123412341234',
-    password: 'a',
-    accessMenus: [0, 1, 2],
+    password: '1234',
+    role : 1,
     isAdmin: 1,
   };
 
