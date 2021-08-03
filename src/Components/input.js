@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from "styled-components"
 
-const COLOR = {
-  MAIN : '#0085FD'
-}
+import COLOR from 'constant/colorCode';
 
 const ACTIVE_STYLE = {
   'border' : `1px solid ${COLOR.MAIN}`,
