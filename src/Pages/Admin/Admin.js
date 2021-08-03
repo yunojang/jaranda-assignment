@@ -20,10 +20,6 @@ const Title = styled.h1`
   color: #252529;
 `;
 
-// const Left = styled.aside`
-//   width: 155px;
-// `;
-
 const Search = styled.div`
   display: flex;
   flex-direction: row;
@@ -69,7 +65,7 @@ const Search = styled.div`
 `;
 
 function Admin() {
-  const [users] = useState(USERS);
+  const [users, setUsers] = useState(USERS);
 
   const [value, setValue] = useState('');
   const [userList, setUserList] = useState([]);
@@ -105,7 +101,12 @@ function Admin() {
             사용자 추가
           </button>
         </Search>
-        <UserTable users={users} userList={userList} value={value} />
+        <UserTable
+          users={users}
+          setUsers={setUsers}
+          userList={userList}
+          value={value}
+        />
       </AdminWrap>
     </Container>
   );

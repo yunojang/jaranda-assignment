@@ -1,6 +1,6 @@
 import React , { useState,useEffect } from 'react'
 import styled from 'styled-components'
-import {ROLE} from 'asset/role'
+import {ROLE} from 'constant/role'
 import userImage from 'asset/user.png' 
 import Modal from 'Components/modal'
 import Button from 'Components/button'

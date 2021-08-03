@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import OptionalAccount from './optionalAccount';
 
-const UserSearch = ({ handleInput }) => {
+const UserSearch = ({ users, setUsers }) => {
   const Search = styled.div`
     display: flex;
     flex-direction: row;
@@ -46,15 +47,27 @@ const UserSearch = ({ handleInput }) => {
     }
   `;
 
+  const [isModal, setIsModal] = useState(false);
+
+  const toggleModal = () => {
+    setIsModal(prev => !prev);
+  };
+
   return (
     <>
       <Search>
-        <input placeholder="전체 사용자 검색" onChange={handleInput} />
-        <button>
+        <input placeholder="전체 사용자 검색" />
+        <button onClick={toggleModal}>
           <img src="images/user-add.svg" alt="추가"></img>
           사용자 추가
         </button>
       </Search>
+      <OptionalAccount
+        show={isModal}
+        toggle={toggleModal}
+        setUsers={setUsers}
+        lastId={users.length}
+      />
     </>
   );
 };

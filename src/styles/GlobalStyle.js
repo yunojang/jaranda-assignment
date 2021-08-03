@@ -21,4 +21,7 @@ input, button {
 ol, ul, li {
   list-style: none;
 }
+button, input[type='submit'] {
+  cursor: pointer;
+}
 `;

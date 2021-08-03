@@ -3,15 +3,18 @@ import styled from 'styled-components'
 import Modal from '../../Components/modal'
 import Button from '../../Components/button'
 import useInput from '../../hooks/useInput'
+import Input from 'Components/input';
 
 const FormWrap = styled.form` 
   padding: 2rem;
 `
 const Body = styled.div`
- 	margin: 0;
+  display:flex;
+  flex-direction: column;
  	margin-bottom: 1rem;
   justify-content: center;
 	text-align: center;
+
 `
 const Label = styled.label`
   display: block;
@@ -21,28 +24,14 @@ const Label = styled.label`
   letter-spacing: 2px;
 	font-size: 30px;
 `
-const Input = styled.input`
-	font-size: 1rem;
-  border: none;
-  border-bottom: 1px solid #ced4da;
-  padding-bottom: 0.5rem;
-  outline: none;
-  width: 90%;
-  &:focus {
-    border-bottom: 1px solid #868e96;
-  }
-  & + & {
-    margin-top: 1rem;
-  }
-`;
 const Footer = styled.div`
   display:flex;
   justify-content:space-around;
 `;
 
 function LoginModal({ show,toggle,setIsLoggedIn }) {
-  const [id, onChangeId] = useInput('');
-  const [password, onChangePassword] = useInput('');
+  const id = useInput('');
+  const password = useInput('');
 
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -65,17 +54,15 @@ function LoginModal({ show,toggle,setIsLoggedIn }) {
             type="text"
             placeholder="아이디를 입력하세요."
             name="id"
-            value={id}
-            onChange={onChangeId}
             required
+            {...id}
           />
           <Input
             type="password"
             placeholder="비밀번호를 입력하세요."
             name="password"
-            value={password}
-            onChange={onChangePassword}
             required
+            {...password}
           />
         </Body>
         <Footer>

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
-import PageButton from 'Components/pageButton';
+import PageButton from 'Pages/Admin/pageButton';
 import UserModal from './userModal';
-import { ROLE } from 'asset/role';
+import { ROLE } from 'constant/role';
 import { cardNumberFormat } from 'utils/format';
-// import OptionalAccount from './optionalAccount';
 
 const Container = styled.div`
   position: relative;
@@ -97,10 +96,10 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ users, setUsers, value, userList }) => {
+const UserTable = ({ users, value, userList, setUsers }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const [limit] = useState(10);
+  const [limit] = useState(5);
   const [showUsers, setShowUsers] = useState(users.slice(0, limit));
   const openModal = idx => {
     setIsModal(true);
@@ -155,7 +154,6 @@ const UserTable = ({ users, setUsers, value, userList }) => {
       {isModal && (
         <UserModal user={showUsers[modalId]} toggleModal={toggleModal} />
       )}
-      {/* <OptionalAccount setUsers={setUsers} lastId={users.length} /> */}
     </Container>
   );
 };

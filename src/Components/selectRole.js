@@ -1,5 +1,5 @@
 import React,{} from 'react'
-import { ROLE } from 'asset/role'
+import { ROLE } from 'constant/role'
 import styled from 'styled-components'
 const SelectWrap = styled.select`
   height: 30px;

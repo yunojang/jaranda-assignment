@@ -1,12 +1,22 @@
-import { useState, useCallback } from 'react';
+import { useState } from 'react';
 
-const useInput = (initialInput = null) => {
-  const [input, setInput] = useState(initialInput);
-  const handler = useCallback(e => {
-    setInput(e.target.value);
-  }, []);
+const useInput = (initialValue, validate) => {
+  const [value, setValue] = useState(initialValue);
+  const [isValid, setValid] = useState(true);
 
-  return [input, handler, setInput];
+  const onInput = event => {
+    const {value} = event.target;
+
+    if (typeof validate === 'function') {
+      setValid(validate(value)); 
+    }
+
+    setValue(value);
+  }
+
+  return {
+    value, onInput, isValid
+  }
 };
 
 export default useInput;
