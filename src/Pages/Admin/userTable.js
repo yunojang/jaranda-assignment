@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components'
-import Modal from 'Components/modal'
+import UserModal from './userModal'
+import { ROLE } from 'asset/role'
+import {cardNumberFormat} from 'utils/format'
 
 const Td = styled.td`
   padding-right:18px;
@@ -21,13 +23,12 @@ const User = ({user, onClickhandler})=> {
       <Td>{id}</Td>
       <Td>{userName}</Td>
       <Td>{address}</Td>
-      <Td>{cardNumber}</Td>
-      <Td>{role}</Td>
+      <Td>{cardNumberFormat(cardNumber)}</Td>
+      <Td>{ROLE[role]}</Td>
       <Td>{isAdmin ? '관리자' : ''}</Td>
     </tr>
   )
 }
-
 
 const UserTable = ({users}) => {
   const [ isModal , setIsModal ] = useState(false)
@@ -35,6 +36,9 @@ const UserTable = ({users}) => {
   const openModal = (idx) => {
     setIsModal(true)
     setModalId(idx)
+  }
+  const toggleModal = () => {
+    setIsModal(!isModal)
   }
   return (
     <>
@@ -45,7 +49,7 @@ const UserTable = ({users}) => {
             <Td>이름</Td>
             <Td>주소</Td>
             <Td>카드번호</Td>
-            <Td>접근게시판</Td>
+            <Td>Role</Td>
             <Td>admin</Td>
           </tr>
         </THead>
@@ -59,11 +63,12 @@ const UserTable = ({users}) => {
           ))}
         </TBody>
       </Table>
-      <Modal
+      <UserModal
+        user={users[modalId]}
         show={isModal}
+        toggleModal={toggleModal}
       >
-        {isModal && users[modalId].userName}
-      </Modal>
+      </UserModal>
     </>
   );
 }
