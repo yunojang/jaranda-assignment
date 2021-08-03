@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './SignupButton';
 import Input from 'Components/input';
@@ -13,17 +13,33 @@ const SearchButton = styled(Button)`
 `;
 
 function Adress() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPostCode = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePostCode = () => {
+    setIsPopupOpen(false);
+  };
   return (
     <>
       <AdressContainer>
+
         <Input
           type='text'
           placeholder='주소'
           readOnly
           Fill
         />
-        <SearchButton>주소 찾기</SearchButton>
-
+        <SearchButton onClick={openPostCode}>주소 찾기</SearchButton>
+        <div id="popupDom">
+          {isPopupOpen && (
+            <PopupDom>
+              <PopupPostCode onClose={closePostCode} />
+            </PopupDom>
+          )}
+        </div>
       </AdressContainer>
 
       <Input type="text" placeholder="상세 주소" />
