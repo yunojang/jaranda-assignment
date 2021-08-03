@@ -9,8 +9,9 @@ const Container = styled.div`
   margin-top: 30px;
   padding: 30px;
   width: 795px;
+  font-weight: 400;
   background-color: white;
-  color: #252529;
+  color: #4a4a4a;
 
   button {
     border: none;
@@ -30,7 +31,8 @@ const Total = styled.div`
 
 const Td = styled.td`
   padding: 20px 30px 20px 0px;
-  max-width: 200px;
+  max-width: 150px;
+  font-size: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -64,6 +66,7 @@ const ModifyBtn = styled.div`
   justify-content: center;
   align-items: center;
   padding: 8px 10px;
+  margin-left: 10px;
   border: 1px solid #e3e3e3;
   border-radius: 5px;
   background-color: #fafafa;
@@ -94,10 +97,10 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ users }) => {
+const UserTable = ({ users, userList }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const [limit] = useState(3);
+  const [limit] = useState(10);
   const [showUsers, setShowUsers] = useState([]);
   const openModal = idx => {
     setIsModal(true);
