@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Input from 'Components/input';
 import Button from 'Components/button';
 import COLOR from 'constant/colorCode';
+import PopupDom from './PopupDom';
+import PopupPostCode from './PopupPostCode';
 
 const AdressContainer = styled.div`
   display: flex;
@@ -30,11 +32,29 @@ const ButtonAddress = styled(Button)`
 `;
 
 function Adress() {
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const openPostCode = () => {
+    setIsPopupOpen(true);
+  };
+
+  const closePostCode = () => {
+    setIsPopupOpen(false);
+  };
   return (
     <>
       <AdressContainer>
         <InputAddress type="text" placeholder="주소" readOnly />
-        <ButtonAddress>주소 찾기</ButtonAddress>
+        <ButtonAddress type="button" onClick={openPostCode}>
+          주소 찾기
+        </ButtonAddress>
+        <div id="popupDom">
+          {isPopupOpen && (
+            <PopupDom>
+              <PopupPostCode onClose={closePostCode} />
+            </PopupDom>
+          )}
+        </div>
       </AdressContainer>
 
       <Input type="text" placeholder="상세 주소" />

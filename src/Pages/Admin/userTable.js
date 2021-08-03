@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
 import PageButton from 'Components/pageButton';
 import UserModal from './userModal';
 import { ROLE } from 'asset/role';
 import { cardNumberFormat } from 'utils/format';
-import OptionalAccount from './optionalAccount';
+// import OptionalAccount from './optionalAccount';
 
 const Container = styled.div`
   margin-top: 30px;
@@ -142,7 +142,7 @@ const UserTable = ({ users, setUsers }) => {
       {isModal && (
         <UserModal user={showUsers[modalId]} toggleModal={toggleModal} />
       )}
-      <OptionalAccount setUsers={setUsers} lastId={users.length} />
+      {/* <OptionalAccount setUsers={setUsers} lastId={users.length} /> */}
     </Container>
   );
 };
