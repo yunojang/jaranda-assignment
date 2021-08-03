@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import PageButton from 'Components/pageButton';
+import Storage from 'constant/storage';
 import UserModal from './userModal'
-
 import { ROLE } from 'asset/role'
-import USERS from 'asset/users.json';
-
 import { cardNumberFormat } from 'utils/format'
 
 const Td = styled.td`
@@ -41,9 +38,14 @@ const UserTable = ({ users, setUsers }) => {
     setIsModal(true);
     setModalId(idx);
   };
+
+  const USERS = Storage.userdata.load();
+
+
   const toggleModal = () => {
     setIsModal(!isModal)
   }
+
   useEffect(() => {
     setUsers(USERS.slice(0, limit));
   }, []);
