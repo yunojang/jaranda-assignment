@@ -43,17 +43,15 @@ function PageButton({ items, setItems, limit, size }) {
       )}
       {pageList.length < size
         ? pageList.map(v => (
-            <>
-              <Button
-                key={v}
-                Small
-                onClick={() => {
-                  onPaging(v);
-                }}
-              >
-                {v}
-              </Button>
-            </>
+            <Button
+              key={v}
+              Small
+              onClick={() => {
+                onPaging(v);
+              }}
+            >
+              {v}
+            </Button>
           ))
         : !(pageList.length - currentPage < size / 2 + 1)
         ? pageList
@@ -64,17 +62,15 @@ function PageButton({ items, setItems, limit, size }) {
                 : 0) + size,
             )
             .map(v => (
-              <>
-                <Button
-                  key={v}
-                  Small
-                  onClick={() => {
-                    onPaging(v);
-                  }}
-                >
-                  {v + 1}
-                </Button>
-              </>
+              <Button
+                key={v}
+                Small
+                onClick={() => {
+                  onPaging(v);
+                }}
+              >
+                {v + 1}
+              </Button>
             ))
         : pageList
             .slice(
@@ -82,17 +78,15 @@ function PageButton({ items, setItems, limit, size }) {
                 pageList.length - size,
             )
             .map(v => (
-              <>
-                <Button
-                  key={v}
-                  Small
-                  onClick={() => {
-                    onPaging(v);
-                  }}
-                >
-                  {v + 1}
-                </Button>
-              </>
+              <Button
+                key={v}
+                Small
+                onClick={() => {
+                  onPaging(v);
+                }}
+              >
+                {v + 1}
+              </Button>
             ))}
       {currentPage === pageList.length - 1 ? (
         <></>
