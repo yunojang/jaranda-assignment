@@ -88,7 +88,8 @@
     "password": "a",
     "role": 11,
     "isAdmin": 0
-  },  {
+  },
+  {
     "id": 11,
     "userName": "eric",
     "address": "104동 101 호",
@@ -332,7 +333,7 @@
     "isAdmin": 0
   },
   {
-    "id":38,
+    "id": 38,
     "userName": "userName",
     "address": "104동 118 호",
     "cardNumber": "1234123412341234",

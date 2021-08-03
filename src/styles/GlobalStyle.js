@@ -7,7 +7,7 @@ ${reset}
   box-sizing : border-box;
 }
 *, html, body {
-  font-family: 'NanumSquare', sans-serif;
+  font-family: -apple-system, Helvetica, Arial, "hiragino kaku gothic pro", meiryo, "Microsoft YaHei", "ms pgothic", "Apple SD Gothic Neo", "Nanum Gothic", "Malgun Gothic", sans-serif;
 }
 a {
   color: inherit;

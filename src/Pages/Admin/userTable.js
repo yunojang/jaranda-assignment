@@ -7,11 +7,13 @@ import { ROLE } from 'constant/role';
 import { cardNumberFormat } from 'utils/format';
 
 const Container = styled.div`
+  position: relative;
   margin-top: 30px;
   padding: 30px;
   width: 795px;
+  font-weight: 400;
   background-color: white;
-  color: #252529;
+  color: #4a4a4a;
 
   button {
     border: none;
@@ -31,7 +33,9 @@ const Total = styled.div`
 
 const Td = styled.td`
   padding: 20px 30px 20px 0px;
-  max-width: 200px;
+  max-width: 150px;
+  min-width: 100px;
+  font-size: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -39,13 +43,7 @@ const Td = styled.td`
 
 const AdminTd = styled.td`
   padding: 20px 35px 20px 0px;
-
-  span {
-    border-radius: 50px;
-    padding: 8px 15px;
-    background-color: #4a4a4a;
-    color: white;
-  }
+  font-weight: 600;
 `;
 
 const Table = styled.table`
@@ -60,11 +58,14 @@ const THead = styled.thead`
 const TBody = styled.tbody``;
 
 const ModifyBtn = styled.div`
+  position: absolute;
+  right: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 8px 10px;
+  margin-top: 8px;
   border: 1px solid #e3e3e3;
   border-radius: 5px;
   background-color: #fafafa;
@@ -95,7 +96,7 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ users }) => {
+const UserTable = ({ users, value, userList, setUsers }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
   const [limit] = useState(5);
@@ -126,9 +127,21 @@ const UserTable = ({ users }) => {
           </tr>
         </THead>
         <TBody>
-          {showUsers.map((user, idx) => (
-            <User key={idx} user={user} onClickhandler={() => openModal(idx)} />
-          ))}
+          {value
+            ? userList.map((user, idx) => (
+                <User
+                  key={idx}
+                  user={user}
+                  onClickhandler={() => openModal(idx)}
+                />
+              ))
+            : showUsers.map((user, idx) => (
+                <User
+                  key={idx}
+                  user={user}
+                  onClickhandler={() => openModal(idx)}
+                />
+              ))}
         </TBody>
       </Table>
       <PageButton

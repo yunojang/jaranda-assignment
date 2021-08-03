@@ -34,7 +34,7 @@ const UserSearch = ({ users, setUsers }) => {
       padding: 20px 30px;
       height: 60px;
       font-size: 18px;
-      font-weight: bold;
+      font-weight: 500;
       background-color: #1685fd;
       color: white;
       border-radius: 5px;
