@@ -21,6 +21,7 @@ const Submit = styled.input.attrs({ type: 'submit' })`
   color: #fff;
   border : none;
   border-radius: 6px;
+  font-size : 14px;
 `;
 
 function Form() {

@@ -1,34 +1,15 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import Button from './SignupButton';
 import Input from 'Components/input';
-import Button from 'Components/button';
-import COLOR from 'constant/colorCode';
-import PopupDom from './PopupDom';
-import PopupPostCode from './PopupPostCode';
 
 const AdressContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
 
-const InputAddress = styled(Input)`
-  width: 60%;
-  ::placeholder {
-    text-align: center;
-  }
-`;
-
-const ButtonAddress = styled(Button)`
-  width: 38%;
-  height: 44px;
-  border: none;
-  background: ${COLOR.SINGUP_MAIN};
-  color: #fff;
-  font-size: 12px;
-
-  &:hover {
-    background-color: ${COLOR.SINGUP_MAIN};
-  }
+const SearchButton = styled(Button)`
+  margin-left: 5px;
 `;
 
 function Adress() {
@@ -44,10 +25,14 @@ function Adress() {
   return (
     <>
       <AdressContainer>
-        <InputAddress type="text" placeholder="주소" readOnly />
-        <ButtonAddress type="button" onClick={openPostCode}>
-          주소 찾기
-        </ButtonAddress>
+
+        <Input
+          type='text'
+          placeholder='주소'
+          readOnly
+          Fill
+        />
+        <SearchButton onClick={openPostCode}>주소 찾기</SearchButton>
         <div id="popupDom">
           {isPopupOpen && (
             <PopupDom>

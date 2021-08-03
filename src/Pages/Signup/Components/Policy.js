@@ -1,9 +1,14 @@
 import React from 'react';
+import styled from 'styled-components';
+
+const Conatiner = styled.div`
+  margin-bottom: 30px;
+`;
 
 function Policy() {
   return (
-    <div>
-    </div>
+    <Conatiner>
+    </Conatiner>
   )
 }
 

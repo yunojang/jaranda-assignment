@@ -26,7 +26,7 @@ const Title = styled.h1`
 // `;
 
 function Admin() {
-  const [users] = useState(USERS);
+  const [users, setUsers] = useState(USERS);
 
   // if (!users.isAdmin) {
   //   return (
@@ -40,7 +40,7 @@ function Admin() {
     <Container>
       <AdminWrap>
         <Title>사용자 관리</Title>
-        <UserSearch />
+        <UserSearch users={users} setUsers={setUsers} />
         <UserTable users={users} />
       </AdminWrap>
     </Container>

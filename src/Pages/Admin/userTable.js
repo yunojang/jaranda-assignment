@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
-import PageButton from 'Components/pageButton';
+import PageButton from 'Pages/Admin/pageButton';
 import UserModal from './userModal';
 import { ROLE } from 'asset/role';
 import { cardNumberFormat } from 'utils/format';
-// import OptionalAccount from './optionalAccount';
 
 const Container = styled.div`
   margin-top: 30px;
@@ -96,10 +95,10 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ users, setUsers }) => {
+const UserTable = ({ users }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const [limit] = useState(3);
+  const [limit] = useState(5);
   const [showUsers, setShowUsers] = useState(users.slice(0, limit));
   const openModal = idx => {
     setIsModal(true);
@@ -113,7 +112,7 @@ const UserTable = ({ users, setUsers }) => {
   return (
     <Container>
       <Total>
-        전체 사용자 <span>100</span>명
+        전체 사용자 <span>{users.length}</span>명
       </Total>
       <Table>
         <THead>
@@ -142,7 +141,6 @@ const UserTable = ({ users, setUsers }) => {
       {isModal && (
         <UserModal user={showUsers[modalId]} toggleModal={toggleModal} />
       )}
-      {/* <OptionalAccount setUsers={setUsers} lastId={users.length} /> */}
     </Container>
   );
 };
