@@ -143,8 +143,7 @@ const UserTable = ({ users, setUsers }) => {
         <UserModal user={showUsers[modalId]} toggleModal={toggleModal} />
       )}
       <OptionalAccount setUsers={setUsers} lastId={users.length} />
-    </>
-
+    </Container>
   );
 };
 
