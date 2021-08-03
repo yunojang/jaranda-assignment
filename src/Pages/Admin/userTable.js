@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from 'Components/modal';
-import USERS from 'asset/users.json';
 import PageButton from 'Components/pageButton';
+import Storage from 'constant/storage';
 
 const Td = styled.td`
   padding-right: 18px;
@@ -36,6 +36,7 @@ const UserTable = ({ users, setUsers }) => {
     setIsModal(true);
     setModalId(idx);
   };
+  const USERS = Storage.userdata.load();
 
   useEffect(() => {
     setUsers(USERS.slice(0, limit));
