@@ -1,5 +1,4 @@
 import React from 'react';
-import Input from 'Components/input';
 import styled from 'styled-components';
 import Button from './SignupButton';
 
@@ -23,14 +22,12 @@ function Adress() {
           Fill
         />
         <SearchButton>주소 찾기</SearchButton>
+
       </AdressContainer>
 
-      <Input 
-        type='text'
-        placeholder='상세 주소'
-      />
+      <Input type="text" placeholder="상세 주소" />
     </>
-  )
+  );
 }
 
 export default Adress;

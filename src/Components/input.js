@@ -1,13 +1,14 @@
 import React from 'react';
 import styled, { css } from "styled-components"
 
+
 import COLOR from 'constant/colorCode';
 
 const ACTIVE_STYLE = {
-  'border': `1px solid ${COLOR.SINGUP_MAIN}`,
-  'background': 'rgba(0,80,230,.1)',
-  'color': COLOR.SINGUP_MAIN,
-}
+  border: `1px solid ${COLOR.SINGUP_MAIN}`,
+  background: 'rgba(0,80,230,.1)',
+  color: COLOR.SINGUP_MAIN,
+};
 
 const InputWrap = styled.input`
   flex-grow : ${props => props.Fill ? '1' : ''};
@@ -31,6 +32,7 @@ const InputWrap = styled.input`
 
 function Input({ ...props }) {
   return <InputWrap {...props}></InputWrap>
+
 }
 
 export default Input;

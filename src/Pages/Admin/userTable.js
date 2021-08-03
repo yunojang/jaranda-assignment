@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-import PageButton from 'Components/pageButton';
+
+import PageButton from 'Pages/Admin/pageButton';
 import UserModal from './userModal';
 import { ROLE } from 'asset/role';
 import { cardNumberFormat } from 'utils/format';
@@ -97,8 +98,8 @@ const User = ({ user, onClickhandler }) => {
 const UserTable = ({ users }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const [limit] = useState(3);
-  const [showUsers, setShowUsers] = useState([]);
+  const [limit] = useState(5);
+  const [showUsers, setShowUsers] = useState(users.slice(0, limit));
   const openModal = idx => {
     setIsModal(true);
     setModalId(idx);
@@ -108,14 +109,10 @@ const UserTable = ({ users }) => {
     setIsModal(!isModal);
   };
 
-  useEffect(() => {
-    setShowUsers(users.slice(0, limit));
-  }, []);
-
   return (
     <Container>
       <Total>
-        전체 사용자 <span>100</span>명
+        전체 사용자 <span>{users.length}</span>명
       </Total>
       <Table>
         <THead>
@@ -140,11 +137,10 @@ const UserTable = ({ users }) => {
         limit={limit}
         size={5}
       />
-      <UserModal
-        user={users[modalId]}
-        show={isModal}
-        toggleModal={toggleModal}
-      ></UserModal>
+
+      {isModal && (
+        <UserModal user={showUsers[modalId]} toggleModal={toggleModal} />
+      )}
     </Container>
   );
 };

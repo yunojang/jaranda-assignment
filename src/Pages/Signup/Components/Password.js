@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import styled from 'styled-components';
 import Input from 'Components/input';
 import styled from "styled-components";
 import { AiOutlineCheck as Check } from 'react-icons/ai';
@@ -8,12 +9,9 @@ const CHECK = ['숫자', '특수문자', '영문', '8자리 이상'];
 const CheckList = styled.ul`
   display: flex;
   margin-bottom: 25px;
-  li {
-    font-size: 15px;
-  }
-  li + li {
-    margin-left: 10px;
-  }
+  font-size: 15px;
+  column-gap: 10px;
+  
   span {
     color: #aaa;
   }
@@ -45,7 +43,7 @@ function Password() {
         placeholder='비밀번호 확인'
       />
     </>
-  )
+  );
 }
 
 export default Password;
