@@ -1,9 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import USERS from 'asset/users.json';
 import styled from 'styled-components/macro';
 import UserTable from './userTable';
-import UserSearch from './userSearch';
-import { debounce } from 'lodash';
 // import Error from 'Pages/Error/Error';
 
 const Container = styled.div`
@@ -26,28 +24,67 @@ const Title = styled.h1`
 //   width: 155px;
 // `;
 
+const Search = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    position: relative;
+    padding-left: 75px;
+    margin-right: 25px;
+    font-size: 17px;
+    width: 595px;
+    height: 60px;
+    border-radius: 5px;
+    background-color: white;
+    background-image: url('images/search.svg');
+    background-position: 30px 50%;
+    background-repeat: no-repeat;
+  }
+
+  input::placeholder {
+    font-size: 17px;
+  }
+
+  button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 30px;
+    height: 60px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #1685fd;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+
+  img {
+    margin-right: 10px;
+  }
+`;
+
 function Admin() {
   const [users] = useState(USERS);
 
   const [value, setValue] = useState('');
-  const [search, setSearch] = useState('');
   const [userList, setUserList] = useState([]);
 
   const handleInput = e => {
-    delaySetValue(e.target.value);
     setValue(e.target.value);
   };
 
   useEffect(() => {
     setUserList(
-      users?.filter(el => el.userName.includes(search)).slice(0, users.length),
+      users?.filter(el =>
+        el.userName.toLowerCase().includes(value.toLowerCase()),
+      ),
     );
-  }, [users, search]);
-
-  const delaySetValue = useCallback(
-    debounce(value => setSearch(value), 1000),
-    [],
-  );
+  }, [value, users]);
 
   // if (!users.isAdmin) {
   //   return (
@@ -61,8 +98,14 @@ function Admin() {
     <Container>
       <AdminWrap>
         <Title>사용자 관리</Title>
-        <UserSearch value={value} handleInput={handleInput} />
-        <UserTable users={users} userList={userList} />
+        <Search>
+          <input placeholder="전체 사용자 검색" onChange={handleInput} />
+          <button>
+            <img src="images/user-add.svg" alt="추가" />
+            사용자 추가
+          </button>
+        </Search>
+        <UserTable users={users} userList={userList} value={value} />
       </AdminWrap>
     </Container>
   );

@@ -5,9 +5,10 @@ import PageButton from 'Components/pageButton';
 import UserModal from './userModal';
 import { ROLE } from 'asset/role';
 import { cardNumberFormat } from 'utils/format';
-import OptionalAccount from './optionalAccount';
+// import OptionalAccount from './optionalAccount';
 
 const Container = styled.div`
+  position: relative;
   margin-top: 30px;
   padding: 30px;
   width: 795px;
@@ -34,6 +35,7 @@ const Total = styled.div`
 const Td = styled.td`
   padding: 20px 30px 20px 0px;
   max-width: 150px;
+  min-width: 100px;
   font-size: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -42,13 +44,7 @@ const Td = styled.td`
 
 const AdminTd = styled.td`
   padding: 20px 35px 20px 0px;
-
-  span {
-    border-radius: 50px;
-    padding: 8px 15px;
-    background-color: #4a4a4a;
-    color: white;
-  }
+  font-weight: 600;
 `;
 
 const Table = styled.table`
@@ -63,12 +59,14 @@ const THead = styled.thead`
 const TBody = styled.tbody``;
 
 const ModifyBtn = styled.div`
+  position: absolute;
+  right: 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 8px 10px;
-  margin-left: 10px;
+  margin-top: 8px;
   border: 1px solid #e3e3e3;
   border-radius: 5px;
   background-color: #fafafa;
@@ -99,10 +97,10 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ users, setUsers }) => {
+const UserTable = ({ users, setUsers, value, userList }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const [limit] = useState(3);
+  const [limit] = useState(10);
   const [showUsers, setShowUsers] = useState(users.slice(0, limit));
   const openModal = idx => {
     setIsModal(true);
@@ -116,7 +114,7 @@ const UserTable = ({ users, setUsers }) => {
   return (
     <Container>
       <Total>
-        전체 사용자 <span>100</span>명
+        전체 사용자 <span>{users.length}</span>명
       </Total>
       <Table>
         <THead>
@@ -130,9 +128,21 @@ const UserTable = ({ users, setUsers }) => {
           </tr>
         </THead>
         <TBody>
-          {showUsers.map((user, idx) => (
-            <User key={idx} user={user} onClickhandler={() => openModal(idx)} />
-          ))}
+          {value
+            ? userList.map((user, idx) => (
+                <User
+                  key={idx}
+                  user={user}
+                  onClickhandler={() => openModal(idx)}
+                />
+              ))
+            : showUsers.map((user, idx) => (
+                <User
+                  key={idx}
+                  user={user}
+                  onClickhandler={() => openModal(idx)}
+                />
+              ))}
         </TBody>
       </Table>
       <PageButton
@@ -145,7 +155,7 @@ const UserTable = ({ users, setUsers }) => {
       {isModal && (
         <UserModal user={showUsers[modalId]} toggleModal={toggleModal} />
       )}
-      <OptionalAccount setUsers={setUsers} lastId={users.length} />
+      {/* <OptionalAccount setUsers={setUsers} lastId={users.length} /> */}
     </Container>
   );
 };

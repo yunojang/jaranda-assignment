@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const UserSearch = ({ handleInput, value }) => {
+const UserSearch = ({ handleInput }) => {
   const Search = styled.div`
     display: flex;
     flex-direction: row;
@@ -49,11 +49,7 @@ const UserSearch = ({ handleInput, value }) => {
   return (
     <>
       <Search>
-        <input
-          placeholder="전체 사용자 검색"
-          onChange={handleInput}
-          value={value}
-        />
+        <input placeholder="전체 사용자 검색" onChange={handleInput} />
         <button>
           <img src="images/user-add.svg" alt="추가"></img>
           사용자 추가
