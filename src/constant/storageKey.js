@@ -1,0 +1,1 @@
+export const USERDATA_KEYNAME = 'user-data';
