@@ -33,11 +33,11 @@ const OutLayer = styled.div`
   z-index: 0;
 `;
 
-function Modal(){
+function Modal({show,Small,toggle,children}){
   return (
-    <ModalWrap show={this.props.show}>
-      <Container Small={this.props.Small}>{this.props.children}</Container>
-      <OutLayer onClick={this.props.toggle}></OutLayer>
+    <ModalWrap show={show}>
+      <Container Small={Small}>{children}</Container>
+      <OutLayer onClick={toggle}></OutLayer>
     </ModalWrap>
   );
 }
