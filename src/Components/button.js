@@ -40,8 +40,8 @@ const ButtonWrap = styled.button`
   }
 `;
 
-function Button({ children }){
-  return <ButtonWrap>{children}</ButtonWrap>;
+function Button({ children, ...props}){
+  return <ButtonWrap {...props}>{children}</ButtonWrap>;
 }
 
 export default Button;
