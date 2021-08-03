@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import PageButton from 'Components/pageButton';
-import Modal from 'Components/modal';
 import UserModal from './userModal'
 
 import { ROLE } from 'asset/role'
