@@ -5,7 +5,7 @@
     "address": "104동 101 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [0, 1, 2],
+    "role": 0,
     "isAdmin": 1
   },
   {
@@ -14,7 +14,7 @@
     "address": "104동 103 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [0, 1, 2],
+    "role": 10,
     "isAdmin": 0
   },
   {
@@ -23,7 +23,7 @@
     "address": "104동 105 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [0],
+    "role": 11,
     "isAdmin": 0
   },
   {
@@ -32,7 +32,7 @@
     "address": "104동 106 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [1],
+    "role": 12,
     "isAdmin": 0
   },
   {
@@ -41,7 +41,7 @@
     "address": "104동 110 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [2],
+    "role": 13,
     "isAdmin": 1
   },
   {
@@ -50,7 +50,7 @@
     "address": "104동 112 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [0, 1],
+    "role": 11,
     "isAdmin": 0
   },
   {
@@ -59,7 +59,7 @@
     "address": "104동 116 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [0, 2],
+    "role": 21,
     "isAdmin": 0
   },
   {
@@ -68,7 +68,7 @@
     "address": "104동 118 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [1, 2],
+    "role": 22,
     "isAdmin": 0
   },
   {
@@ -77,7 +77,7 @@
     "address": "104동 120 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [0, 1, 2],
+    "role": 22,
     "isAdmin": 0
   },
   {
@@ -86,7 +86,276 @@
     "address": "104동 151 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "accessMenus": [0, 1, 2],
+    "role": 11,
+    "isAdmin": 0
+  },  {
+    "id": 11,
+    "userName": "eric",
+    "address": "104동 101 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 0,
+    "isAdmin": 1
+  },
+  {
+    "id": 12,
+    "userName": "kevin",
+    "address": "104동 103 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 10,
+    "isAdmin": 0
+  },
+  {
+    "id": 13,
+    "userName": "james",
+    "address": "104동 105 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 11,
+    "isAdmin": 0
+  },
+  {
+    "id": 14,
+    "userName": "name",
+    "address": "104동 106 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 12,
+    "isAdmin": 0
+  },
+  {
+    "id": 15,
+    "userName": "user",
+    "address": "104동 110 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 13,
+    "isAdmin": 1
+  },
+  {
+    "id": 16,
+    "userName": "faker",
+    "address": "104동 112 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 11,
+    "isAdmin": 0
+  },
+  {
+    "id": 17,
+    "userName": "pray",
+    "address": "104동 116 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 21,
+    "isAdmin": 0
+  },
+  {
+    "id": 18,
+    "userName": "userName",
+    "address": "104동 118 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 22,
+    "isAdmin": 0
+  },
+  {
+    "id": 19,
+    "userName": "javascript",
+    "address": "104동 120 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 22,
+    "isAdmin": 0
+  },
+  {
+    "id": 20,
+    "userName": "lastUser",
+    "address": "104동 151 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 11,
+    "isAdmin": 0
+  },
+  {
+    "id": 21,
+    "userName": "eric",
+    "address": "104동 101 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 0,
+    "isAdmin": 1
+  },
+  {
+    "id": 22,
+    "userName": "kevin",
+    "address": "104동 103 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 10,
+    "isAdmin": 0
+  },
+  {
+    "id": 23,
+    "userName": "james",
+    "address": "104동 105 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 11,
+    "isAdmin": 0
+  },
+  {
+    "id": 24,
+    "userName": "name",
+    "address": "104동 106 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 12,
+    "isAdmin": 0
+  },
+  {
+    "id": 25,
+    "userName": "user",
+    "address": "104동 110 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 13,
+    "isAdmin": 1
+  },
+  {
+    "id": 26,
+    "userName": "faker",
+    "address": "104동 112 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 11,
+    "isAdmin": 0
+  },
+  {
+    "id": 27,
+    "userName": "pray",
+    "address": "104동 116 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 21,
+    "isAdmin": 0
+  },
+  {
+    "id": 28,
+    "userName": "userName",
+    "address": "104동 118 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 22,
+    "isAdmin": 0
+  },
+  {
+    "id": 29,
+    "userName": "javascript",
+    "address": "104동 120 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 22,
+    "isAdmin": 0
+  },
+  {
+    "id": 30,
+    "userName": "lastUser",
+    "address": "104동 151 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 11,
+    "isAdmin": 0
+  },
+  {
+    "id": 31,
+    "userName": "eric",
+    "address": "104동 101 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 0,
+    "isAdmin": 1
+  },
+  {
+    "id": 32,
+    "userName": "kevin",
+    "address": "104동 103 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 10,
+    "isAdmin": 0
+  },
+  {
+    "id": 33,
+    "userName": "james",
+    "address": "104동 105 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 11,
+    "isAdmin": 0
+  },
+  {
+    "id": 34,
+    "userName": "name",
+    "address": "104동 106 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 12,
+    "isAdmin": 0
+  },
+  {
+    "id": 35,
+    "userName": "user",
+    "address": "104동 110 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 13,
+    "isAdmin": 1
+  },
+  {
+    "id": 36,
+    "userName": "faker",
+    "address": "104동 112 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 11,
+    "isAdmin": 0
+  },
+  {
+    "id": 37,
+    "userName": "pray",
+    "address": "104동 116 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 21,
+    "isAdmin": 0
+  },
+  {
+    "id":38,
+    "userName": "userName",
+    "address": "104동 118 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 22,
+    "isAdmin": 0
+  },
+  {
+    "id": 39,
+    "userName": "javascript",
+    "address": "104동 120 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 22,
+    "isAdmin": 0
+  },
+  {
+    "id": 40,
+    "userName": "lastUser",
+    "address": "104동 151 호",
+    "cardNumber": "1234123412341234",
+    "password": "a",
+    "role": 11,
     "isAdmin": 0
   }
 ]
