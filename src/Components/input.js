@@ -20,13 +20,12 @@ const InputWrap = styled.input`
     ${ACTIVE_STYLE}
   }
   &:focus {
-    outline: none;
     ${ACTIVE_STYLE}
   }
 `;
 
-function Input({ children, ...props }) {
-  return <InputWrap {...props}>{children}</InputWrap>
+function Input({ ...props }) {
+  return <InputWrap {...props}></InputWrap>
 }
 
 export default Input;
