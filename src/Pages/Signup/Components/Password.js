@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Input from 'Components/input';
-import styled from "styled-components";
 import { AiOutlineCheck as Check } from 'react-icons/ai';
 
 const CHECK = ['숫자', '특수문자', '영문', '8자리 이상'];
