@@ -41,8 +41,8 @@ const Footer = styled.div`
 `;
 
 function LoginModal({ show,toggle,setIsLoggedIn }) {
-  const [id, onChangeId] = useInput('');
-  const [password, onChangePassword] = useInput('');
+  const id = useInput('');
+  const password = useInput('');
 
   const onSubmitForm = (e) => {
     e.preventDefault();
@@ -65,17 +65,15 @@ function LoginModal({ show,toggle,setIsLoggedIn }) {
             type="text"
             placeholder="아이디를 입력하세요."
             name="id"
-            value={id}
-            onChange={onChangeId}
             required
+            {...id}
           />
           <Input
             type="password"
             placeholder="비밀번호를 입력하세요."
             name="password"
-            value={password}
-            onChange={onChangePassword}
             required
+            {...password}
           />
         </Body>
         <Footer>
