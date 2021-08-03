@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components/macro';
 import PageButton from 'Components/pageButton';
 import UserModal from './userModal';
-import { ROLE } from 'asset/role';
+import { ROLE } from 'constant/role';
 import { cardNumberFormat } from 'utils/format';
 
 const Container = styled.div`
