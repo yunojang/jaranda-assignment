@@ -18,14 +18,15 @@ const InputWrap = styled.input`
   background : ${props => props.readOnly && 'rgba(100,100,100,.1);'};
   font-size: 12px;
 
-  ${props => !props.readOnly && css`
-    &:hover {
-      ${ACTIVE_STYLE}
-    }
-    &:focus {
-      ${ACTIVE_STYLE}
-    }
-  `}
+  ${props => !props.readOnly 
+    && css`
+        &:hover {
+          ${ACTIVE_STYLE}
+        }
+        &:focus {
+          ${ACTIVE_STYLE}
+        }
+      `}
 `;
 
 function Input({ ...props }) {

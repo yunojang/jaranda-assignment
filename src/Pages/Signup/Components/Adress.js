@@ -9,7 +9,7 @@ const AdressContainer = styled.div`
 `;
 
 const SearchButton = styled(Button)`
-  margin-left: 20px;
+  margin-left: 5px;
 `;
 
 function Adress() {
