@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './SignupButton';
 import Input from 'Components/input';
+import PopupDom from './PopupDom';
+import PopupPostCode from './PopupPostCode';
 
 const AdressContainer = styled.div`
   display: flex;
@@ -15,7 +17,9 @@ const SearchButton = styled(Button)`
 function Adress() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const openPostCode = () => {
+  const openPostCode = event => {
+    event.preventDefault();
+
     setIsPopupOpen(true);
   };
 
