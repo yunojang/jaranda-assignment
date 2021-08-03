@@ -25,6 +25,8 @@ const RightLink = styled(Link)`
 `;
 const PageLink = styled(Link)`
   margin-Right: 10px;
+  text-decoration:none;
+  color:#a9a3a9;
 `;
 const Account = styled.div`
   display:flex;
@@ -57,11 +59,17 @@ function Header({ history }){
           <PageLink to="/admin">관리페이지</PageLink>
           <PageLink to="/">마이페이지</PageLink>
           <Button onClick={onLogout}>
-            <Link to="/">Logout</Link>
+            <PageLink to="/">
+              Logout
+            </PageLink>
           </Button>
         </>
         : 
-        <Button onClick={toggleModal} select={pathname === '/'}>Login</Button>}
+        <Button onClick={toggleModal} select={pathname === '/login'}>
+          <PageLink to="/">
+            Login
+          </PageLink>
+        </Button>}
       <LoginModal
         show={modal}
         toggle={toggleModal}
