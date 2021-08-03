@@ -1,5 +1,16 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import Button from './button';
+import styled from 'styled-components';
+
+const Button = styled.button`
+  text-align: center;
+
+  color: ${props => (props.select ? '#1685fd' : 'black')};
+  padding-bottom: 2px;
+
+  &:hover {
+    border-bottom: 1px solid gray;
+  }
+`;
 
 function PageButton({ items, setItems, limit, size }) {
   const [pageList, setPageList] = useState([]);
@@ -31,7 +42,6 @@ function PageButton({ items, setItems, limit, size }) {
     <>
       {currentPage ? (
         <Button
-          Small
           onClick={() => {
             onPaging(currentPage - 1);
           }}
@@ -39,18 +49,18 @@ function PageButton({ items, setItems, limit, size }) {
           {'이전'}
         </Button>
       ) : (
-        <></>
+        <div style={{ width: '36px', display: 'inline-block' }} />
       )}
       {pageList.length < size
         ? pageList.map(v => (
             <Button
+              select={currentPage === v}
               key={v}
-              Small
               onClick={() => {
                 onPaging(v);
               }}
             >
-              {v}
+              {v + 1}
             </Button>
           ))
         : !(pageList.length - currentPage < size / 2 + 1)
@@ -63,8 +73,8 @@ function PageButton({ items, setItems, limit, size }) {
             )
             .map(v => (
               <Button
+                select={currentPage === v}
                 key={v}
-                Small
                 onClick={() => {
                   onPaging(v);
                 }}
@@ -79,8 +89,8 @@ function PageButton({ items, setItems, limit, size }) {
             )
             .map(v => (
               <Button
+                select={currentPage === v}
                 key={v}
-                Small
                 onClick={() => {
                   onPaging(v);
                 }}
@@ -91,9 +101,7 @@ function PageButton({ items, setItems, limit, size }) {
       {currentPage === pageList.length - 1 ? (
         <></>
       ) : (
-        <Button Small onClick={() => onPaging(currentPage + 1)}>
-          {'다음'}
-        </Button>
+        <Button onClick={() => onPaging(currentPage + 1)}>{'다음'}</Button>
       )}
     </>
   );
