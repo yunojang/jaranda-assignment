@@ -2,23 +2,23 @@ import React, { useState } from 'react';
 import USERS from 'asset/users.json';
 import styled from 'styled-components';
 import UserTable from './userTable';
-import Error from 'Pages/Error/Error';
+// import Error from 'Pages/Error/Error';
 
 const AdminWrap = styled.div``;
 
 function Admin() {
-  const [users, setUsers] = useState(USERS);
+  const [users] = useState(USERS);
 
-  if (!users.isAdmin) {
-    return (
-      <>
-        <Error />
-      </>
-    );
-  }
+  // if (!users.isAdmin) {
+  //   return (
+  //     <>
+  //       <Error />
+  //     </>
+  //   );
+  // }
   return (
     <AdminWrap>
-      <UserTable users={users} setUsers={setUsers} />
+      <UserTable users={users} />
     </AdminWrap>
   );
 }
