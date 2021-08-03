@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PageButton from 'Components/pageButton';
-import Storage from 'store/userData';
 import UserModal from './userModal';
 import { ROLE } from 'asset/role';
 import { cardNumberFormat } from 'utils/format';
@@ -30,23 +29,22 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ users, setUsers }) => {
+const UserTable = ({ users }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
   const [limit] = useState(3);
+  const [showUsers, setShowUsers] = useState([]);
   const openModal = idx => {
     setIsModal(true);
     setModalId(idx);
   };
-
-  const USERS = Storage.userdata.load();
 
   const toggleModal = () => {
     setIsModal(!isModal);
   };
 
   useEffect(() => {
-    setUsers(USERS.slice(0, limit));
+    setShowUsers(users.slice(0, limit));
   }, []);
 
   return (
@@ -63,12 +61,17 @@ const UserTable = ({ users, setUsers }) => {
           </tr>
         </THead>
         <TBody>
-          {users.map((user, idx) => (
+          {showUsers.map((user, idx) => (
             <User key={idx} user={user} onClickhandler={() => openModal(idx)} />
           ))}
         </TBody>
       </Table>
-      <PageButton items={USERS} setItems={setUsers} limit={limit} />
+      <PageButton
+        items={users}
+        setItems={setShowUsers}
+        limit={limit}
+        size={5}
+      />
       <UserModal
         user={users[modalId]}
         show={isModal}
