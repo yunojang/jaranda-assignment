@@ -13,6 +13,7 @@ const setSize = props => {
       padding: 0.125rem 0.375rem;
     `;
   }
+
   return css`
     padding: 0.375rem 0.75rem;
     line-height: 1.5;
