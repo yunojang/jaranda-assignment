@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Modal from 'Components/modal';
-import USERS from 'asset/users.json';
+
 import PageButton from 'Components/pageButton';
+import Modal from 'Components/modal';
+import UserModal from './userModal'
+
+import { ROLE } from 'asset/role'
+import USERS from 'asset/users.json';
+
+import { cardNumberFormat } from 'utils/format'
 
 const Td = styled.td`
   padding-right: 18px;
@@ -21,8 +27,8 @@ const User = ({ user, onClickhandler }) => {
       <Td>{id}</Td>
       <Td>{userName}</Td>
       <Td>{address}</Td>
-      <Td>{cardNumber}</Td>
-      <Td>{role}</Td>
+      <Td>{cardNumberFormat(cardNumber)}</Td>
+      <Td>{ROLE[role]}</Td>
       <Td>{isAdmin ? '관리자' : ''}</Td>
     </tr>
   );
@@ -36,11 +42,13 @@ const UserTable = ({ users, setUsers }) => {
     setIsModal(true);
     setModalId(idx);
   };
-
+  const toggleModal = () => {
+    setIsModal(!isModal)
+  }
   useEffect(() => {
     setUsers(USERS.slice(0, limit));
   }, []);
-
+  
   return (
     <>
       <Table>
@@ -50,7 +58,7 @@ const UserTable = ({ users, setUsers }) => {
             <Td>이름</Td>
             <Td>주소</Td>
             <Td>카드번호</Td>
-            <Td>접근게시판</Td>
+            <Td>Role</Td>
             <Td>admin</Td>
           </tr>
         </THead>
@@ -61,7 +69,12 @@ const UserTable = ({ users, setUsers }) => {
         </TBody>
       </Table>
       <PageButton items={USERS} setItems={setUsers} limit={limit} />
-      <Modal show={isModal}>{isModal && users[modalId].userName}</Modal>
+      <UserModal
+        user={users[modalId]}
+        show={isModal}
+        toggleModal={toggleModal}
+      >
+      </UserModal>
     </>
   );
 };
