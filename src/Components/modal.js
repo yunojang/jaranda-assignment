@@ -33,15 +33,13 @@ const OutLayer = styled.div`
   z-index: 0;
 `;
 
-class Modal extends React.Component {
-  render() {
-    return (
-      <ModalWrap show={this.props.show}>
-        <Container Small={this.props.Small}>{this.props.children}</Container>
-        <OutLayer onClick={this.props.toggle}></OutLayer>
-      </ModalWrap>
-    );
-  }
+function Modal({show,Small,toggle,children}){
+  return (
+    <ModalWrap show={show}>
+      <Container Small={Small}>{children}</Container>
+      <OutLayer onClick={toggle}></OutLayer>
+    </ModalWrap>
+  );
 }
 
 export default Modal;

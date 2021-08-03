@@ -40,14 +40,8 @@ const ButtonWrap = styled.button`
   }
 `;
 
-class Button extends React.Component {
-  constructor(props) {
-    super();
-    this.props = props;
-  }
-  render() {
-    return <ButtonWrap {...this.props}></ButtonWrap>;
-  }
+function Button({ children }){
+  return <ButtonWrap>{children}</ButtonWrap>;
 }
 
 export default Button;
