@@ -2,13 +2,13 @@ import React from "react";
 import styled from "styled-components";
 
 import Password from './Password';
-import Adress from './Adress';
+import Address from './Address';
 import Card from './Card';
 import Policy from './Policy';
 import Input from 'Components/input';
 
 import COLOR from 'constant/colorCode';
-
+import useInput from "hooks/useInput";
 
 const Container = styled.form`
   display: flex;
@@ -21,18 +21,35 @@ const Submit = styled.input.attrs({ type: 'submit' })`
   color: #fff;
   border : none;
   border-radius: 6px;
-  font-size : 14px;
+  font-size : 17px;
 `;
 
 function Form() {
+  const idInput = useInput('');
+  const pwdInput = useInput('');
+
+  const onSubmit = event => {
+    event.preventDefault();
+
+    const formData = {
+      id : idInput.value,
+    }
+
+    console.log(formData);
+  }
+
   return (
-    <Container>
+    <Container onSubmit={onSubmit}>
       <Input
+        required
         type='text'
         placeholder='아이디'
+        {...idInput}
       />
-      <Password />
-      <Adress />
+      <Password 
+        {...pwdInput}
+      />
+      <Address />
       <Card />
       <Policy />
       <Submit 

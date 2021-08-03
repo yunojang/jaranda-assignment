@@ -22,7 +22,7 @@ const CheckIcon = styled(Check)`
   ${props => props.checked && 'color : red'}
 `;
 
-function Password() {
+function Password(pwdInput) {
 
   const renderCheck = () => {
     return CHECK.map((item, index) => <li key={index}><CheckIcon checked={false}/><span>{item}</span></li>)
@@ -31,13 +31,16 @@ function Password() {
   return (
     <>
       <Input
+        required
         type='password'
         placeholder='비밀번호'
+        {...pwdInput}
       />
       <CheckList>
         {renderCheck()}
       </CheckList>
       <Input
+        required
         type='password'
         placeholder='비밀번호 확인'
       />

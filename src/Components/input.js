@@ -18,7 +18,9 @@ const InputWrap = styled.input`
   border: 1px solid rgba(154, 154, 154, 0.5);
   background : ${props => props.readOnly && 'rgba(100,100,100,.1);'};
   font-size: 12px;
+  font-family: sans-serif;
 
+  /* readOnly가 아닌 경우에 hover와 focus 스타일을 적용합니다. */
   ${props => !props.readOnly 
     && css`
         &:hover {
