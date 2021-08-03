@@ -1,13 +1,13 @@
 import React from 'react';
-import styled from "styled-components"
+import styled from 'styled-components';
 
 import COLOR from 'constant/colorCode';
 
 const ACTIVE_STYLE = {
-  'border': `1px solid ${COLOR.SINGUP_MAIN}`,
-  'background': 'rgba(0,80,230,.1)',
-  'color': COLOR.SINGUP_MAIN,
-}
+  border: `1px solid ${COLOR.SINGUP_MAIN}`,
+  background: 'rgba(0,80,230,.1)',
+  color: COLOR.SINGUP_MAIN,
+};
 
 const InputWrap = styled.input`
   height: 44px;
@@ -20,13 +20,12 @@ const InputWrap = styled.input`
     ${ACTIVE_STYLE}
   }
   &:focus {
-    outline: none;
     ${ACTIVE_STYLE}
   }
 `;
 
-function Input({ children, ...props }) {
-  return <InputWrap {...props}>{children}</InputWrap>
+function Input({ ...props }) {
+  return <InputWrap {...props} />;
 }
 
 export default Input;
