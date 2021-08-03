@@ -1,7 +1,8 @@
-export const boards = [
+export const BOARDS = [
   {
     'id' : 0,
-    'name' : '일반게시판'
+    'name' : '일반게시판',
+    'category' : [],
   },
   {
     'id' : 10,
@@ -9,11 +10,11 @@ export const boards = [
     'category' : [
       {
         'id' : 11,
-        'name' : '프론트엔드 개시판'
+        'name' : '프론트엔드 게시판'
       },
       {
         'id' : 12,
-        'name' : '백엔드 개시판'
+        'name' : '백엔드 게시판'
       },
       {
         'id' : 13,
