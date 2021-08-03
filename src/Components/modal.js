@@ -15,11 +15,9 @@ const ModalWrap = styled.div`
 `;
 
 const Container = styled.div`
-  position: relative;
-  width: ${props => (props.width ? props.width : '50%')};
-  height: ${props => (props.height ? props.height : '40%')};
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.025);
   background-color: white;
-  padding: 16px;
+  padding: 2rem;
   border-radius: 10px;
   z-index: 10;
 `;
