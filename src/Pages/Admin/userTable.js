@@ -1,21 +1,21 @@
-import React, { useState } from 'react';
-import styled from 'styled-components'
-import Modal from 'Components/modal'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import Modal from 'Components/modal';
+import USERS from 'asset/users.json';
+import PageButton from 'Components/pageButton';
 
 const Td = styled.td`
-  padding-right:18px;
+  padding-right: 18px;
   padding-top: 20px;
-`
-const Table = styled.table`
-`
+`;
+const Table = styled.table``;
 const THead = styled.thead`
   margin: 8px 0px;
-`
-const TBody = styled.tbody`
-`
+`;
+const TBody = styled.tbody``;
 
-const User = ({user, onClickhandler})=> {
-  const {id,userName,address,cardNumber,role,isAdmin} = user
+const User = ({ user, onClickhandler }) => {
+  const { id, userName, address, cardNumber, role, isAdmin } = user;
   return (
     <tr onClick={onClickhandler}>
       <Td>{id}</Td>
@@ -25,17 +25,22 @@ const User = ({user, onClickhandler})=> {
       <Td>{role}</Td>
       <Td>{isAdmin ? '관리자' : ''}</Td>
     </tr>
-  )
-}
+  );
+};
 
+const UserTable = ({ users, setUsers }) => {
+  const [isModal, setIsModal] = useState(false);
+  const [modalId, setModalId] = useState(0);
+  const [limit] = useState(3);
+  const openModal = idx => {
+    setIsModal(true);
+    setModalId(idx);
+  };
 
-const UserTable = ({users}) => {
-  const [ isModal , setIsModal ] = useState(false)
-  const [ modalId, setModalId ] = useState(0)
-  const openModal = (idx) => {
-    setIsModal(true)
-    setModalId(idx)
-  }
+  useEffect(() => {
+    setUsers(USERS.slice(0, limit));
+  }, []);
+
   return (
     <>
       <Table>
@@ -50,22 +55,15 @@ const UserTable = ({users}) => {
           </tr>
         </THead>
         <TBody>
-          {users.map((user,idx)=> (
-            <User 
-              key= {idx}
-              user={user}
-              onClickhandler={() => openModal(idx)}
-            />
+          {users.map((user, idx) => (
+            <User key={idx} user={user} onClickhandler={() => openModal(idx)} />
           ))}
         </TBody>
       </Table>
-      <Modal
-        show={isModal}
-      >
-        {isModal && users[modalId].userName}
-      </Modal>
+      <PageButton items={USERS} setItems={setUsers} limit={limit} />
+      <Modal show={isModal}>{isModal && users[modalId].userName}</Modal>
     </>
   );
-}
+};
 
 export default UserTable;
