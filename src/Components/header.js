@@ -27,25 +27,23 @@ const Account = styled.div`
   margin-right: 10%;
 `;
 
-class Header extends React.Component {
-  render() {
-    const pathname = this.props.history.location.pathname;
-    return (
-      <HeaderWrap>
-        <LeftLink to="/">
-          <Button select={pathname === '/'}>Main</Button>
-        </LeftLink>
-        <Account>
-          <RightLink to="/login">
-            <Button select={pathname === '/login'}>Login</Button>
-          </RightLink>
-          <RightLink to="/signup">
-            <Button select={pathname === '/signup'}>Sign Up</Button>
-          </RightLink>
-        </Account>
-      </HeaderWrap>
-    );
-  }
+function Header({ history }){
+  const pathname = history.location.pathname;
+  return (
+    <HeaderWrap>
+      <LeftLink to="/">
+        <Button select={pathname === '/'}>Main</Button>
+      </LeftLink>
+      <Account>
+        <RightLink to="/login">
+          <Button select={pathname === '/login'}>Login</Button>
+        </RightLink>
+        <RightLink to="/signup">
+          <Button select={pathname === '/signup'}>Sign Up</Button>
+        </RightLink>
+      </Account>
+    </HeaderWrap>
+  );
 }
 
 export default withRouter(Header);
