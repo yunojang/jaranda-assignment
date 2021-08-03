@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import Button from './button';
 
-function PageButton({ items, setItems, limit }) {
+function PageButton({ items, setItems, limit, size }) {
   const [pageList, setPageList] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -41,7 +41,7 @@ function PageButton({ items, setItems, limit }) {
       ) : (
         <></>
       )}
-      {pageList.length < 10
+      {pageList.length < size
         ? pageList.map(v => (
             <>
               <Button
@@ -55,11 +55,13 @@ function PageButton({ items, setItems, limit }) {
               </Button>
             </>
           ))
-        : !(pageList.length - currentPage < 6)
+        : !(pageList.length - currentPage < size / 2 + 1)
         ? pageList
             .slice(
-              currentPage - 5 > 0 ? currentPage - 5 : 0,
-              (currentPage - 5 > 0 ? currentPage - 5 : 0) + 10,
+              currentPage - size / 2 > 0 ? currentPage - parseInt(size / 2) : 0,
+              (currentPage - size / 2 > 0
+                ? currentPage - parseInt(size / 2)
+                : 0) + size,
             )
             .map(v => (
               <>
@@ -75,7 +77,10 @@ function PageButton({ items, setItems, limit }) {
               </>
             ))
         : pageList
-            .slice(pageList.length - currentPage < 6 && pageList.length - 10)
+            .slice(
+              pageList.length - currentPage < size / 2 + 1 &&
+                pageList.length - size,
+            )
             .map(v => (
               <>
                 <Button
