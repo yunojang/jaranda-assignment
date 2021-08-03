@@ -1,5 +1,5 @@
 const COLOR = {
-  MAIN : '#0085FD'
+  SINGUP_MAIN : '#0085FD'
 }
 
 export default COLOR;
