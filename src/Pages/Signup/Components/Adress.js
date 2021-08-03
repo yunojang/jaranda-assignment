@@ -1,10 +1,15 @@
 import React from 'react';
 import Input from 'Components/input';
 import styled from 'styled-components';
+import Button from './SignupButton';
 
 const AdressContainer = styled.div`
   display: flex;
   justify-content: space-between;
+`;
+
+const SearchButton = styled(Button)`
+  margin-left: 20px;
 `;
 
 function Adress() {
@@ -15,8 +20,9 @@ function Adress() {
           type='text'
           placeholder='주소'
           readOnly
+          Fill
         />
-        <button>주소 찾기</button>
+        <SearchButton>주소 찾기</SearchButton>
       </AdressContainer>
 
       <Input 

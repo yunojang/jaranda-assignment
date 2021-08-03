@@ -7,10 +7,12 @@ const CHECK = ['숫자', '특수문자', '영문', '8자리 이상'];
 const CheckList = styled.ul`
   display: flex;
   margin-bottom: 25px;
-  padding-left: 5px;
   li {
     color: #aaa;
-    margin-right: 10px;
+    font-size: 15px;
+  }
+  li + li {
+    margin-left: 10px;
   }
 `;
 
