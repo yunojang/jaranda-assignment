@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 
 import PageButton from 'Pages/Admin/pageButton';
 import UserModal from './userModal';
-import { ROLE } from 'asset/role';
+import { ROLE } from 'constant/role';
 import { cardNumberFormat } from 'utils/format';
 
 const Container = styled.div`
