@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import PageButton from 'Components/pageButton';
-import Storage from 'constant/storage';
-import UserModal from './userModal'
-import { ROLE } from 'asset/role'
-import { cardNumberFormat } from 'utils/format'
+import Storage from 'store/userData';
+import UserModal from './userModal';
+import { ROLE } from 'asset/role';
+import { cardNumberFormat } from 'utils/format';
 
 const Td = styled.td`
   padding-right: 18px;
@@ -41,15 +41,14 @@ const UserTable = ({ users, setUsers }) => {
 
   const USERS = Storage.userdata.load();
 
-
   const toggleModal = () => {
-    setIsModal(!isModal)
-  }
+    setIsModal(!isModal);
+  };
 
   useEffect(() => {
     setUsers(USERS.slice(0, limit));
   }, []);
-  
+
   return (
     <>
       <Table>
@@ -74,8 +73,7 @@ const UserTable = ({ users, setUsers }) => {
         user={users[modalId]}
         show={isModal}
         toggleModal={toggleModal}
-      >
-      </UserModal>
+      ></UserModal>
     </>
   );
 };
