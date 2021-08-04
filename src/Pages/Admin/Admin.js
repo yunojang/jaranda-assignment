@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import USERS from 'asset/users.json';
 import styled from 'styled-components/macro';
 import UserTable from './userTable';
+import OptionalAccount from './optionalAccount';
 // import Error from 'Pages/Error/Error';
 
 const Container = styled.div`
@@ -68,6 +69,11 @@ function Admin() {
   const [users] = useState(USERS);
   const [value, setValue] = useState('');
   const [userList, setUserList] = useState(users);
+  const [isModal, setIsModal] = useState(false);
+
+  const toggleModal = () => {
+    setIsModal(prev => !prev);
+  };
 
   const handleInput = e => {
     setValue(e.target.value);
@@ -80,7 +86,7 @@ function Admin() {
         ),
       );
     } else {
-      setUserList(users)
+      setUserList(users);
     }
   }, [value, users]);
 
@@ -98,16 +104,19 @@ function Admin() {
         <Title>사용자 관리</Title>
         <Search>
           <input placeholder="전체 사용자 검색" onChange={handleInput} />
-          <button>
+          <button onClick={toggleModal}>
             <img src="images/user-add.svg" alt="추가" />
             사용자 추가
           </button>
         </Search>
-        <UserTable
-          users={users}
-          userList={userList}
-        />
+        <UserTable userList={userList} />
       </AdminWrap>
+      <OptionalAccount
+        show={isModal}
+        toggle={toggleModal}
+        setUserList={setUserList}
+        lastId={userList.length}
+      />
     </Container>
   );
 }

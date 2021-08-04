@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
 
 import PageButton from 'Pages/Admin/pageButton';
@@ -96,7 +96,7 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ users, userList }) => {
+const UserTable = ({ userList }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
   const [limit] = useState(5);
@@ -105,9 +105,9 @@ const UserTable = ({ users, userList }) => {
     setIsModal(true);
     setModalId(idx);
   };
-  useEffect(()=>{
-    setShowUsers(userList.slice(0,limit))
-  },[userList])
+  useEffect(() => {
+    setShowUsers(userList.slice(0, limit));
+  }, [userList]);
   const toggleModal = () => {
     setIsModal(!isModal);
   };
@@ -115,7 +115,7 @@ const UserTable = ({ users, userList }) => {
   return (
     <Container>
       <Total>
-        전체 사용자 <span>{users.length}</span>명
+        전체 사용자 <span>{userList.length}</span>명
       </Total>
       <Table>
         <THead>
@@ -129,15 +129,9 @@ const UserTable = ({ users, userList }) => {
           </tr>
         </THead>
         <TBody>
-          {
-            showUsers.map((user, idx) => (
-              <User
-                key={idx}
-                user={user}
-                onClickhandler={() => openModal(idx)}
-              />)
-            )
-          }
+          {showUsers.map((user, idx) => (
+            <User key={idx} user={user} onClickhandler={() => openModal(idx)} />
+          ))}
         </TBody>
       </Table>
       <PageButton
@@ -147,7 +141,11 @@ const UserTable = ({ users, userList }) => {
         size={5}
       />
       {isModal && (
-        <UserModal show={isModal} user={showUsers[modalId]} toggleModal={toggleModal} />
+        <UserModal
+          show={isModal}
+          user={showUsers[modalId]}
+          toggleModal={toggleModal}
+        />
       )}
     </Container>
   );
