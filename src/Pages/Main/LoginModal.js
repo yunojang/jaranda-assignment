@@ -29,14 +29,18 @@ const Footer = styled.div`
   justify-content:space-around;
 `;
 
-function LoginModal({ show,toggle,setIsLoggedIn }) {
-  const id = useInput('');
+function LoginModal({ show,toggle,setIsLoggedIn,onLogin }) {
+  const userName = useInput('');
   const password = useInput('');
 
   const onSubmitForm = (e) => {
     e.preventDefault();
-    setIsLoggedIn(true);
-    console.log(id,password);
+    try{
+      onLogin({ userName:userName.value,password:password.value });
+      setIsLoggedIn(true);
+    }catch(e){
+      alert('Failed to login');
+    }
   }
 
   return (
@@ -52,10 +56,10 @@ function LoginModal({ show,toggle,setIsLoggedIn }) {
         <Body>
           <Input
             type="text"
-            placeholder="아이디를 입력하세요."
-            name="id"
+            placeholder="이름을 입력하세요."
+            name="userName"
             required
-            {...id}
+            {...userName}
           />
           <Input
             type="password"
