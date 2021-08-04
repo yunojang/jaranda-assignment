@@ -21,20 +21,19 @@ const Title = styled.h1`
   color: #4a4a4a;
 `;
 
-function Card() {
+function Card(props) {
   const [show, setShow] = useState(false);
-  const [number, setNumber] = useState('');
 
   const openModal = () => {
     setShow(true);
   }
 
   const closeModal = () => {
-     setShow(false);
+    setShow(false);
   }
 
   const resetNumber = () => {
-    setNumber('');
+    props.setValue('');
   }
 
   const renderInputs = () => {
@@ -42,9 +41,9 @@ function Card() {
 
     for (let i = 0; i < 4; i++) {
       const start = i * 4;
-      const sliced = number.slice(start, start + 4);
+      const sliced = props.value.slice(start, start + 4);
 
-      const input = <Input key={i} value={sliced} readOnly/>
+      const input = <Input key={i} value={sliced} readOnly />
 
       inputs.push(input)
     }
@@ -58,14 +57,14 @@ function Card() {
 
       <InputList>
         {renderInputs()}
-        <Button onClick={() => { openModal(); resetNumber(); }}>카드 입력</Button>
+        <Button onClick={() => { resetNumber(); openModal(); }}>카드 입력</Button>
       </InputList>
 
       <CardModal
         show={show}
-        closeModal={closeModal}
-        setNumber = {setNumber}
-        resetNumber = {resetNumber}
+        close={closeModal}
+        setNumber={props.setValue}
+        resetNumber={resetNumber}
       />
     </>
   );
