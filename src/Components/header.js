@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './button';
+import Navbar from '../Pages/Main/Navbar';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import LoginModal from '../Pages/Main/loginModal';
@@ -21,36 +22,36 @@ const LeftLink = styled(Link)`
   margin-left: 10%;
 `;
 const RightLink = styled(Link)`
-  margin-Right: 10px;
+  margin-right: 10px;
 `;
 const Account = styled.div`
-  display:flex;
+  display: flex;
   margin-right: 10%;
 `;
 
-function Header({ history }){
+function Header({ history }) {
   const pathname = history.location.pathname;
   const [modal, setModal] = useState(false);
 
   const toggleModal = () => {
     setModal(!modal);
-  }
+  };
 
   return (
     <HeaderWrap>
       <LeftLink to="/">
         <Button select={pathname === '/'}>Main</Button>
       </LeftLink>
+      <Navbar />
+
       <Account>
-      <RightLink to="/">
-        <Button onClick={toggleModal} select={pathname === '/login'}>Login</Button>
-      </RightLink>
+        <RightLink to="/">
+          <Button onClick={toggleModal} select={pathname === '/login'}>
+            Login
+          </Button>
+        </RightLink>
         <div>
-          <LoginModal
-              show={modal}
-              toggle={toggleModal}
-          >
-          </LoginModal>
+          <LoginModal show={modal} toggle={toggleModal}></LoginModal>
         </div>
         <RightLink to="/signup">
           <Button select={pathname === '/signup'}>Sign Up</Button>
