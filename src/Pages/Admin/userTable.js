@@ -103,9 +103,10 @@ const UserTable = ({ userList, setUserList }) => {
   const [showUsers, setShowUsers] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
 
-  const openModal = idx => {
+  const openModal = id => {
+    console.log(id);
     setIsModal(true);
-    setModalId(idx);
+    setModalId(id);
   };
   useEffect(() => {
     setShowUsers(userList.slice(0, limit));
@@ -133,7 +134,11 @@ const UserTable = ({ userList, setUserList }) => {
         </THead>
         <TBody>
           {showUsers.map((user, idx) => (
-            <User key={idx} user={user} onClickhandler={() => openModal(idx)} />
+            <User
+              key={idx}
+              user={user}
+              onClickhandler={() => openModal(user.id)}
+            />
           ))}
         </TBody>
       </Table>
@@ -148,7 +153,7 @@ const UserTable = ({ userList, setUserList }) => {
       {isModal && (
         <UserModal
           show={isModal}
-          user={showUsers[modalId]}
+          user={userList.find(v => v.id === modalId)}
           toggleModal={toggleModal}
           setUserList={setUserList}
         />
