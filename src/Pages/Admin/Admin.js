@@ -70,7 +70,7 @@ function Admin() {
   const [users] = useState(userListData.load());
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
-  const { value, onInput } = useInput('');
+  const { value, onChange } = useInput('');
 
   const toggleModal = () => {
     setIsModal(prev => !prev);
@@ -87,6 +87,8 @@ function Admin() {
       setUserList(users);
     }
   }, [value, users]);
+
+  console.log(userList);
 
   // if (!users.isAdmin) {
   //   return (
@@ -105,7 +107,7 @@ function Admin() {
       <AdminWrap>
         <Title>사용자 관리</Title>
         <Search>
-          <input placeholder="전체 사용자 검색" onInput={onInput} />
+          <input placeholder="전체 사용자 검색" onChange={onChange} />
           <button onClick={toggleModal}>
             <img src="images/user-add.svg" alt="추가" />
             사용자 추가
