@@ -38,7 +38,7 @@ function Password(props) {
       </li>)
   }
 
-  const passwordInput = event => {
+  const validCheck = event => {
     const { value } = event.target;
     const checked = [];
 
@@ -58,7 +58,7 @@ function Password(props) {
         required
         type='password'
         placeholder='비밀번호'
-        onInput={passwordInput}
+        onInput={validCheck}
         {...props}
       />
 
