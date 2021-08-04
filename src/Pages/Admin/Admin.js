@@ -4,6 +4,8 @@ import UserTable from './userTable';
 import OptionalAccount from './optionalAccount';
 import userListData from 'store/userList';
 import useInput from 'hooks/useInput';
+import { userStorage } from 'store';
+import Error from 'Pages/Error/Error';
 // import Error from 'Pages/Error/Error';
 
 const Container = styled.div`
@@ -68,9 +70,10 @@ const Search = styled.div`
 
 function Admin() {
   const [users] = useState(userListData.load());
+  const [user] = useState(userStorage.load());
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
-  const { value, onInput } = useInput('');
+  const { value, onChange } = useInput('');
 
   const toggleModal = () => {
     setIsModal(prev => !prev);
@@ -88,30 +91,26 @@ function Admin() {
     }
   }, [value, users]);
 
-  // if (!users.isAdmin) {
-  //   return (
-  //     <>
-  //       <Error />
-  //     </>
-  //   );
-  // }
-
   const findLastId = () => {
     return Math.max(...users.map(v => v.id));
   };
+
+  if (!user || !user.isAdmin) {
+    return <Error />;
+  }
 
   return (
     <Container>
       <AdminWrap>
         <Title>사용자 관리</Title>
         <Search>
-          <input placeholder="전체 사용자 검색" onInput={onInput} />
+          <input placeholder="전체 사용자 검색" onChange={onChange} />
           <button onClick={toggleModal}>
             <img src="images/user-add.svg" alt="추가" />
             사용자 추가
           </button>
         </Search>
-        <UserTable userList={userList} />
+        <UserTable setUserList={setUserList} userList={userList} />
       </AdminWrap>
       <OptionalAccount
         show={isModal}
