@@ -4,6 +4,8 @@ import Button from './button';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import LoginModal from '../Pages/Main/LoginModal';
+import  Login from '../Pages/Main/Login';
+import { userStorage } from 'store'
 
 const HeaderWrap = styled.div`
   top: 0;
@@ -33,16 +35,26 @@ const Account = styled.div`
 function Header({ history }){
   const pathname = history.location.pathname;
   const [modal, setModal] = useState(false);
-  const [isLoggedIn,setIsLoggedIn] = useState(false);
+  const [isLoggedIn,setIsLoggedIn] = useState(false);   //로그인중인지확인userData
 
   const toggleModal = () => {
     setModal(!modal);
   }
  
+  const onLogin = ({ userName, password }) => {
+    const user=Login({ userName,password });
+    console.log(user);
+    if(user){
+      userStorage.save(user)
+      setIsLoggedIn(true);
+    }else{
+      throw new Error();
+    }
+  };
+
   const onLogout = () => {
     setModal(false);
     setIsLoggedIn(false);
-    console.log('로그아웃')
   }
 
   return (
@@ -80,6 +92,7 @@ function Header({ history }){
         show={modal}
         toggle={toggleModal}
         setIsLoggedIn={setIsLoggedIn}
+        onLogin={onLogin}
       >
       </LoginModal>
       </Account>
