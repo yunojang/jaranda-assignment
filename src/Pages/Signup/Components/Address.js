@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './SignupButton';
 import Input from 'Components/input';
-import PopupDom from './PopupDom';
-import PopupPostCode from './PopupPostCode';
+import PopupDom from './daum/PopupDom';
+import PopupPostCode from './daum/PopupPostCode';
 
 const AdressContainer = styled.div`
   display: flex;
