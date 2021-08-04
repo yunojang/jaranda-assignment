@@ -6,7 +6,6 @@ import userListData from 'store/userList';
 import useInput from 'hooks/useInput';
 // import { userStorage } from 'store';
 // import Error from 'Pages/Error/Error';
-// import Error from 'Pages/Error/Error';
 
 const Container = styled.div`
   display: flex;
@@ -68,19 +67,24 @@ const Search = styled.div`
   }
 `;
 
+const Input = styled.input``;
+
 function Admin() {
   const [users] = useState(userListData.load());
   // const [user] = useState(userStorage.load());
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
-  const { value, onChange } = useInput('');
+
+  const search = useInput('');
 
   const toggleModal = () => {
     setIsModal(prev => !prev);
   };
 
   useEffect(() => {
+    const { value } = search;
     if (value) {
+      console.log(value);
       setUserList(
         users?.filter(el =>
           el.userName.toLowerCase().includes(value.toLowerCase()),
@@ -89,7 +93,7 @@ function Admin() {
     } else {
       setUserList(users);
     }
-  }, [value, users]);
+  }, [search.value, users]);
 
   const findLastId = () => {
     return Math.max(...users.map(v => v.id));
@@ -104,7 +108,7 @@ function Admin() {
       <AdminWrap>
         <Title>사용자 관리</Title>
         <Search>
-          <input placeholder="전체 사용자 검색" onChange={onChange} />
+          <Input placeholder="전체 사용자 검색" {...search} />
           <button onClick={toggleModal}>
             <img src="images/user-add.svg" alt="추가" />
             사용자 추가
