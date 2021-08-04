@@ -36,7 +36,7 @@ function PageButton({ items, setItems, limit, size }) {
         (_, i) => i,
       ),
     );
-  }, []);
+  }, [items]);
 
   return (
     <>
