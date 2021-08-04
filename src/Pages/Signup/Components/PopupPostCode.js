@@ -30,6 +30,7 @@ const PopupPostCode = props => {
       }
       fullAddress += extraAddress !== '' ? `(${extraAddress})` : '';
     }
+    
     props.setValue(fullAddress);
     props.onClose();
   };

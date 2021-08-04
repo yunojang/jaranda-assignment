@@ -14,9 +14,9 @@ const SearchButton = styled(Button)`
   margin-left: 5px;
 `;
 
-function Adress() {
+function Adress(props) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [selectedAddress, setSelectedAddress] = useState('주소');
+
   const openPostCode = event => {
     event.preventDefault();
 
@@ -32,8 +32,7 @@ function Adress() {
       <AdressContainer>
         <Input
           type="text"
-          value={selectedAddress}
-          placeholder={selectedAddress}
+          value={props.value}
           readOnly
           Fill
         />
@@ -42,7 +41,7 @@ function Adress() {
           {isPopupOpen && (
             <PopupDom>
               <PopupPostCode
-                setValue={setSelectedAddress}
+                setValue={props.setValue}
                 onClose={closePostCode}
               />
             </PopupDom>

@@ -15,7 +15,7 @@ const useInput = (initialValue, validate) => {
   };
 
   return {
-    value, onChange, isCorrect
+    value, onChange, isCorrect, setValue
   }
 };
 
