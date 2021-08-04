@@ -26,8 +26,8 @@ const CheckItem = styled.span`
   color: ${props => props.checked ? '#4a4a4a' : '#aaa'};
 `;
 
-function Password(pwdInput) {
-  const pwdCheck = useInput('', samed.bind(null, pwdInput.value));
+function Password(props) {
+  const pwdCheck = useInput('', samed.bind(null, props.value));
   const [check, setCheck] = useState(CHECK_LIST.map(item => ({ name: item, checked: false })));
 
   const renderCheck = () => {
@@ -59,7 +59,7 @@ function Password(pwdInput) {
         type='password'
         placeholder='비밀번호'
         onInput={passwordInput}
-        {...pwdInput}
+        {...props}
       />
 
       <CheckList>

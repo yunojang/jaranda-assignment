@@ -28,6 +28,7 @@ const Submit = styled.input.attrs({ type: 'submit' })`
 function Form() {
   const idInput = useInput('');
   const pwdInput = useInput('',validPassword);
+  const addressInput = useInput('');
 
   const onSubmit = event => {
     event.preventDefault();
@@ -51,7 +52,9 @@ function Form() {
       <Password 
         {...pwdInput}
       />
-      <Address />
+      <Address 
+        {...addressInput}
+      />
       <Card />
       <Policy />
       <Submit 
