@@ -1,23 +1,37 @@
-import React from 'react'
-import { ROLE } from 'asset/role'
-
-const SelectRole = ({currentRoleId, ...props}) => {
+import React,{} from 'react'
+import { ROLE } from 'constant/role'
+import styled from 'styled-components'
+const SelectWrap = styled.select`
+  height: 30px;
+  min-width: 130px;
+  width: 25%;
+`
+const SelectRole = ({currentRoleId,callback,...props}) => {
+  const onChangehandler = (e) => {
+    e.preventDefault()
+    if (callback) {
+      callback(e.target.value)
+    }
+  }
   return (
-    <select {...props}
+    <SelectWrap {...props}
       name="role"
+      value={currentRoleId}
+      onChange={onChangehandler}
     >
       {Object.entries(ROLE).map(([id,role])=> {
         return  (
           <option
-            selected={Number(id) === currentRoleId}
             key={id}
+            name={id}
+            value={id}
           >
             {role}
           </option>
         )
       }
       )}
-    </select>
+    </SelectWrap>
   )
 }
 

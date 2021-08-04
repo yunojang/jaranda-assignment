@@ -7,8 +7,11 @@ export const getItem = (key) => {
 }
 
 class Storage {
-	constructor(keyName) {
+	constructor(keyName,defaultValue) {
 		this.keyName = keyName;
+		if (defaultValue) {
+			this.save(defaultValue)
+		}
 	}
 
 	save(data) {
@@ -19,11 +22,15 @@ class Storage {
 		return getItem(this.keyName);
 	}
 
+	exist() {
+		return getItem(this.keyName) ? true : false
+	}
+
 	push(item) {
 		const loadedData = this.load() ?? [];
 
 		if (!Array.isArray(loadedData)) {
-			console.error('Array');
+			console.error('You can push only on Array');
 			return;
 		}
 

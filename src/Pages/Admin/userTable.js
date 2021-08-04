@@ -1,80 +1,153 @@
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
+import styled from 'styled-components/macro';
 
-import PageButton from 'Components/pageButton';
-import UserModal from './userModal'
+import PageButton from 'Pages/Admin/pageButton';
+import UserModal from './userModal';
+import { ROLE } from 'constant/role';
+import { cardNumberFormat } from 'utils/format';
 
-import { ROLE } from 'asset/role'
-import USERS from 'asset/users.json';
+const Container = styled.div`
+  position: relative;
+  margin-top: 30px;
+  padding: 30px;
+  width: 795px;
+  font-weight: 400;
+  background-color: white;
+  color: #4a4a4a;
 
-import { cardNumberFormat } from 'utils/format'
+  button {
+    border: none;
+  }
+`;
+
+const Total = styled.div`
+  margin-bottom: 35px;
+  font-size: 17px;
+  font-weight: bold;
+  color: #252529;
+
+  span {
+    color: #1685fd;
+  }
+`;
 
 const Td = styled.td`
-  padding-right: 18px;
-  padding-top: 20px;
+  padding: 20px 30px 20px 0px;
+  max-width: 150px;
+  min-width: 100px;
+  font-size: 15px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
-const Table = styled.table``;
+
+const AdminTd = styled.td`
+  padding: 20px 35px 20px 0px;
+  font-weight: 600;
+`;
+
+const Table = styled.table`
+  margin-bottom: 45px;
+`;
 const THead = styled.thead`
   margin: 8px 0px;
+  tr {
+    color: #9a9a9a;
+  }
 `;
 const TBody = styled.tbody``;
+
+const ModifyBtn = styled.td`
+  position: absolute;
+  right: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 10px;
+  margin-top: 8px;
+  border: 1px solid #e3e3e3;
+  border-radius: 5px;
+  background-color: #fafafa;
+  cursor: pointer;
+  color: #7e7e7e;
+
+  img {
+    width: 18px;
+    margin-right: 5px;
+  }
+`;
 
 const User = ({ user, onClickhandler }) => {
   const { id, userName, address, cardNumber, role, isAdmin } = user;
   return (
-    <tr onClick={onClickhandler}>
+    <tr>
       <Td>{id}</Td>
       <Td>{userName}</Td>
       <Td>{address}</Td>
       <Td>{cardNumberFormat(cardNumber)}</Td>
       <Td>{ROLE[role]}</Td>
-      <Td>{isAdmin ? '관리자' : ''}</Td>
+      <AdminTd>{isAdmin ? '관리자' : ''}</AdminTd>
+      <ModifyBtn onClick={onClickhandler}>
+        <img src="images/edit-alt.svg" alt="아이콘" />
+        수정
+      </ModifyBtn>
     </tr>
   );
 };
 
-const UserTable = ({ users, setUsers }) => {
+const UserTable = ({ userList }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const [limit] = useState(3);
+  const [limit] = useState(5);
+  const [showUsers, setShowUsers] = useState([]);
   const openModal = idx => {
     setIsModal(true);
     setModalId(idx);
   };
-  const toggleModal = () => {
-    setIsModal(!isModal)
-  }
   useEffect(() => {
-    setUsers(USERS.slice(0, limit));
-  }, []);
-  
+    setShowUsers(userList.slice(0, limit));
+  }, [userList]);
+  const toggleModal = () => {
+    setIsModal(!isModal);
+  };
+
   return (
-    <>
+    <Container>
+      <Total>
+        전체 사용자 <span>{userList.length}</span>명
+      </Total>
       <Table>
         <THead>
           <tr>
-            <Td>USERID</Td>
+            <Td>아이디</Td>
             <Td>이름</Td>
             <Td>주소</Td>
             <Td>카드번호</Td>
-            <Td>Role</Td>
-            <Td>admin</Td>
+            <Td>권한</Td>
+            {/* <Td>admin</Td> */}
           </tr>
         </THead>
         <TBody>
-          {users.map((user, idx) => (
+          {showUsers.map((user, idx) => (
             <User key={idx} user={user} onClickhandler={() => openModal(idx)} />
           ))}
         </TBody>
       </Table>
-      <PageButton items={USERS} setItems={setUsers} limit={limit} />
-      <UserModal
-        user={users[modalId]}
-        show={isModal}
-        toggleModal={toggleModal}
-      >
-      </UserModal>
-    </>
+      <PageButton
+        items={userList}
+        setItems={setShowUsers}
+        limit={limit}
+        size={5}
+      />
+      {isModal && (
+        <UserModal
+          show={isModal}
+          user={showUsers[modalId]}
+          toggleModal={toggleModal}
+        />
+      )}
+    </Container>
   );
 };
 

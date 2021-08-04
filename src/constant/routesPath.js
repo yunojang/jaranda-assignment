@@ -1,5 +1,8 @@
 export const ROUTES_PATH = {
-    MAIN : '/',
-    ADMIN : '/admin',
-    SIGNUP : '/signup',
-}
+  MAIN: '/',
+  ADMIN: '/admin',
+  LOGIN: '/login',
+  SIGNUP: '/signup',
+  ERROR: '/error',
+};
+
