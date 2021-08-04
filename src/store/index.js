@@ -1,7 +1,7 @@
-import Store from './Store';
+import userStorage from './user.js'
+import userListStorage from './userList.js'
 
-const state = {
-  
+export {
+  userStorage,
+  userListStorage
 }
-
-export default new Store({ state });
