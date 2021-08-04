@@ -72,11 +72,10 @@ const CloseImg = styled.img`
 `;
 
 const OptionalAccount = ({ lastId, setUsers, show, toggle }) => {
-  const [userName, onChangeUserName] = useInput('');
-  const [password, onChangePassword] = useInput('');
-  const [name, onChangeName] = useInput('');
+  const userName = useInput('');
+  const password = useInput('');
+  const name = useInput('');
   const [role, setRole] = useState(0);
-
   const onSubmit = () => {
     const newAccount = {
       id: lastId,
@@ -98,16 +97,14 @@ const OptionalAccount = ({ lastId, setUsers, show, toggle }) => {
           <CloseImg src="images/close.svg" alt="close" onClick={toggle} />
           <Header>사용자 추가</Header>
           <InputContainer>
-            <input value={name} onChange={onChangeName} placeholder="이름" />
+            <input {...name} placeholder="이름" />
             <input
-              value={userName}
-              onChange={onChangeUserName}
+              {...userName}
               type="id"
               placeholder="아이디"
             />
             <input
-              value={password}
-              onChange={onChangePassword}
+              {...password}
               placeholder="비밀번호"
             />
             <SelectRole currentRoleId={role} callback={setRole} />
