@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import USERS from 'asset/users.json';
 import styled from 'styled-components/macro';
 import UserTable from './userTable';
 import OptionalAccount from './optionalAccount';
+import userListData from 'store/userList';
+import useInput from 'hooks/useInput';
 // import Error from 'Pages/Error/Error';
 
 const Container = styled.div`
@@ -66,18 +67,15 @@ const Search = styled.div`
 `;
 
 function Admin() {
-  const [users] = useState(USERS);
-  const [value, setValue] = useState('');
+  const [users] = useState(userListData.load());
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
+  const { value, onInput } = useInput('');
 
   const toggleModal = () => {
     setIsModal(prev => !prev);
   };
 
-  const handleInput = e => {
-    setValue(e.target.value);
-  };
   useEffect(() => {
     if (value) {
       setUserList(
@@ -98,12 +96,16 @@ function Admin() {
   //   );
   // }
 
+  const findLastId = () => {
+    return Math.max(...users.map(v => v.id));
+  };
+
   return (
     <Container>
       <AdminWrap>
         <Title>사용자 관리</Title>
         <Search>
-          <input placeholder="전체 사용자 검색" onChange={handleInput} />
+          <input placeholder="전체 사용자 검색" onInput={onInput} />
           <button onClick={toggleModal}>
             <img src="images/user-add.svg" alt="추가" />
             사용자 추가
@@ -115,7 +117,7 @@ function Admin() {
         show={isModal}
         toggle={toggleModal}
         setUserList={setUserList}
-        lastId={userList.length}
+        lastId={findLastId() + 1}
       />
     </Container>
   );

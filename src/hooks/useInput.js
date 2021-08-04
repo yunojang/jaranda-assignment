@@ -12,7 +12,7 @@ const useInput = (initialValue, validate) => {
     }
 
     setValue(value);
-  }
+  };
 
   return {
     value, onChange, isCorrect
