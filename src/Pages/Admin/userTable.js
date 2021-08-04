@@ -34,7 +34,7 @@ const Total = styled.div`
 const Td = styled.td`
   padding: 20px 30px 20px 0px;
   max-width: 150px;
-  min-width: 100px;
+  min-width: 90px;
   font-size: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -42,7 +42,7 @@ const Td = styled.td`
 `;
 
 const AdminTd = styled.td`
-  padding: 20px 35px 20px 0px;
+  padding: 20px 30px 20px 0px;
   font-weight: 600;
 `;
 

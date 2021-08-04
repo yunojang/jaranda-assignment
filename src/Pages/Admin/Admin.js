@@ -91,6 +91,19 @@ function Admin() {
     }
   }, [value, users]);
 
+<<<<<<< HEAD
+  console.log(userList);
+
+  // if (!users.isAdmin) {
+  //   return (
+  //     <>
+  //       <Error />
+  //     </>
+  //   );
+  // }
+
+=======
+>>>>>>> master
   const findLastId = () => {
     return Math.max(...users.map(v => v.id));
   };

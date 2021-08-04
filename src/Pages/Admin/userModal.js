@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { ROLE } from 'constant/role';
 import userImage from 'asset/user.png';
 import Modal from 'Components/modal';
@@ -9,36 +9,71 @@ import { cardNumberFormat } from 'utils/format';
 import { userListStorage } from 'store';
 
 const ImageWrapper = styled.div`
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 `;
 const Container = styled.div`
-  padding: 30px 10%;
+  position: relative;
+  padding: 0px 30px;
+  margin: 20px 0px 60px 0px;
+  color: #4a4a4a;
 `;
 const UserAvatar = styled.img`
-  height: 130px;
+  height: 100px;
 `;
 const UserInfo = styled.div`
-  font-size: 20px;
-  margin-bottom: 25px;
+  display: flex;
+  flex-direction: row;
+  font-size: 16px;
+  margin-bottom: 20px;
+  line-height: 1.45;
+  word-break: keep-all;
 `;
 const UserName = styled.div`
-  font-size: 40px;
-  text-align: center;
-  margin-bottom: 40px;
+  font-size: 30px;
+  font-weight: 500;
+  text-align: left;
+  margin-bottom: 30px;
+  color: #252529;
 `;
 const Label = styled.div`
-  display: inline-block;
-  width: 20%;
-  font-size: 14px;
-  font-weight: 600;
+  margin-right: 10px;
+  width: 70px;
+  font-size: 15px;
+  font-weight: 400;
+  color: #9a9a9a;
 `;
 const Footer = styled.div`
-  position: absolute;
-  bottom: 30px;
-  right: 50px;
+  button {
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 20px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: #1685fd;
+    color: white;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  img {
+    width: 18px;
+    margin-right: 5px;
+  }
 `;
-const CloseButton = styled(Button)`
-  margin-left: 16px;
+const CloseImg = styled.img`
+  width: 16px;
+  height: 16px;
+
+  position: absolute;
+  right: 30px;
+  top: 30px;
+
+  cursor: pointer;
 `;
 const UserModal = ({ show, toggleModal, user, setUserList }) => {
   const [userState, setUserState] = useState(user);
@@ -71,33 +106,33 @@ const UserModal = ({ show, toggleModal, user, setUserList }) => {
   };
 
   return (
-    <Modal show={show} height="80%" width="80%" toggle={toggleModal}>
+    <Modal show={show} width="470px" toggle={toggleModal}>
       <Container>
-        <UserName>{userState.userName}</UserName>
         <ImageWrapper>
           <UserAvatar src={userImage} alt="user" />
         </ImageWrapper>
+        <UserName>{userState.userName}</UserName>
         <UserInfo>
-          <Label>ID</Label>
-          {userState.id}
+          <Label>아이디</Label>
+          <span>{userState.id}</span>
         </UserInfo>
         <UserInfo>
-          <Label>Address</Label>
-          {userState.address}
+          <Label>주소</Label>
+          <span>{userState.address}</span>
         </UserInfo>
         <UserInfo>
-          <Label>Card No.</Label>
+          <Label>카드번호</Label>
           {cardNumberFormat(userState.cardNumber)}
         </UserInfo>
         <UserInfo>
-          <Label>Role</Label>
+          <Label>권한</Label>
           <SelectRole
             currentRoleId={userState.role}
             callback={role => setRoleId(role)}
           />
         </UserInfo>
         <UserInfo>
-          <Label>Admin</Label>
+          <Label>관리 권한</Label>
           관리자
           <input
             type="checkbox"
@@ -108,12 +143,11 @@ const UserModal = ({ show, toggleModal, user, setUserList }) => {
       </Container>
       <Footer>
         <Button Small onClick={changeUserData}>
+          <img src="images/edit-alt white.svg" alt="아이콘" />
           수정
         </Button>
-        <CloseButton Small onClick={toggleModal}>
-          닫기
-        </CloseButton>
       </Footer>
+      <CloseImg src="images/close.svg" alt="close" onClick={toggleModal} />
     </Modal>
   );
 };
