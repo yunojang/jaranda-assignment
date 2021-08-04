@@ -9,6 +9,7 @@ import Input from 'Components/input';
 
 import COLOR from 'constant/colorCode';
 import useInput from "hooks/useInput";
+import { validPassword } from "utils/validate";
 
 const Container = styled.form`
   display: flex;
@@ -26,13 +27,14 @@ const Submit = styled.input.attrs({ type: 'submit' })`
 
 function Form() {
   const idInput = useInput('');
-  const pwdInput = useInput('');
+  const pwdInput = useInput('',validPassword);
 
   const onSubmit = event => {
     event.preventDefault();
 
     const formData = {
       id : idInput.value,
+      password : pwdInput.value,
     }
 
     console.log(formData);
