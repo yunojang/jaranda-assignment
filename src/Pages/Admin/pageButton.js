@@ -12,16 +12,15 @@ const Button = styled.button`
   }
 `;
 
-function PageButton({ items, setItems, limit, size }) {
+function PageButton({ page, setPage, items, setItems, limit, size }) {
   const [pageList, setPageList] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
 
   const onPaging = useCallback(
     page => {
-      setCurrentPage(page);
+      setPage(page);
       setItems(items.slice(page * limit, page * limit + limit));
     },
-    [items, limit],
+    [items, limit, page],
   );
 
   useEffect(() => {
@@ -40,10 +39,10 @@ function PageButton({ items, setItems, limit, size }) {
 
   return (
     <>
-      {currentPage ? (
+      {page ? (
         <Button
           onClick={() => {
-            onPaging(currentPage - 1);
+            onPaging(page - 1);
           }}
         >
           {'이전'}
@@ -54,7 +53,7 @@ function PageButton({ items, setItems, limit, size }) {
       {pageList.length < size
         ? pageList.map(v => (
             <Button
-              select={currentPage === v}
+              select={page === v}
               key={v}
               onClick={() => {
                 onPaging(v);
@@ -63,17 +62,15 @@ function PageButton({ items, setItems, limit, size }) {
               {v + 1}
             </Button>
           ))
-        : !(pageList.length - currentPage < size / 2 + 1)
+        : !(pageList.length - page < size / 2 + 1)
         ? pageList
             .slice(
-              currentPage - size / 2 > 0 ? currentPage - parseInt(size / 2) : 0,
-              (currentPage - size / 2 > 0
-                ? currentPage - parseInt(size / 2)
-                : 0) + size,
+              page - size / 2 > 0 ? page - parseInt(size / 2) : 0,
+              (page - size / 2 > 0 ? page - parseInt(size / 2) : 0) + size,
             )
             .map(v => (
               <Button
-                select={currentPage === v}
+                select={page === v}
                 key={v}
                 onClick={() => {
                   onPaging(v);
@@ -84,12 +81,11 @@ function PageButton({ items, setItems, limit, size }) {
             ))
         : pageList
             .slice(
-              pageList.length - currentPage < size / 2 + 1 &&
-                pageList.length - size,
+              pageList.length - page < size / 2 + 1 && pageList.length - size,
             )
             .map(v => (
               <Button
-                select={currentPage === v}
+                select={page === v}
                 key={v}
                 onClick={() => {
                   onPaging(v);
@@ -98,10 +94,10 @@ function PageButton({ items, setItems, limit, size }) {
                 {v + 1}
               </Button>
             ))}
-      {currentPage === pageList.length - 1 ? (
+      {page >= pageList.length - 1 ? (
         <></>
       ) : (
-        <Button onClick={() => onPaging(currentPage + 1)}>{'다음'}</Button>
+        <Button onClick={() => onPaging(page + 1)}>{'다음'}</Button>
       )}
     </>
   );
