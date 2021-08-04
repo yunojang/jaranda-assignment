@@ -40,7 +40,7 @@ const Footer = styled.div`
 const CloseButton = styled(Button)`
   margin-left: 16px;
 `;
-const UserModal = ({ show, toggleModal, user }) => {
+const UserModal = ({ show, toggleModal, user, setUserList }) => {
   const [userState, setUserState] = useState(user);
   useEffect(() => {
     setUserState(user);
@@ -54,6 +54,7 @@ const UserModal = ({ show, toggleModal, user }) => {
   };
   const changeUserData = () => {
     userListStorage.push(userState);
+    setUserList(prev => prev.map(v => (v.id === userState.id ? userState : v)));
     let changeData = '';
     if (userState.role !== user.role) {
       changeData += `권한이 ${ROLE[userState.role]}로 바뀌었습니다.`;

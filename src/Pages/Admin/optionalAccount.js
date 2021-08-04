@@ -1,7 +1,7 @@
 import Modal from 'Components/modal';
 import SelectRole from 'Components/selectRole';
 import useInput from 'hooks/useInput';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import userList from 'store/userList';
 
@@ -73,12 +73,14 @@ const CloseImg = styled.img`
   top: 20px;
 `;
 
+const Input = styled.input``;
+
 const OptionalAccount = ({ lastId, setUserList, show, toggle }) => {
-  const { isValid: _, ...userName } = useInput('');
-  const { isValid: __, ...password } = useInput('');
-  const { isValid: ___, ...name } = useInput('');
+  const userName = useInput('');
+  const password = useInput('');
+  const name = useInput('');
   const [role, setRole] = useState(0);
-  const onSubmit = e => {
+  const onSubmit = () => {
     const newAccount = {
       id: lastId,
       userName: userName.value,
@@ -96,11 +98,11 @@ const OptionalAccount = ({ lastId, setUserList, show, toggle }) => {
     return alert('계정이 생성되었습니다.');
   };
 
-  // useEffect(() => {
-  //   userName.setValue('');
-  //   password.setValue('');
-  //   name.setValue('');
-  // }, [show]);
+  useEffect(() => {
+    userName.setValue('');
+    password.setValue('');
+    name.setValue('');
+  }, [show]);
 
   return (
     <Modal show={show} width="420px" height="470px" toggle={toggle}>
@@ -115,9 +117,9 @@ const OptionalAccount = ({ lastId, setUserList, show, toggle }) => {
             }}
           >
             <InputContainer>
-              <input required {...name} placeholder="이름" />
-              <input required {...userName} type="id" placeholder="아이디" />
-              <input required {...password} placeholder="비밀번호" />
+              <Input required {...name} placeholder="이름" />
+              <Input required {...userName} type="id" placeholder="아이디" />
+              <Input required {...password} placeholder="비밀번호" />
               <SelectRole required currentRoleId={role} callback={setRole} />
             </InputContainer>
             <SubmitButton type="submit">생성</SubmitButton>
