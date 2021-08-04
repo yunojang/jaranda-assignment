@@ -4,7 +4,6 @@ import Button from './button';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import Login from '../Pages/Main/Login';
-import Navigation from '../Pages/Main/Navbar';
 import LoginModal from '../Pages/Main/LoginModal';
 import { userStorage } from 'store';
 
@@ -67,7 +66,6 @@ function Header({ history }) {
       <LeftLink to="/">
         <Button select={pathname === '/'}>Main</Button>
       </LeftLink>
-      <Navigation />
       <Account>
         {isLoggedIn ? (
           <>
