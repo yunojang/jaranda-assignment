@@ -1,4 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -12,92 +13,85 @@ const Button = styled.button`
   }
 `;
 
-function PageButton({ page, setPage, items, setItems, limit, size }) {
+function PageButton({ size, maxPage, page, setPage, next, prev }) {
   const [pageList, setPageList] = useState([]);
 
-  const onPaging = useCallback(
-    page => {
-      setPage(page);
-      setItems(items.slice(page * limit, page * limit + limit));
-    },
-    [items, limit, page],
-  );
+  const onPaging = page => {
+    console.log(page);
+    setPage(page);
+  };
 
   useEffect(() => {
-    setPageList(
-      Array.from(
-        {
-          length:
-            items.length % limit
-              ? parseInt(items.length / limit + 1)
-              : parseInt(items.length / limit),
-        },
-        (_, i) => i,
-      ),
-    );
-  }, [items]);
+    setPageList(Array.from({ length: maxPage }, (_, i) => i));
+  }, [maxPage]);
 
   return (
     <>
-      {page ? (
-        <Button
-          onClick={() => {
-            onPaging(page - 1);
-          }}
-        >
-          {'이전'}
-        </Button>
+      {prev ? (
+        <Link to={`/admin/${page - 1}`}>
+          <Button
+            onClick={() => {
+              onPaging(page - 1);
+            }}
+          >
+            {'이전'}
+          </Button>
+        </Link>
       ) : (
         <div style={{ width: '36px', display: 'inline-block' }} />
       )}
-      {pageList.length < size
+      {maxPage < size
         ? pageList.map(v => (
-            <Button
-              select={page === v}
-              key={v}
-              onClick={() => {
-                onPaging(v);
-              }}
-            >
-              {v + 1}
-            </Button>
+            <Link key={v} to={`/admin/${v}`}>
+              <Button
+                select={page === v}
+                onClick={() => {
+                  onPaging(v);
+                }}
+              >
+                {v + 1}
+              </Button>
+            </Link>
           ))
-        : !(pageList.length - page < size / 2 + 1)
+        : !(maxPage - page < size / 2 + 1)
         ? pageList
             .slice(
               page - size / 2 > 0 ? page - parseInt(size / 2) : 0,
               (page - size / 2 > 0 ? page - parseInt(size / 2) : 0) + size,
             )
             .map(v => (
-              <Button
-                select={page === v}
-                key={v}
-                onClick={() => {
-                  onPaging(v);
-                }}
-              >
-                {v + 1}
-              </Button>
+              <Link key={v} to={`/admin/${v}`}>
+                <Button
+                  select={page === v}
+                  key={v}
+                  onClick={() => {
+                    onPaging(v);
+                  }}
+                >
+                  {v + 1}
+                </Button>
+              </Link>
             ))
         : pageList
-            .slice(
-              pageList.length - page < size / 2 + 1 && pageList.length - size,
-            )
+            .slice(maxPage - page < size / 2 + 1 && maxPage - size)
             .map(v => (
-              <Button
-                select={page === v}
-                key={v}
-                onClick={() => {
-                  onPaging(v);
-                }}
-              >
-                {v + 1}
-              </Button>
+              <Link key={v} to={`/admin/${v}`}>
+                <Button
+                  select={page === v}
+                  onClick={() => {
+                    onPaging(v);
+                  }}
+                >
+                  {v + 1}
+                </Button>
+              </Link>
             ))}
-      {page >= pageList.length - 1 ? (
-        <></>
+      {next ? (
+        <Link to={`/admin/${page + 1}`}>
+          <Button onClick={() => onPaging(page + 1)}>{'다음'}</Button>
+        </Link>
       ) : (
-        <Button onClick={() => onPaging(page + 1)}>{'다음'}</Button>
+        <></>
       )}
     </>
   );
