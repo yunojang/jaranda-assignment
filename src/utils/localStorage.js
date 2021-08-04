@@ -7,8 +7,11 @@ export const getItem = (key) => {
 }
 
 class Storage {
-	constructor(keyName) {
+	constructor(keyName,defaultValue) {
 		this.keyName = keyName;
+		if (defaultValue) {
+			this.save(defaultValue)
+		}
 	}
 
 	save(data) {
@@ -17,6 +20,10 @@ class Storage {
 
 	load() {
 		return getItem(this.keyName);
+	}
+
+	exist() {
+		return getItem(this.keyName) ? true : false
 	}
 
 	push(item) {
