@@ -27,6 +27,10 @@ class Storage {
     return getItem(this.keyName) ? true : false;
   }
 
+  existById(id) {
+    return getItem(this.keyName).find(v => v.id === id) ? true : false;
+  }
+
   push(item) {
     const loadedData = this.load() ?? [];
 
@@ -35,8 +39,14 @@ class Storage {
       return;
     }
 
-    loadedData.push(item);
-    this.save(loadedData);
+    if (!this.existById(item.id)) {
+      loadedData.push(item);
+      this.save(loadedData);
+
+      return;
+    }
+
+    this.save(loadedData.map(v => (v.id === item.id ? item : v)));
   }
 }
 

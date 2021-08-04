@@ -78,7 +78,7 @@ const OptionalAccount = ({ lastId, setUserList, show, toggle }) => {
   const { isValid: __, ...password } = useInput('');
   const { isValid: ___, ...name } = useInput('');
   const [role, setRole] = useState(0);
-  const onSubmit = () => {
+  const onSubmit = e => {
     const newAccount = {
       id: lastId,
       userName: userName.value,
@@ -92,6 +92,8 @@ const OptionalAccount = ({ lastId, setUserList, show, toggle }) => {
     toggle();
     userList.push(newAccount);
     setUserList(prev => [...prev, newAccount]);
+
+    return alert('계정이 생성되었습니다.');
   };
 
   // useEffect(() => {
@@ -106,13 +108,20 @@ const OptionalAccount = ({ lastId, setUserList, show, toggle }) => {
         <OptionalAccountContainer>
           <CloseImg src="images/close.svg" alt="close" onClick={toggle} />
           <Header>사용자 추가</Header>
-          <InputContainer>
-            <input {...name} placeholder="이름" />
-            <input {...userName} type="id" placeholder="아이디" />
-            <input {...password} placeholder="비밀번호" />
-            <SelectRole currentRoleId={role} callback={setRole} />
-          </InputContainer>
-          <SubmitButton onClick={onSubmit}>생성</SubmitButton>
+          <form
+            onSubmit={e => {
+              onSubmit(e);
+              e.preventDefault();
+            }}
+          >
+            <InputContainer>
+              <input required {...name} placeholder="이름" />
+              <input required {...userName} type="id" placeholder="아이디" />
+              <input required {...password} placeholder="비밀번호" />
+              <SelectRole required currentRoleId={role} callback={setRole} />
+            </InputContainer>
+            <SubmitButton type="submit">생성</SubmitButton>
+          </form>
         </OptionalAccountContainer>
       </OptionalAccountWrap>
     </Modal>
