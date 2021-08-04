@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Input from 'Components/input';
 import styled from 'styled-components';
+
 import Button from './SignupButton';
-import Modal from 'Components/modal';
+import CardModal from './CardModal';
 
 const InputList = styled.div`
   display: flex;
@@ -10,7 +11,7 @@ const InputList = styled.div`
   justify-content: space-between;
 
   input {
-    max-width: calc(100% / 5);
+    max-width: calc(100% / 5 - 5px);
   }
 `;
 
@@ -21,68 +22,51 @@ const Title = styled.h1`
 `;
 
 function Card() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [cardNum, setCardNum] = useState({
-    first: '',
-    second: '',
-    third: '',
-    fourth: '',
-  });
-
-  const { first, second, third, fourth } = cardNum;
+  const [show, setShow] = useState(false);
+  const [number, setNumber] = useState('');
 
   const openModal = () => {
-    setIsModalOpen(true);
-  };
+    setShow(true);
+  }
 
   const closeModal = () => {
-    setIsModalOpen(false);
-    onReset();
-  };
+     setShow(false);
+  }
 
-  const finishModal = () => {
-    setIsModalOpen(false);
-  };
+  const resetNumber = () => {
+    setNumber('');
+  }
 
-  const handleCardNum = e => {
-    const { value, name } = e.target;
-    setCardNum({
-      ...cardNum,
-      [name]: value,
-    });
-  };
-  //카드 넘버 초기화 함수
-  const onReset = () => {
-    setCardNum({
-      ...cardNum,
-      first: '',
-      second: '',
-      third: '',
-      fourth: '',
-    });
-  };
+  const renderInputs = () => {
+    const inputs = [];
+
+    for (let i = 0; i < 4; i++) {
+      const start = i * 4;
+      const sliced = number.slice(start, start + 4);
+
+      const input = <Input key={i} value={sliced} readOnly/>
+
+      inputs.push(input)
+    }
+
+    return inputs
+  }
 
   return (
     <>
       <Title>카드 번호</Title>
+
       <InputList>
-        <Input readOnly value={cardNum.first} />
-        <Input readOnly value={cardNum.second} />
-        <Input readOnly value={cardNum.third} />
-        <Input readOnly value={cardNum.fourth} />
-        <Button onClick={openModal}>카드 입력</Button>
+        {renderInputs()}
+        <Button onClick={() => { openModal(); resetNumber(); }}>카드 입력</Button>
       </InputList>
-      <Modal show={isModalOpen} toggle={closeModal} width={'480px'}>
-        <h1>카드번호를 입력하세요.</h1>
-        <div>
-          <Input name="first" onChange={handleCardNum} value={first} />
-          <Input name="second" onChange={handleCardNum} value={second} />
-          <Input name="third" onChange={handleCardNum} value={third} />
-          <Input name="fourth" onChange={handleCardNum} value={fourth} />
-        </div>
-        <Button onClick={closeModal}>취소</Button>
-        <Button onClick={finishModal}>확인</Button>
-      </Modal>
+
+      <CardModal
+        show={show}
+        closeModal={closeModal}
+        setNumber = {setNumber}
+        resetNumber = {resetNumber}
+      />
     </>
   );
 }
