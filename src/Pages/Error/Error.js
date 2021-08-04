@@ -9,10 +9,16 @@ const ErrorWrap = styled.div`
 `;
 
 const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   p {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #4a4a4a;
   }
 `;
 
@@ -21,8 +27,10 @@ const Error = () => {
     <>
       <ErrorWrap>
         <ErrorContainer>
-          <img src="/images/error.png" alt="error" />
-          <p>접근 권한이 없습니다.</p>
+          <img src="/images/warning.svg" width="200px" alt="error" />
+          <p>
+            죄송합니다. <br /> 이 페이지에는 접근 권한이 없습니다.
+          </p>
         </ErrorContainer>
       </ErrorWrap>
     </>
