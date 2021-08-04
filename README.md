@@ -57,5 +57,3 @@
 > git clone https://github.com/gugudanAssginment/jaranda-assignment.git
 
 > npm install
-
-> npm start
