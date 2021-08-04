@@ -2,7 +2,7 @@ import Modal from 'Components/modal';
 import SelectRole from 'Components/selectRole';
 import useInput from 'hooks/useInput';
 import React, { useState } from 'react';
-import userData from 'store/userData';
+import userList from 'store/userList';
 import styled from 'styled-components';
 
 const OptionalAccountWrap = styled.div`
@@ -33,7 +33,7 @@ const InputContainer = styled.div`
   input {
     display: block;
     height: 38px;
-    width: 90%;
+    width: 100%;
     margin-bottom: 8px;
     padding: 0 15px;
     border: 1px solid rgba(154, 154, 154, 0.5);
@@ -71,42 +71,43 @@ const CloseImg = styled.img`
   top: 20px;
 `;
 
-const OptionalAccount = ({ lastId, setUsers, show, toggle }) => {
-  const userName = useInput('');
-  const password = useInput('');
-  const name = useInput('');
+const OptionalAccount = ({ lastId, setUserList, show, toggle }) => {
+  const { isValid: _, ...userName } = useInput('');
+  const { isValid: __, ...password } = useInput('');
+  const { isValid: ___, ...name } = useInput('');
   const [role, setRole] = useState(0);
   const onSubmit = () => {
     const newAccount = {
       id: lastId,
-      userName,
+      userName: userName.value,
       address: '',
       cardNumber: '',
-      password,
+      password: password.value,
       role,
       isAdmin: 0,
     };
-    userData.push(newAccount);
-    setUsers(prev => [...prev, newAccount]);
+
+    toggle();
+    userList.push(newAccount);
+    setUserList(prev => [...prev, newAccount]);
   };
 
+  // useEffect(() => {
+  //   userName.setValue('');
+  //   password.setValue('');
+  //   name.setValue('');
+  // }, [show]);
+
   return (
-    <Modal show={show} height="470px" toggle={toggle}>
+    <Modal show={show} width="420px" height="470px" toggle={toggle}>
       <OptionalAccountWrap>
         <OptionalAccountContainer>
           <CloseImg src="images/close.svg" alt="close" onClick={toggle} />
           <Header>사용자 추가</Header>
           <InputContainer>
             <input {...name} placeholder="이름" />
-            <input
-              {...userName}
-              type="id"
-              placeholder="아이디"
-            />
-            <input
-              {...password}
-              placeholder="비밀번호"
-            />
+            <input {...userName} type="id" placeholder="아이디" />
+            <input {...password} placeholder="비밀번호" />
             <SelectRole currentRoleId={role} callback={setRole} />
           </InputContainer>
           <SubmitButton onClick={onSubmit}>생성</SubmitButton>

@@ -83,7 +83,7 @@ const User = ({ user, onClickhandler }) => {
   return (
     <tr>
       <Td>{id}</Td>
-      <Td>{userName}</Td>
+      <Td>{userName || userName.value}</Td>
       <Td>{address}</Td>
       <Td>{cardNumberFormat(cardNumber)}</Td>
       <Td>{ROLE[role]}</Td>
@@ -101,12 +101,15 @@ const UserTable = ({ userList }) => {
   const [modalId, setModalId] = useState(0);
   const [limit] = useState(5);
   const [showUsers, setShowUsers] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+
   const openModal = idx => {
     setIsModal(true);
     setModalId(idx);
   };
   useEffect(() => {
     setShowUsers(userList.slice(0, limit));
+    setCurrentPage(0);
   }, [userList]);
   const toggleModal = () => {
     setIsModal(!isModal);
@@ -135,6 +138,8 @@ const UserTable = ({ userList }) => {
         </TBody>
       </Table>
       <PageButton
+        page={currentPage}
+        setPage={setCurrentPage}
         items={userList}
         setItems={setShowUsers}
         limit={limit}
