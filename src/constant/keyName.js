@@ -1,5 +1,6 @@
 const KEYNAME = {
-  USERDATA : 'user-data',
+  USERLIST : 'jaranda-userList',
+  USER : 'jaranda-user'
 }
 
 export default KEYNAME;
