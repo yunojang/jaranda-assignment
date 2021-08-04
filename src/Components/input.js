@@ -1,6 +1,5 @@
 import React from 'react';
-import styled, { css } from "styled-components"
-
+import styled, { css } from 'styled-components';
 
 import COLOR from 'constant/colorCode';
 
@@ -11,30 +10,30 @@ const ACTIVE_STYLE = {
 };
 
 const InputWrap = styled.input`
-  flex-grow : ${props => props.Fill ? '1' : ''};
+  flex-grow: ${props => (props.Fill ? '1' : '')};
   height: 44px;
   margin-bottom: 8px;
   padding: 0 15px;
   border: 1px solid rgba(154, 154, 154, 0.5);
-  background : ${props => props.readOnly && 'rgba(100,100,100,.1);'};
+  background: ${props => props.readOnly && 'rgba(100,100,100,.1);'};
   font-size: 12px;
   font-family: sans-serif;
 
   /* readOnly가 아닌 경우에 hover와 focus 스타일을 적용합니다. */
-  ${props => !props.readOnly 
-    && css`
-        &:hover {
-          ${ACTIVE_STYLE}
-        }
-        &:focus {
-          ${ACTIVE_STYLE}
-        }
-      `}
+  ${props =>
+    !props.readOnly &&
+    css`
+      &:hover {
+        ${ACTIVE_STYLE}
+      }
+      &:focus {
+        ${ACTIVE_STYLE}
+      }
+    `}
 `;
 
 function Input({ ...props }) {
-  return <InputWrap {...props}></InputWrap>
-
+  return <InputWrap {...props}></InputWrap>;
 }
 
 export default Input;
