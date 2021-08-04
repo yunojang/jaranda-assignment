@@ -2,30 +2,44 @@ import React from 'react';
 import { BOARDS } from 'constant/boards';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { userStorage } from 'store';
+
+const accessStyle = `
+  color : black;
+  &:hover {
+    cursor: pointer
+  }
+`
 
 const NavigationWrap = styled.div`
-  //padding-top: 30px;
+  padding-top: 30px;
   display: inline-block;
-  //background-color: #e3e3e3;
-  display: flex;
-  // width: 200px;
-  line-height: 3;
+  position:fixed;
+  background-color: #e3e3e3;
+  width: 200px;
+  height: 100vh;
 `;
+
 const MainBoard = styled.div`
   font-size: 20px;
   padding: 12px;
-
-  color: ${props => (props.access ? 'black' : '#939393')};
+  color: #939393;
+  ${props => props.access && accessStyle}
 `;
-// const SubBoardWrap = styled.div``;
-// const SubBoard = styled.div`
-//   margin-left: 20px;
-//   padding: 8px;
-//   font-size: 14px;
-//   color: ${props => (props.access ? 'black' : '#939393')};
-// `;
 
-const Board = ({ board, isLogin, isAdmin, role }) => {
+const SubBoardWrap = styled.div``;
+const SubBoard = styled.div`
+  margin-left: 20px;
+  padding: 8px;
+  font-size: 14px;
+  color: #939393;
+  ${props => props.access && accessStyle}
+
+`;
+
+const Board = ({ board, user ,setBoard}) => {
+  const isLogin = user ? true : false
+  const {role,isAdmin} = user
   const accessBoard = boardId => {
     if (!isLogin) {
       return false;
@@ -43,37 +57,46 @@ const Board = ({ board, isLogin, isAdmin, role }) => {
     }
     return false;
   };
+  const setBoardName = (board) => {
+    const { id, name } = board
+    if (accessBoard(id)) {
+      setBoard(name)
+    }
+  }
   return (
     <>
-      <MainBoard access={accessBoard(board.id)}>{board.name}</MainBoard>
-      {/* <SubBoardWrap>
+      <MainBoard
+        access={accessBoard(board.id)}
+        onClick={()=>setBoardName(board)}
+      >{board.name}</MainBoard>
+      <SubBoardWrap >
         {board.category.map((sub, idx) => (
-          <SubBoard access={accessBoard(sub.id)} key={idx}>
+          <SubBoard 
+            onClick={()=>setBoardName(sub)}
+            access={accessBoard(sub.id)} key={idx}>
             {sub.name}
           </SubBoard>
         ))}
-      </SubBoardWrap> */}
+      </SubBoardWrap>
     </>
   );
 };
 const Navigation = ({ setBoard }) => {
-  // 예시 데이터 - 프론트엔드
-  const [isLogin, isAdmin, role] = [true, true, 11];
+  const user = userStorage.load()
+  const isLogin = userStorage.exist()
   return (
     <NavigationWrap>
       {BOARDS.map((board, idx) => (
         <Board
           key={idx}
           board={board}
-          isLogin={isLogin}
-          isAdmin={isAdmin}
-          role={role}
+          user={user || {}}
           setBoard={setBoard}
         ></Board>
       ))}
-      {isAdmin && (
+      {isLogin && user.isAdmin && (
         <Link to="/admin">
-          <MainBoard access={isAdmin}>관리자 게시판</MainBoard>
+          <MainBoard access={user.isAdmin}>관리자 게시판</MainBoard>
         </Link>
       )}
     </NavigationWrap>

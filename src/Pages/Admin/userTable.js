@@ -96,7 +96,7 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ userList }) => {
+const UserTable = ({ userList, setUserList }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
   const [limit] = useState(5);
@@ -123,8 +123,8 @@ const UserTable = ({ userList }) => {
       <Table>
         <THead>
           <tr>
+            <Td>No</Td>
             <Td>아이디</Td>
-            <Td>이름</Td>
             <Td>주소</Td>
             <Td>카드번호</Td>
             <Td>권한</Td>
@@ -150,6 +150,7 @@ const UserTable = ({ userList }) => {
           show={isModal}
           user={showUsers[modalId]}
           toggleModal={toggleModal}
+          setUserList={setUserList}
         />
       )}
     </Container>

@@ -4,6 +4,8 @@ import UserTable from './userTable';
 import OptionalAccount from './optionalAccount';
 import userListData from 'store/userList';
 import useInput from 'hooks/useInput';
+import { userStorage } from 'store';
+import Error from 'Pages/Error/Error';
 // import Error from 'Pages/Error/Error';
 
 const Container = styled.div`
@@ -68,6 +70,7 @@ const Search = styled.div`
 
 function Admin() {
   const [users] = useState(userListData.load());
+  const [user] = useState(userStorage.load());
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
   const { value, onChange } = useInput('');
@@ -88,6 +91,7 @@ function Admin() {
     }
   }, [value, users]);
 
+<<<<<<< HEAD
   console.log(userList);
 
   // if (!users.isAdmin) {
@@ -98,9 +102,15 @@ function Admin() {
   //   );
   // }
 
+=======
+>>>>>>> master
   const findLastId = () => {
     return Math.max(...users.map(v => v.id));
   };
+
+  if (!user || !user.isAdmin) {
+    return <Error />;
+  }
 
   return (
     <Container>
@@ -113,7 +123,7 @@ function Admin() {
             사용자 추가
           </button>
         </Search>
-        <UserTable userList={userList} />
+        <UserTable setUserList={setUserList} userList={userList} />
       </AdminWrap>
       <OptionalAccount
         show={isModal}
