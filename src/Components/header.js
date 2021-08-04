@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Button from './button';
 import { withRouter } from 'react-router-dom';
@@ -37,6 +37,10 @@ function Header({ history }){
   const [modal, setModal] = useState(false);
   const [isLoggedIn,setIsLoggedIn] = useState(false);   //로그인중인지확인userData
 
+  useEffect(() => {
+    if(userStorage.exist()) setIsLoggedIn(true);
+  },[])
+
   const toggleModal = () => {
     setModal(!modal);
   }
@@ -55,6 +59,7 @@ function Header({ history }){
   const onLogout = () => {
     setModal(false);
     setIsLoggedIn(false);
+    localStorage.removeItem('jaranda-user');
   }
 
   return (
