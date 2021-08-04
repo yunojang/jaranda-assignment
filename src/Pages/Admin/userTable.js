@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import styled from 'styled-components/macro';
 
 import PageButton from 'Pages/Admin/pageButton';
@@ -57,7 +57,7 @@ const THead = styled.thead`
 `;
 const TBody = styled.tbody``;
 
-const ModifyBtn = styled.div`
+const ModifyBtn = styled.td`
   position: absolute;
   right: 50px;
   display: flex;
@@ -96,16 +96,18 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ users, value, userList, setUsers }) => {
+const UserTable = ({ users, userList }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
   const [limit] = useState(5);
-  const [showUsers, setShowUsers] = useState(users.slice(0, limit));
+  const [showUsers, setShowUsers] = useState([]);
   const openModal = idx => {
     setIsModal(true);
     setModalId(idx);
   };
-
+  useEffect(()=>{
+    setShowUsers(userList.slice(0,limit))
+  },[userList])
   const toggleModal = () => {
     setIsModal(!isModal);
   };
@@ -127,32 +129,25 @@ const UserTable = ({ users, value, userList, setUsers }) => {
           </tr>
         </THead>
         <TBody>
-          {value
-            ? userList.map((user, idx) => (
-                <User
-                  key={idx}
-                  user={user}
-                  onClickhandler={() => openModal(idx)}
-                />
-              ))
-            : showUsers.map((user, idx) => (
-                <User
-                  key={idx}
-                  user={user}
-                  onClickhandler={() => openModal(idx)}
-                />
-              ))}
+          {
+            showUsers.map((user, idx) => (
+              <User
+                key={idx}
+                user={user}
+                onClickhandler={() => openModal(idx)}
+              />)
+            )
+          }
         </TBody>
       </Table>
       <PageButton
-        items={users}
+        items={userList}
         setItems={setShowUsers}
         limit={limit}
         size={5}
       />
-
       {isModal && (
-        <UserModal user={showUsers[modalId]} toggleModal={toggleModal} />
+        <UserModal show={isModal} user={showUsers[modalId]} toggleModal={toggleModal} />
       )}
     </Container>
   );

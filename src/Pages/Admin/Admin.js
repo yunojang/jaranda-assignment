@@ -65,21 +65,23 @@ const Search = styled.div`
 `;
 
 function Admin() {
-  const [users, setUsers] = useState(USERS);
-
+  const [users] = useState(USERS);
   const [value, setValue] = useState('');
-  const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState(users);
 
   const handleInput = e => {
     setValue(e.target.value);
   };
-
   useEffect(() => {
-    setUserList(
-      users?.filter(el =>
-        el.userName.toLowerCase().includes(value.toLowerCase()),
-      ),
-    );
+    if (value) {
+      setUserList(
+        users?.filter(el =>
+          el.userName.toLowerCase().includes(value.toLowerCase()),
+        ),
+      );
+    } else {
+      setUserList(users)
+    }
   }, [value, users]);
 
   // if (!users.isAdmin) {
@@ -103,9 +105,7 @@ function Admin() {
         </Search>
         <UserTable
           users={users}
-          setUsers={setUsers}
           userList={userList}
-          value={value}
         />
       </AdminWrap>
     </Container>
