@@ -1,42 +1,53 @@
 export const setItem = (key, data) => {
-	localStorage.setItem(key, JSON.stringify(data));
-}
+  localStorage.setItem(key, JSON.stringify(data));
+};
 
-export const getItem = (key) => {
-	return JSON.parse(localStorage.getItem(key));
-}
+export const getItem = key => {
+  return JSON.parse(localStorage.getItem(key));
+};
 
 class Storage {
-	constructor(keyName,defaultValue) {
-		this.keyName = keyName;
-		if (defaultValue) {
-			this.save(defaultValue)
-		}
-	}
+  constructor(keyName, defaultValue) {
+    this.keyName = keyName;
 
-	save(data) {
-		setItem(this.keyName, data);
-	}
+    if (!this.exist() && defaultValue) {
+      this.save(defaultValue);
+    }
+  }
 
-	load() {
-		return getItem(this.keyName);
-	}
+  save(data) {
+    setItem(this.keyName, data);
+  }
 
-	exist() {
-		return getItem(this.keyName) ? true : false
-	}
+  load() {
+    return getItem(this.keyName);
+  }
 
-	push(item) {
-		const loadedData = this.load() ?? [];
+  exist() {
+    return getItem(this.keyName) ? true : false;
+  }
 
-		if (!Array.isArray(loadedData)) {
-			console.error('You can push only on Array');
-			return;
-		}
+  existById(id) {
+    return getItem(this.keyName).find(v => v.id === id) ? true : false;
+  }
 
-		loadedData.push(item);
-		this.save(loadedData);
-	}
+  push(item) {
+    const loadedData = this.load() ?? [];
+
+    if (!Array.isArray(loadedData)) {
+      console.error('You can push only on Array');
+      return;
+    }
+
+    if (!this.existById(item.id)) {
+      loadedData.push(item);
+      this.save(loadedData);
+
+      return;
+    }
+
+    this.save(loadedData.map(v => (v.id === item.id ? item : v)));
+  }
 }
 
 export default Storage;
