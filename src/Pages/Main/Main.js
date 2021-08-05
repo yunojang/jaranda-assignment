@@ -9,35 +9,52 @@ const MainContainer = styled.div`
 `
 const BoardTitle = styled.div`
   font-size: 30px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 `
+
+const BoardContainer = styled.div``
 
 const BoardItemWrap = styled.div`
   border: 1px solid gray;
   margin : 10px;
   padding: 20px;
+  `
+
+const BoardDescription = styled.div`
+  color: gray;
+  font-size: 12px;
+  font-weight: 500;
+  text-align: start;
+  margin-bottom: 50px;
 `
 
 const BoardItem = ({board,idx}) => {
   return (
-    <BoardItemWrap>{board} {idx+1} 번째 게시글 </BoardItemWrap>
+    <BoardItemWrap> {board.name} {idx+1} 번째 게시글 </BoardItemWrap>
   )
 }
 function Main({location}) {
-  const [board,setBoard] = useState('')
+  const [board,setBoard] = useState(null)
   useEffect(()=>{
-    setBoard('')
+    setBoard(null)
   },[location])
   return (
     <>
       <Navigation setBoard={setBoard}/>
       <MainContainer>
-        <BoardTitle>
-          {board}
-        </BoardTitle>
-        {board && Array(6).fill(0).map((_,idx) => (
-          <BoardItem key={idx} idx={idx} board={board}/>
-        ))}
+        {board && 
+          <BoardContainer>
+            <BoardTitle>
+              {board.name}
+            </BoardTitle>
+            <BoardDescription>
+              {board.access} 사용하는 게시판입니다
+            </BoardDescription>
+            {Array(6).fill(0).map((_,idx) => (
+              <BoardItem key={idx} idx={idx} board={board}/>
+            ))}
+          </BoardContainer>
+        }
       </MainContainer>
     </>
   );

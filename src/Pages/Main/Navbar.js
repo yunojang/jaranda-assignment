@@ -3,11 +3,14 @@ import { BOARDS } from 'constant/boards';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { userStorage } from 'store';
-
+import { ROUTES_PATH } from 'constant/routesPath'
 const accessStyle = `
   color : black;
   &:hover {
     cursor: pointer
+  }
+  & div {
+    cursor: initial
   }
 `;
 
@@ -27,7 +30,9 @@ const MainBoard = styled.div`
   ${props => props.access && accessStyle}
 `;
 
-const SubBoardWrap = styled.div``;
+const SubBoardWrap = styled.div`
+  padding-top: 12px;
+`;
 const SubBoard = styled.div`
   margin-left: 20px;
   padding: 8px;
@@ -39,7 +44,9 @@ const SubBoard = styled.div`
 const Board = ({ board, user, setBoard }) => {
   const [showSubBoard, setShowSubBoard] = useState(false);
   const trueSubBoard = () => {
-    setShowSubBoard(true);
+    if (board.category.length) {
+      setShowSubBoard(true);
+    }
   };
   const falseSubBoard = () => {
     setShowSubBoard(false);
@@ -63,10 +70,10 @@ const Board = ({ board, user, setBoard }) => {
     }
     return false;
   };
-  const setBoardName = board => {
-    const { id, name } = board;
-    if (accessBoard(id)) {
-      setBoard(name);
+  const setBoardName = (e, board) => {
+    e.stopPropagation()
+    if (accessBoard(board.id)) {
+      setBoard(board);
     }
   };
   return (
@@ -75,13 +82,15 @@ const Board = ({ board, user, setBoard }) => {
         onMouseEnter={trueSubBoard}
         onMouseLeave={falseSubBoard}
         access={accessBoard(board.id)}
-        onClick={() => setBoardName(board)}
+        onClick={(e) => setBoardName(e, board)}
       >
         {board.name}
         {showSubBoard && (
           <SubBoardWrap>
             {board.category.map((sub, idx) => (
-              <SubBoard access={accessBoard(sub.id)} key={idx}>
+              <SubBoard 
+                onClick={(e) => setBoardName(e, sub)}
+                access={accessBoard(sub.id)} key={idx}>
                 {sub.name}
               </SubBoard>
             ))}
@@ -92,7 +101,7 @@ const Board = ({ board, user, setBoard }) => {
   );
 };
 const Navigation = ({ setBoard }) => {
-  const user = userStorage.load();
+  const user = userStorage.load() || {};
   const isLogin = userStorage.exist();
   return (
     <NavigationWrap>
@@ -100,12 +109,12 @@ const Navigation = ({ setBoard }) => {
         <Board
           key={idx}
           board={board}
-          user={user || {}}
+          user={user}
           setBoard={setBoard}
         ></Board>
       ))}
       {isLogin && user.isAdmin && (
-        <Link to="/admin">
+        <Link to={ROUTES_PATH.ADMIN}>
           <MainBoard access={user.isAdmin}>관리자 게시판</MainBoard>
         </Link>
       )}
