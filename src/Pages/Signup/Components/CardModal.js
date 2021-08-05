@@ -34,9 +34,22 @@ function CardModal({ show, close, setNumber, resetNumber }) {
   inputs[2] = useInput('',validCardSection);
   inputs[3] = useInput('',validCardSection);
 
+  const resetInputs = () => {
+    inputs.forEach(input=> input.setValue(''));
+  }
+
   const onConfirm = () => {
     const unionNumber = inputs.reduce((union,{value})=>`${union}${value.padEnd(4,' ')}`,'');
+
     setNumber(unionNumber);
+    
+    resetInputs();
+    close();
+  }
+
+  const onCancle = () => {
+    resetNumber();
+    resetInputs();
     close();
   }
 
@@ -55,7 +68,7 @@ function CardModal({ show, close, setNumber, resetNumber }) {
       </InputList>
 
       <ButtonContainer>
-        <Button wide onClick={() => { close(); resetNumber(); }}>취소</Button>
+        <Button wide onClick={onCancle}>취소</Button>
         <Button wide onClick={onConfirm}>확인</Button>
       </ButtonContainer>
 
