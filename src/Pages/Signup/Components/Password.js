@@ -71,7 +71,6 @@ function Password(props) {
   return (
     <>
       <Input
-        required
         type='password'
         placeholder='비밀번호'
         onInput={validCheck}

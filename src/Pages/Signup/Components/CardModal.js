@@ -12,8 +12,7 @@ const Title = styled.h1`
 
 const InputList = styled.div`
   display: flex;
-  justify-content: space-between;
-  column-gap: 4px;
+  gap: 5px;
   margin-bottom: 10px;
 
   input {
@@ -24,7 +23,7 @@ const InputList = styled.div`
 const ButtonContainer = styled.div`
   display: flex;
   justify-content: flex-end;
-  column-gap: 8px;
+  gap: 8px;
 `;
 
 function CardModal({ show, close, setNumber, resetNumber }) {
