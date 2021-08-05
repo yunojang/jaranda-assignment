@@ -12,6 +12,7 @@ import Alert from "Components/inputAlert";
 import useInput from "hooks/useInput";
 import { userListStorage } from "store";
 import COLOR from 'constant/colorCode';
+import { ROUTES_PATH } from 'constant/routesPath';
 import { validPassword, validCardNumber, existUsername } from "utils/validate";
 
 const Container = styled.form`
@@ -78,7 +79,7 @@ function Form() {
   const onSubmit = event => {
     event.preventDefault();
 
-    if ( !validateCheck() ) {
+    if (!validateCheck()) {
       return;
     }
 
@@ -87,7 +88,7 @@ function Form() {
     userListStorage.push(user);
     alert(`${user.userName}님 회원가입 되었습니다.`);
 
-    history.push('/')
+    history.push(ROUTES_PATH.MAIN)
   }
 
   return (
