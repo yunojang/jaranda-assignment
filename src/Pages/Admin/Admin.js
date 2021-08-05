@@ -4,8 +4,8 @@ import UserTable from './userTable';
 import OptionalAccount from './optionalAccount';
 import userListData from 'store/userList';
 import useInput from 'hooks/useInput';
-import { userStorage } from 'store';
-import Error from 'Pages/Error/Error';
+// import { userStorage } from 'store';
+// import Error from 'Pages/Error/Error';
 
 const Container = styled.div`
   display: flex;
@@ -71,8 +71,7 @@ const Input = styled.input``;
 
 function Admin() {
   const [users] = useState(userListData.load());
-  const [user] = useState(userStorage.load());
-
+  // const [user] = useState(userStorage.load());
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
 
@@ -102,9 +101,9 @@ function Admin() {
     return Math.max(...userList.map(v => v.id));
   };
 
-  if (!user || !user.isAdmin) {
-    return <Error />;
-  }
+  // if (!user || !user.isAdmin) {
+  //   return <Error />;
+  // }
 
   return (
     <Container>
