@@ -3,8 +3,8 @@ import Modal from "Components/modal"
 import Input from "Components/input";
 import styled from "styled-components";
 import Button from './SignupButton';
-import useInput from "../hooks/useInputLock";
-import { validCardNumber } from "utils/validate";
+import useInput from "hooks/useInput";
+import { validCardSection } from "utils/validate";
 
 const Title = styled.h1`
   margin-bottom: 20px;
@@ -27,16 +27,29 @@ const ButtonContainer = styled.div`
   column-gap: 8px;
 `;
 
-function CardModal({ show, closeModal: close, setNumber, resetNumber }) {
+function CardModal({ show, close, setNumber, resetNumber }) {
   const inputs = [];
-  inputs[0] = useInput('',validCardNumber);
-  inputs[1] = useInput('',validCardNumber);
-  inputs[2] = useInput('',validCardNumber);
-  inputs[3] = useInput('',validCardNumber);
+  inputs[0] = useInput('',validCardSection);
+  inputs[1] = useInput('',validCardSection);
+  inputs[2] = useInput('',validCardSection);
+  inputs[3] = useInput('',validCardSection);
+
+  const resetInputs = () => {
+    inputs.forEach(input=> input.setValue(''));
+  }
 
   const onConfirm = () => {
-    const unionNumber = inputs.reduce((union,{value})=>`${union}${value}`,'');
+    const unionNumber = inputs.reduce((union,{value})=>`${union}${value.padEnd(4,' ')}`,'');
+
     setNumber(unionNumber);
+    
+    resetInputs();
+    close();
+  }
+
+  const onCancle = () => {
+    resetNumber();
+    resetInputs();
     close();
   }
 
@@ -55,7 +68,7 @@ function CardModal({ show, closeModal: close, setNumber, resetNumber }) {
       </InputList>
 
       <ButtonContainer>
-        <Button wide onClick={() => { close(); resetNumber(); }}>취소</Button>
+        <Button wide onClick={onCancle}>취소</Button>
         <Button wide onClick={onConfirm}>확인</Button>
       </ButtonContainer>
 

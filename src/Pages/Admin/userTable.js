@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
 import PageButton from 'Pages/Admin/pageButton';
@@ -96,22 +96,17 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ userList, setUserList, filteredList }) => {
+const UserTable = ({ userList, setUserList, page, setPage, pageable }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const [limit] = useState(5);
-  const [showUsers, setShowUsers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const { content, ...props } = pageable;
 
   const openModal = id => {
     console.log(id);
     setIsModal(true);
     setModalId(id);
   };
-  useEffect(() => {
-    setShowUsers(userList.slice(0, limit));
-    setCurrentPage(0);
-  }, [userList]);
+
   const toggleModal = () => {
     setIsModal(!isModal);
   };
@@ -133,23 +128,22 @@ const UserTable = ({ userList, setUserList, filteredList }) => {
           </tr>
         </THead>
         <TBody>
-          {showUsers.map((user, idx) => (
+          {content.map((user, idx) => (
             <User
               key={idx}
               user={user}
               onClickhandler={() => openModal(user.id)}
             />
+            // {userList.map((user, idx) => (
+            //   <User
+            //     key={idx}
+            //     user={user}
+            //     onClickhandler={() => openModal(user.id)}
+            //   />
           ))}
         </TBody>
       </Table>
-      <PageButton
-        page={currentPage}
-        setPage={setCurrentPage}
-        items={userList}
-        setItems={setShowUsers}
-        limit={limit}
-        size={5}
-      />
+      <PageButton {...props} setPage={setPage} page={page} size={5} />
       {isModal && (
         <UserModal
           show={isModal}

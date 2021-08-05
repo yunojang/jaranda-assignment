@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './button';
 import { withRouter } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import Login from '../Pages/Main/Login';
 import LoginModal from '../Pages/Main/LoginModal';
 import { userStorage } from 'store';
+import { ROLE } from 'constant/role';
+import { ROUTES_PATH } from 'constant/routesPath'
 
 const HeaderWrap = styled.div`
   top: 0;
@@ -17,12 +19,11 @@ const HeaderWrap = styled.div`
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   padding: 8px 0px;
   z-index: 10;
-  background-color: #f9f9f9;
+  background-color: #F9F9F9;
 `;
 const LeftLink = styled(Link)`
   margin-left: 10%;
 `;
-
 const PageLink = styled(Link)`
   margin-right: 10px;
 `;
@@ -30,73 +31,65 @@ const Account = styled.div`
   display: flex;
   margin-right: 10%;
 `;
-
+const User = styled.div`
+  display: flex;
+  margin-right: 10px;
+  align-items: center;
+`;
 function Header({ history }) {
   const pathname = history.location.pathname;
   const [modal, setModal] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); //로그인중인지확인userData
-
-  useEffect(() => {
-    if (userStorage.exist()) setIsLoggedIn(true);
-  }, []);
-
+  const isLoggedIn = userStorage.exist(); //로그인중인지확인userData 
+  const currentUser = userStorage.load()
   const toggleModal = () => {
     setModal(!modal);
   };
-
   const onLogin = ({ userName, password }) => {
     const user = Login({ userName, password });
-    console.log(user);
     if (user) {
       userStorage.save(user);
-      setIsLoggedIn(true);
+      history.push('/')
     } else {
       throw new Error();
     }
   };
-
   const onLogout = () => {
     setModal(false);
-    setIsLoggedIn(false);
     localStorage.removeItem('jaranda-user');
   };
-
   return (
     <HeaderWrap>
-      <LeftLink to="/">
-        <Button select={pathname === '/'}>Main</Button>
+      <LeftLink to={ROUTES_PATH.MAIN}>
+        <Button select={pathname === ROUTES_PATH.MAIN}>Main</Button>
       </LeftLink>
       <Account>
         {isLoggedIn ? (
           <>
-            <PageLink to="/admin">관리페이지</PageLink>
-            <PageLink to="/">마이페이지</PageLink>
-            <PageLink to="/">
+            <User>{currentUser.userName}</User>
+            <User>{currentUser.isAdmin ? '관리자' : ROLE[currentUser.role]}</User>
+            <PageLink to={ROUTES_PATH.MAIN}>
               <Button onClick={onLogout}>Logout</Button>
             </PageLink>
           </>
         ) : (
           <>
-            <PageLink to="/">
-              <Button onClick={toggleModal} select={pathname === '/login'}>
+            <PageLink to={ROUTES_PATH.MAIN}>
+              <Button onClick={toggleModal}>
                 Login
               </Button>
             </PageLink>
-            <PageLink to="/signup">
-              <Button select={pathname === '/signup'}>Sign Up</Button>
+            <PageLink to={ROUTES_PATH.SIGNUP}>
+              <Button select={pathname === ROUTES_PATH.SIGNUP}>Sign Up</Button>
             </PageLink>
           </>
         )}
-
         <LoginModal
           show={modal}
           toggle={toggleModal}
-          setIsLoggedIn={setIsLoggedIn}
           onLogin={onLogin}
         ></LoginModal>
       </Account>
     </HeaderWrap>
   );
 }
-
 export default withRouter(Header);

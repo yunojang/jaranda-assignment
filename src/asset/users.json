@@ -1,57 +1,57 @@
 [
   {
     "id": 1,
-    "userName": "eric",
+    "userName": "admin",
     "address": "104동 101 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 0,
-    "isAdmin": 1
+    "role": 11,
+    "isAdmin": true
   },
   {
     "id": 2,
-    "userName": "kevin",
+    "userName": "frontend",
     "address": "104동 103 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 10,
-    "isAdmin": 0
+    "role": 11,
+    "isAdmin": false
   },
   {
     "id": 3,
-    "userName": "james",
+    "userName": "backend",
     "address": "104동 105 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 11,
-    "isAdmin": 0
+    "role": 12,
+    "isAdmin": false
   },
   {
     "id": 4,
-    "userName": "name",
+    "userName": "server",
     "address": "104동 106 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 12,
-    "isAdmin": 0
+    "role": 13,
+    "isAdmin": false
   },
   {
     "id": 5,
-    "userName": "user",
+    "userName": "customservice",
     "address": "104동 110 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 13,
-    "isAdmin": 1
+    "role": 21,
+    "isAdmin": false
   },
   {
     "id": 6,
-    "userName": "faker",
+    "userName": "HRresource",
     "address": "104동 112 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 11,
-    "isAdmin": 0
+    "role": 22,
+    "isAdmin": false
   },
   {
     "id": 7,
@@ -60,7 +60,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 21,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 8,
@@ -69,7 +69,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 22,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 9,
@@ -78,7 +78,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 22,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 10,
@@ -87,7 +87,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 11,
@@ -95,8 +95,8 @@
     "address": "104동 101 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 0,
-    "isAdmin": 1
+    "role": 11,
+    "isAdmin": true
   },
   {
     "id": 12,
@@ -104,8 +104,8 @@
     "address": "104동 103 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 10,
-    "isAdmin": 0
+    "role": 11,
+    "isAdmin": false
   },
   {
     "id": 13,
@@ -114,7 +114,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 14,
@@ -123,7 +123,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 12,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 15,
@@ -132,7 +132,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 13,
-    "isAdmin": 1
+    "isAdmin": true
   },
   {
     "id": 16,
@@ -141,7 +141,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 17,
@@ -150,7 +150,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 21,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 18,
@@ -159,7 +159,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 22,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 19,
@@ -168,7 +168,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 22,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 20,
@@ -177,7 +177,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 21,
@@ -185,8 +185,8 @@
     "address": "104동 101 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 0,
-    "isAdmin": 1
+    "role": 11,
+    "isAdmin": true
   },
   {
     "id": 22,
@@ -194,8 +194,8 @@
     "address": "104동 103 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 10,
-    "isAdmin": 0
+    "role": 11,
+    "isAdmin": false
   },
   {
     "id": 23,
@@ -204,7 +204,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 24,
@@ -213,7 +213,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 12,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 25,
@@ -222,7 +222,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 13,
-    "isAdmin": 1
+    "isAdmin": true
   },
   {
     "id": 26,
@@ -231,7 +231,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 27,
@@ -240,7 +240,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 21,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 28,
@@ -249,7 +249,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 22,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 29,
@@ -258,7 +258,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 22,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 30,
@@ -267,7 +267,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 31,
@@ -275,8 +275,8 @@
     "address": "104동 101 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 0,
-    "isAdmin": 1
+    "role": 11,
+    "isAdmin": true
   },
   {
     "id": 32,
@@ -284,8 +284,8 @@
     "address": "104동 103 호",
     "cardNumber": "1234123412341234",
     "password": "a",
-    "role": 10,
-    "isAdmin": 0
+    "role": 11,
+    "isAdmin": false
   },
   {
     "id": 33,
@@ -294,7 +294,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 34,
@@ -303,7 +303,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 12,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 35,
@@ -312,7 +312,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 13,
-    "isAdmin": 1
+    "isAdmin": true
   },
   {
     "id": 36,
@@ -321,7 +321,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 37,
@@ -330,7 +330,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 21,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 38,
@@ -339,7 +339,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 22,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 39,
@@ -348,7 +348,7 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 22,
-    "isAdmin": 0
+    "isAdmin": false
   },
   {
     "id": 40,
@@ -357,6 +357,6 @@
     "cardNumber": "1234123412341234",
     "password": "a",
     "role": 11,
-    "isAdmin": 0
+    "isAdmin": false
   }
 ]

@@ -20,16 +20,17 @@ const InputWrap = styled.input`
   font-family: sans-serif;
 
   /* readOnly가 아닌 경우에 hover와 focus 스타일을 적용합니다. */
-  ${props =>
-    !props.readOnly &&
+  ${props => !props.readOnly && 
     css`
-      &:hover {
+      &:hover{
         ${ACTIVE_STYLE}
       }
-      &:focus {
+      &:focus{
         ${ACTIVE_STYLE}
       }
-    `}
+    `
+  }
+
 `;
 
 function Input({ ...props }) {
