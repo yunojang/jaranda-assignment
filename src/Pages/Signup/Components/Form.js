@@ -48,7 +48,12 @@ function Form() {
       setIdAlert(false);
     }
 
-    if (!validPassword(password.value) || !validCardNumber(card) || address.trim() === '') {
+    if (
+      id.value.trim() === ''
+      || !validPassword(password.value) 
+      || !validCardNumber(card) 
+      || address.trim() === ''
+    ) {
       setShowAlert(true);
       return false;
     }
@@ -95,7 +100,6 @@ function Form() {
     <Container onSubmit={onSubmit}>
 
       <Input
-        required
         type='text'
         placeholder='아이디'
         {...id}
