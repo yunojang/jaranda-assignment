@@ -96,7 +96,7 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ userList, setUserList }) => {
+const UserTable = ({ userList, setUserList, filteredList }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
   const [limit] = useState(5);
