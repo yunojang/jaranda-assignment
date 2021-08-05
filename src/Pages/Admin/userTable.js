@@ -134,6 +134,12 @@ const UserTable = ({ userList, setUserList, page, setPage, pageable }) => {
               user={user}
               onClickhandler={() => openModal(user.id)}
             />
+            // {userList.map((user, idx) => (
+            //   <User
+            //     key={idx}
+            //     user={user}
+            //     onClickhandler={() => openModal(user.id)}
+            //   />
           ))}
         </TBody>
       </Table>
