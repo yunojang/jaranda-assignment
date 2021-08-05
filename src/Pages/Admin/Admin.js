@@ -90,7 +90,8 @@ function Admin({ match }) {
   useEffect(() => {
     const { value } = search;
     pageable = userListData.findAllByUsername(page, limit, value);
-  }, [search.value, page]);
+    setPage(0);
+  }, [search.value]);
 
   const findLastId = () => {
     return Math.max(...userList.map(v => v.id));
