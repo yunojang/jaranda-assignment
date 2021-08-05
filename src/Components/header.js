@@ -7,6 +7,7 @@ import Login from '../Pages/Main/Login';
 import LoginModal from '../Pages/Main/LoginModal';
 import { userStorage } from 'store';
 import { ROLE } from 'constant/role';
+import { ROUTES_PATH } from 'constant/routesPath'
 
 const HeaderWrap = styled.div`
   top: 0;
@@ -39,6 +40,7 @@ function Header({ history }) {
   const pathname = history.location.pathname;
   const [modal, setModal] = useState(false);
   const isLoggedIn = userStorage.exist(); //로그인중인지확인userData 
+  const currentUser = userStorage.load()
   const toggleModal = () => {
     setModal(!modal);
   };
@@ -57,27 +59,27 @@ function Header({ history }) {
   };
   return (
     <HeaderWrap>
-      <LeftLink to="/">
-        <Button select={pathname === '/'}>Main</Button>
+      <LeftLink to={ROUTES_PATH.MAIN}>
+        <Button select={pathname === ROUTES_PATH.MAIN}>Main</Button>
       </LeftLink>
       <Account>
         {isLoggedIn ? (
           <>
-            <User>{userStorage.load().userName}</User>
-            <User>{ROLE[userStorage.load().role]}</User>
-            <PageLink to="/">
+            <User>{currentUser.userName}</User>
+            <User>{currentUser.isAdmin ? '관리자' : ROLE[currentUser.role]}</User>
+            <PageLink to={ROUTES_PATH.MAIN}>
               <Button onClick={onLogout}>Logout</Button>
             </PageLink>
           </>
         ) : (
           <>
-            <PageLink to="/">
-              <Button onClick={toggleModal} select={pathname === '/login'}>
+            <PageLink to={ROUTES_PATH.MAIN}>
+              <Button onClick={toggleModal}>
                 Login
               </Button>
             </PageLink>
-            <PageLink to="/signup">
-              <Button select={pathname === '/signup'}>Sign Up</Button>
+            <PageLink to={ROUTES_PATH.SIGNUP}>
+              <Button select={pathname === ROUTES_PATH.SIGNUP}>Sign Up</Button>
             </PageLink>
           </>
         )}
