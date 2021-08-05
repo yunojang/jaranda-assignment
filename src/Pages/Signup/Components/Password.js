@@ -27,23 +27,23 @@ const CheckItem = styled.span`
 `;
 
 function Password(props) {
-  const [check, setCheck] = useState(CHECK_LIST.map(item => ({ name: item, checked: false })));
   const pwdCheck = useInput('');
+  const [check, setCheck] = useState(CHECK_LIST.map(item => ({ name: item, checked: false })));
   const [showAlert, setShowAlert] = useState(false);
 
   const validCheck = event => {
     const { value } = event.target;
-    const passed = [];
+    const passedList = [];
 
     for (const index in CHECK_FUNC) {
 
       if (CHECK_FUNC[index](value)) {
-        passed.push(Number(index));
+        passedList.push(Number(index));
       }
     }
 
     setCheck(check.map((v, i) =>
-      passed.includes(i)
+      passedList.includes(i)
         ? { ...v, checked: true }
         : { ...v, checked: false }
     ))
@@ -84,12 +84,13 @@ function Password(props) {
 
       <Input
         required
-        pattern= {samePwdExp}
+        pattern={samePwdExp}
         type='password'
         placeholder='비밀번호 확인'
         onInput={sameCheck}
         {...pwdCheck}
       />
+
       <Alert show={showAlert}>비밀번호와 다릅니다.</Alert>
     </>
   );
