@@ -4,7 +4,7 @@ import Input from "Components/input";
 import styled from "styled-components";
 import Button from './SignupButton';
 import useInput from "hooks/useInput";
-import { validCardSection } from "utils/validate";
+import { validCardSection } from "../utils/validate";
 
 const Title = styled.h1`
   margin-bottom: 20px;

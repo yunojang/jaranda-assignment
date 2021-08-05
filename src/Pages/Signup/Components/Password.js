@@ -5,7 +5,7 @@ import { AiOutlineCheck as Check } from 'react-icons/ai';
 import Input from 'Components/input';
 import useInput from 'hooks/useInput';
 import Alert from 'Components/inputAlert';
-import { isInclude, minLen } from 'utils/validate';
+import { isInclude, minLen } from '../utils/validate';
 
 const CHECK_LIST = ['숫자', '영어', '특수문자', '8자 이상'];
 const CHECK_FUNC = [isInclude.bind(null, 'number'), isInclude.bind(null, 'string'), isInclude.bind(null, 'special'), minLen.bind(null, 8)];
@@ -82,7 +82,6 @@ function Password(props) {
       </CheckList>
 
       <Input
-        required
         pattern={samePwdExp}
         type='password'
         placeholder='비밀번호 확인'

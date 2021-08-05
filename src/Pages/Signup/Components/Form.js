@@ -13,7 +13,7 @@ import useInput from "hooks/useInput";
 import { userListStorage } from "store";
 import COLOR from 'constant/colorCode';
 import { ROUTES_PATH } from 'constant/routesPath';
-import { validPassword, validCardNumber, existUsername } from "utils/validate";
+import { validPassword, validCardNumber, existUsername } from "../utils/validate";
 
 const Container = styled.form`
   display: flex;
@@ -50,8 +50,8 @@ function Form() {
 
     if (
       id.value.trim() === ''
-      || !validPassword(password.value) 
-      || !validCardNumber(card) 
+      || !validPassword(password.value)
+      || !validCardNumber(card)
       || address.trim() === ''
     ) {
       setShowAlert(true);
