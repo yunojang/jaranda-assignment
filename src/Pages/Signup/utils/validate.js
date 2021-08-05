@@ -33,7 +33,7 @@ export function validCardSection(value) {
 }
 
 export function validCardNumber(value) {
-  return onlyNumber && value.length === 16;
+  return onlyNumber(value) && value.length === 16;
 }
 
 export function existUsername(name) {
