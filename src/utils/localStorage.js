@@ -59,16 +59,16 @@ class Storage {
     } else {
       loadedData = getItem(this.keyName);
     }
-
+ 
     const len = loadedData.length;
     const maxPage =
       loadedData.length % limit
         ? parseInt(len / limit + 1)
-        : parseInt(len / limit);
+        : parseInt(len / limit); 
 
     const next = page < maxPage - 1;
     const prev = page > 0;
-
+ 
     const pageable = {
       maxPage,
       next,

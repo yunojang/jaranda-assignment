@@ -16,7 +16,6 @@ function PageButton({ size, maxPage, page, setPage, next, prev }) {
   const [pageList, setPageList] = useState([]);
 
   const onPaging = page => {
-    console.log(page);
     setPage(page);
   };
 

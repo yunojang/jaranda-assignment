@@ -69,29 +69,34 @@ const Search = styled.div`
 
 const Input = styled.input``;
 
-function Admin({ match }) {
+function Admin() {
   const [users] = useState(userListData.load());
   const [user] = useState(userStorage.load());
 
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
 
-  const [page, setPage] = useState(match.params.page || 0);
+  const [page, setPage] = useState(0);
   const [limit] = useState(5);
   const search = useInput('');
+
+  const [pageable, setPageable] = useState(
+    userListData.findAllByUsername(page, limit, search.value),
+  );
 
   const toggleModal = () => {
     setIsModal(prev => !prev);
   };
 
-  let pageable;
-  pageable = userListData.findAllByUsername(page, limit, search.value);
-
   useEffect(() => {
     const { value } = search;
-    pageable = userListData.findAllByUsername(page, limit, value);
+    setPageable(userListData.findAllByUsername(page, limit, value));
     setPage(0);
   }, [search.value]);
+
+  useEffect(() => {
+    setPageable(userListData.findAllByUsername(page, limit));
+  }, [page, userList]);
 
   const findLastId = () => {
     return Math.max(...userList.map(v => v.id));
