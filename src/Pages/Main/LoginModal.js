@@ -4,7 +4,6 @@ import Modal from '../../Components/modal';
 import Button from '../../Components/button';
 import useInput from '../../hooks/useInput';
 import Input from 'Components/input';
-
 const FormWrap = styled.form`
   padding: 2rem;
 `;
@@ -27,21 +26,19 @@ const Footer = styled.div`
   display: flex;
   justify-content: space-around;
 `;
-
-function LoginModal({ show, toggle, setIsLoggedIn, onLogin }) {
+function LoginModal({ show, toggle, onLogin }) {
   const userName = useInput('');
   const password = useInput('');
-
   const onSubmitForm = e => {
     e.preventDefault();
     try {
       onLogin({ userName: userName.value, password: password.value });
-      setIsLoggedIn(true);
+      userName.setValue('');
+      password.setValue('');
     } catch (e) {
       alert('Failed to login');
     }
   };
-
   return (
     <Modal Small show={show} toggle={toggle}>
       <FormWrap onSubmit={onSubmitForm}>
