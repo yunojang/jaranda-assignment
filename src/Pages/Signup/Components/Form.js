@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 
 import Password from './Password';
 import Address from './Address';
@@ -7,12 +8,11 @@ import Card from './Card';
 import Policy from './Policy';
 import Input from 'Components/input';
 import Alert from "Components/inputAlert";
-import { userListStorage } from "store";
 
-import COLOR from 'constant/colorCode';
 import useInput from "hooks/useInput";
+import { userListStorage } from "store";
+import COLOR from 'constant/colorCode';
 import { validPassword, validCardNumber, existUsername } from "utils/validate";
-import { useHistory } from "react-router";
 
 const Container = styled.form`
   display: flex;
@@ -29,7 +29,6 @@ const Submit = styled.input.attrs({ type: 'submit' })`
 `;
 
 function Form() {
-  const history = useHistory();
   const id = useInput('');
   const password = useInput('');
   const [address, setAddress] = useState('');
@@ -37,48 +36,63 @@ function Form() {
   const [showAlert, setShowAlert] = useState(false);
   const [showIdAlert, setIdAlert] = useState(false);
 
-  const getLastId = () => {
-    const list = userListStorage.load();
-    return Math.max(...list.map(item => item.id))
-  }
+  const history = useHistory();
 
-  const onSubmit = event => {
-    event.preventDefault();
-
-    const { value: idValue } = id;
-    const { value: pwdValue } = password;
-
-    if (existUsername(idValue)) {
+  const validateCheck = () => {
+    if (existUsername(id.value)) {
       setIdAlert(true);
-      return;
+      return false;
     }
     else {
       setIdAlert(false);
     }
 
-    if (!validPassword(pwdValue) || !validCardNumber(card) || address.trim() === '') {
+    if (!validPassword(password.value) || !validCardNumber(card) || address.trim() === '') {
       setShowAlert(true);
-      return;
+      return false;
+    }
+    else {
+      setShowAlert(false);
     }
 
-    setShowAlert(false);
+    return true
+  }
 
-    const formData = {
+  const getLastId = () => {
+    const list = userListStorage.load();
+    return Math.max(...list.map(item => item.id))
+  }
+
+  const createUser = () => {
+    return {
       id: getLastId() + 1,
-      userName: idValue,
-      password: pwdValue,
+      userName: id.value,
+      password: password.value,
       address: address,
       cardNumber: card,
       accessMenus: [],
       isAdmin: 0,
     }
+  }
 
-    userListStorage.push(formData);
+  const onSubmit = event => {
+    event.preventDefault();
+
+    if ( !validateCheck() ) {
+      return;
+    }
+
+    const user = createUser();
+
+    userListStorage.push(user);
+    alert(`${user.userName}님 회원가입 되었습니다.`);
+
     history.push('/')
   }
 
   return (
     <Container onSubmit={onSubmit}>
+
       <Input
         required
         type='text'
@@ -104,6 +118,7 @@ function Form() {
       <Policy />
 
       <Alert show={showAlert} big>올바른 값을 모두 입력해주세요</Alert>
+
       <Submit
         type='submit'
         value='가입하기'

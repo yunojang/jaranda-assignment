@@ -38,7 +38,6 @@ function Adress({ setValue }) {
     <>
       <AdressContainer>
         <Input
-          require
           type="text"
           value={roadAddress}
           readOnly
@@ -49,9 +48,9 @@ function Adress({ setValue }) {
           {isPopupOpen && (
             <PopupDom>
               <PopupPostCode
+                detailAddress={detailAddress}
                 setValue={setValue}
                 setRoadAddress={setRoadAddress}
-                detailAddress={detailAddress}
                 onClose={closePostCode}
               />
             </PopupDom>

@@ -57,7 +57,7 @@ function Card(props) {
 
       <InputList>
         {renderInputs()}
-        <Button onClick={() => { resetNumber(); openModal(); }}>카드 입력</Button>
+        <Button onClick={openModal}>카드 입력</Button>
       </InputList>
 
       <CardModal
