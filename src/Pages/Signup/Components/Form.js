@@ -122,7 +122,7 @@ function Form() {
 
       <Policy />
 
-      <Alert show={showAlert} big>올바른 값을 모두 입력해주세요</Alert>
+      <Alert show={showAlert} big >올바른 값을 모두 입력해주세요</Alert>
 
       <Submit
         type='submit'
