@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
 import PageButton from 'Pages/Admin/pageButton';
@@ -34,7 +34,7 @@ const Total = styled.div`
 const Td = styled.td`
   padding: 20px 30px 20px 0px;
   max-width: 150px;
-  min-width: 100px;
+  min-width: 90px;
   font-size: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -42,7 +42,7 @@ const Td = styled.td`
 `;
 
 const AdminTd = styled.td`
-  padding: 20px 35px 20px 0px;
+  padding: 20px 30px 20px 0px;
   font-weight: 600;
 `;
 
@@ -96,21 +96,17 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ userList }) => {
+const UserTable = ({ userList, setUserList, page, setPage, pageable }) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const [limit] = useState(5);
-  const [showUsers, setShowUsers] = useState([]);
-  const [currentPage, setCurrentPage] = useState(0);
+  const { content, ...props } = pageable;
 
-  const openModal = idx => {
+  const openModal = id => {
+    console.log(id);
     setIsModal(true);
-    setModalId(idx);
+    setModalId(id);
   };
-  useEffect(() => {
-    setShowUsers(userList.slice(0, limit));
-    setCurrentPage(0);
-  }, [userList]);
+
   const toggleModal = () => {
     setIsModal(!isModal);
   };
@@ -123,8 +119,8 @@ const UserTable = ({ userList }) => {
       <Table>
         <THead>
           <tr>
+            <Td>No</Td>
             <Td>아이디</Td>
-            <Td>이름</Td>
             <Td>주소</Td>
             <Td>카드번호</Td>
             <Td>권한</Td>
@@ -132,24 +128,22 @@ const UserTable = ({ userList }) => {
           </tr>
         </THead>
         <TBody>
-          {showUsers.map((user, idx) => (
-            <User key={idx} user={user} onClickhandler={() => openModal(idx)} />
+          {content.map((user, idx) => (
+            <User
+              key={idx}
+              user={user}
+              onClickhandler={() => openModal(user.id)}
+            />
           ))}
         </TBody>
       </Table>
-      <PageButton
-        page={currentPage}
-        setPage={setCurrentPage}
-        items={userList}
-        setItems={setShowUsers}
-        limit={limit}
-        size={5}
-      />
+      <PageButton {...props} setPage={setPage} page={page} size={5} />
       {isModal && (
         <UserModal
           show={isModal}
-          user={showUsers[modalId]}
+          user={userList.find(v => v.id === modalId)}
           toggleModal={toggleModal}
+          setUserList={setUserList}
         />
       )}
     </Container>

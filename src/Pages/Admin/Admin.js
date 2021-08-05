@@ -4,7 +4,8 @@ import UserTable from './userTable';
 import OptionalAccount from './optionalAccount';
 import userListData from 'store/userList';
 import useInput from 'hooks/useInput';
-// import Error from 'Pages/Error/Error';
+import { userStorage } from 'store';
+import Error from 'Pages/Error/Error';
 
 const Container = styled.div`
   display: flex;
@@ -66,52 +67,58 @@ const Search = styled.div`
   }
 `;
 
-function Admin() {
+const Input = styled.input``;
+
+function Admin({ match }) {
   const [users] = useState(userListData.load());
+  const [user] = useState(userStorage.load());
+
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
-  const { value, onInput } = useInput('');
+
+  const [page, setPage] = useState(match.params.page || 0);
+  const [limit] = useState(5);
+  const search = useInput('');
 
   const toggleModal = () => {
     setIsModal(prev => !prev);
   };
 
-  useEffect(() => {
-    if (value) {
-      setUserList(
-        users?.filter(el =>
-          el.userName.toLowerCase().includes(value.toLowerCase()),
-        ),
-      );
-    } else {
-      setUserList(users);
-    }
-  }, [value, users]);
+  let pageable;
+  pageable = userListData.findAllByUsername(page, limit, search.value);
 
-  // if (!users.isAdmin) {
-  //   return (
-  //     <>
-  //       <Error />
-  //     </>
-  //   );
-  // }
+  useEffect(() => {
+    const { value } = search;
+    pageable = userListData.findAllByUsername(page, limit, value);
+  }, [search.value, page]);
 
   const findLastId = () => {
-    return Math.max(...users.map(v => v.id));
+    return Math.max(...userList.map(v => v.id));
   };
+
+  if (!user || !user.isAdmin) {
+    return <Error />;
+  }
 
   return (
     <Container>
       <AdminWrap>
         <Title>사용자 관리</Title>
         <Search>
-          <input placeholder="전체 사용자 검색" onInput={onInput} />
+          <Input placeholder="전체 사용자 검색" {...search} />
           <button onClick={toggleModal}>
             <img src="images/user-add.svg" alt="추가" />
             사용자 추가
           </button>
+          {/* <Link to={}>1페이지</Link> */}
         </Search>
-        <UserTable userList={userList} />
+        <UserTable
+          pageable={pageable}
+          setPage={setPage}
+          page={page}
+          setUserList={setUserList}
+          userList={userList}
+        />
       </AdminWrap>
       <OptionalAccount
         show={isModal}
