@@ -52,8 +52,6 @@ class Storage {
   findAllByUsername(page, limit, username = null) {
     let loadedData;
 
-    console.log(username);
-
     if (username) {
       loadedData = getItem(this.keyName).filter(el =>
         el.userName.toLowerCase().includes(username.toLowerCase()),
