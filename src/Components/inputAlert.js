@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const AlertWrap = styled.span`
   ${props => !props.show && 'display:none'};
-  font-size: 11px;
+  font-size: ${props=>props.big ? '15px' : '11px'};
   margin-bottom: 6px;
   color: red;
 `;

@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import Button from './SignupButton';
 import Input from 'Components/input';
-import PopupDom from './PopupDom';
-import PopupPostCode from './PopupPostCode';
+import PopupDom from './daum/PopupDom';
+import PopupPostCode from './daum/PopupPostCode';
 
 const AdressContainer = styled.div`
   display: flex;
@@ -14,8 +14,10 @@ const SearchButton = styled(Button)`
   margin-left: 5px;
 `;
 
-function Adress(props) {
+function Adress({ setValue }) {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [roadAddress, setRoadAddress] = useState('');
+  const [detailAddress, setDetailAddress] = useState('');
 
   const openPostCode = event => {
     event.preventDefault();
@@ -27,12 +29,17 @@ function Adress(props) {
     setIsPopupOpen(false);
   };
 
+  const onDetailChange = event => {
+    setDetailAddress(event.target.value);
+    setValue(`${roadAddress} ${event.target.value}`)
+  }
+
   return (
     <>
       <AdressContainer>
         <Input
           type="text"
-          value={props.value}
+          value={roadAddress}
           readOnly
           Fill
         />
@@ -41,7 +48,9 @@ function Adress(props) {
           {isPopupOpen && (
             <PopupDom>
               <PopupPostCode
-                setValue={props.setValue}
+                detailAddress={detailAddress}
+                setValue={setValue}
+                setRoadAddress={setRoadAddress}
                 onClose={closePostCode}
               />
             </PopupDom>
@@ -49,7 +58,12 @@ function Adress(props) {
         </div>
       </AdressContainer>
 
-      <Input type="text" placeholder="상세 주소" />
+      <Input
+        type="text"
+        placeholder="상세 주소"
+        value = {detailAddress}
+        onChange = {onDetailChange}
+      />
     </>
   );
 }

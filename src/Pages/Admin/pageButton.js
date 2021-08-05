@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Button = styled.button`
@@ -12,34 +12,20 @@ const Button = styled.button`
   }
 `;
 
-function PageButton({ page, setPage, items, setItems, limit, size }) {
+function PageButton({ size, maxPage, page, setPage, next, prev }) {
   const [pageList, setPageList] = useState([]);
 
-  const onPaging = useCallback(
-    page => {
-      setPage(page);
-      setItems(items.slice(page * limit, page * limit + limit));
-    },
-    [items, limit, page],
-  );
+  const onPaging = page => {
+    setPage(page);
+  };
 
   useEffect(() => {
-    setPageList(
-      Array.from(
-        {
-          length:
-            items.length % limit
-              ? parseInt(items.length / limit + 1)
-              : parseInt(items.length / limit),
-        },
-        (_, i) => i,
-      ),
-    );
-  }, [items]);
+    setPageList(Array.from({ length: maxPage }, (_, i) => i));
+  }, [maxPage]);
 
   return (
     <>
-      {page ? (
+      {prev ? (
         <Button
           onClick={() => {
             onPaging(page - 1);
@@ -50,11 +36,11 @@ function PageButton({ page, setPage, items, setItems, limit, size }) {
       ) : (
         <div style={{ width: '36px', display: 'inline-block' }} />
       )}
-      {pageList.length < size
+      {maxPage < size
         ? pageList.map(v => (
             <Button
-              select={page === v}
               key={v}
+              select={page === v}
               onClick={() => {
                 onPaging(v);
               }}
@@ -62,7 +48,7 @@ function PageButton({ page, setPage, items, setItems, limit, size }) {
               {v + 1}
             </Button>
           ))
-        : !(pageList.length - page < size / 2 + 1)
+        : !(maxPage - page < size / 2 + 1)
         ? pageList
             .slice(
               page - size / 2 > 0 ? page - parseInt(size / 2) : 0,
@@ -80,13 +66,11 @@ function PageButton({ page, setPage, items, setItems, limit, size }) {
               </Button>
             ))
         : pageList
-            .slice(
-              pageList.length - page < size / 2 + 1 && pageList.length - size,
-            )
+            .slice(maxPage - page < size / 2 + 1 && maxPage - size)
             .map(v => (
               <Button
-                select={page === v}
                 key={v}
+                select={page === v}
                 onClick={() => {
                   onPaging(v);
                 }}
@@ -94,10 +78,10 @@ function PageButton({ page, setPage, items, setItems, limit, size }) {
                 {v + 1}
               </Button>
             ))}
-      {page >= pageList.length - 1 ? (
-        <></>
-      ) : (
+      {next ? (
         <Button onClick={() => onPaging(page + 1)}>{'다음'}</Button>
+      ) : (
+        <></>
       )}
     </>
   );

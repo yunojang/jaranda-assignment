@@ -75,7 +75,13 @@ function Admin() {
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
 
+  const [page, setPage] = useState(0);
+  const [limit] = useState(5);
   const search = useInput('');
+
+  const [pageable, setPageable] = useState(
+    userListData.findAllByUsername(page, limit, search.value),
+  );
 
   const toggleModal = () => {
     setIsModal(prev => !prev);
@@ -83,20 +89,16 @@ function Admin() {
 
   useEffect(() => {
     const { value } = search;
-    if (value) {
-      console.log(value);
-      setUserList(
-        users?.filter(el =>
-          el.userName.toLowerCase().includes(value.toLowerCase()),
-        ),
-      );
-    } else {
-      setUserList(users);
-    }
-  }, [search.value, users]);
+    setPageable(userListData.findAllByUsername(page, limit, value));
+    setPage(0);
+  }, [search.value]);
+
+  useEffect(() => {
+    setPageable(userListData.findAllByUsername(page, limit));
+  }, [page, userList]);
 
   const findLastId = () => {
-    return Math.max(...users.map(v => v.id));
+    return Math.max(...userList.map(v => v.id));
   };
 
   // if (!user || !user.isAdmin) {
@@ -113,8 +115,15 @@ function Admin() {
             <img src="images/user-add.svg" alt="추가" />
             사용자 추가
           </button>
+          {/* <Link to={}>1페이지</Link> */}
         </Search>
-        <UserTable setUserList={setUserList} userList={userList} />
+        <UserTable
+          pageable={pageable}
+          setPage={setPage}
+          page={page}
+          setUserList={setUserList}
+          userList={userList}
+        />
       </AdminWrap>
       <OptionalAccount
         show={isModal}

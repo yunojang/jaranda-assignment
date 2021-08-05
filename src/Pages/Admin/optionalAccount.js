@@ -2,8 +2,7 @@ import Modal from 'Components/modal';
 import SelectRole from 'Components/selectRole';
 import useInput from 'hooks/useInput';
 import React, { useEffect, useState } from 'react';
-
-import userList from 'store/userList';
+import { userListStorage } from 'store';
 
 import styled from 'styled-components/macro';
 
@@ -98,7 +97,7 @@ const OptionalAccount = ({ lastId, setUserList, show, toggle }) => {
     };
 
     toggle();
-    userList.push(newAccount);
+    userListStorage.push(newAccount);
     setUserList(prev => [...prev, newAccount]);
 
     return alert('계정이 생성되었습니다.');

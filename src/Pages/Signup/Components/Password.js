@@ -5,7 +5,7 @@ import { AiOutlineCheck as Check } from 'react-icons/ai';
 import Input from 'Components/input';
 import useInput from 'hooks/useInput';
 import Alert from 'Components/inputAlert';
-import { samed, isInclude, minLen } from 'utils/validate';
+import { isInclude, minLen } from 'utils/validate';
 
 const CHECK_LIST = ['숫자', '영어', '특수문자', '8자 이상'];
 const CHECK_FUNC = [isInclude.bind(null, 'number'), isInclude.bind(null, 'string'), isInclude.bind(null, 'special'), minLen.bind(null, 8)];
@@ -27,10 +27,38 @@ const CheckItem = styled.span`
 `;
 
 function Password(props) {
-  const pwdCheck = useInput('', samed.bind(null, props.value));
+  const pwdCheck = useInput('');
   const [check, setCheck] = useState(CHECK_LIST.map(item => ({ name: item, checked: false })));
+  const [showAlert, setShowAlert] = useState(false);
 
-  const renderCheck = () => {
+  const validCheck = event => {
+    const { value } = event.target;
+    const passedList = [];
+
+    for (const index in CHECK_FUNC) {
+
+      if (CHECK_FUNC[index](value)) {
+        passedList.push(Number(index));
+      }
+    }
+
+    setCheck(check.map((v, i) =>
+      passedList.includes(i)
+        ? { ...v, checked: true }
+        : { ...v, checked: false }
+    ))
+  }
+
+  const sameCheck = event => {
+    if (props.value !== event.target.value) {
+      setShowAlert(true);
+    }
+    else {
+      setShowAlert(false);
+    }
+  }
+
+  const renderChecks = () => {
     return check.map(({ name, checked }, index) =>
       <li key={index}>
         <CheckIcon checked={checked} />
@@ -38,19 +66,7 @@ function Password(props) {
       </li>)
   }
 
-  const validCheck = event => {
-    const { value } = event.target;
-    const checked = [];
-
-    for (const i in CHECK_LIST) {
-
-      if (CHECK_FUNC[i](value)) {
-        checked.push(Number(i));
-      }
-    }
-
-    setCheck(check => check.map((v, i) => checked.includes(i) ? { ...v, checked: true } : { ...v, checked: false }))
-  }
+  const samePwdExp = `^${props.value}$`;
 
   return (
     <>
@@ -63,16 +79,19 @@ function Password(props) {
       />
 
       <CheckList>
-        {renderCheck()}
+        {renderChecks()}
       </CheckList>
 
       <Input
         required
+        pattern={samePwdExp}
         type='password'
         placeholder='비밀번호 확인'
+        onInput={sameCheck}
         {...pwdCheck}
       />
-      <Alert show={!pwdCheck.isCorrect}>비밀번호와 다릅니다.</Alert>
+
+      <Alert show={showAlert}>비밀번호와 다릅니다.</Alert>
     </>
   );
 }

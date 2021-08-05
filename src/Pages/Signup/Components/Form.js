@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 
 import Password from './Password';
 import Address from './Address';
 import Card from './Card';
 import Policy from './Policy';
 import Input from 'Components/input';
+import Alert from "Components/inputAlert";
 
-import COLOR from 'constant/colorCode';
 import useInput from "hooks/useInput";
-import { validPassword } from "utils/validate";
+import { userListStorage } from "store";
+import COLOR from 'constant/colorCode';
+import { validPassword, validCardNumber, existUsername } from "utils/validate";
 
 const Container = styled.form`
   display: flex;
@@ -26,41 +29,101 @@ const Submit = styled.input.attrs({ type: 'submit' })`
 `;
 
 function Form() {
-  const idInput = useInput('');
-  const pwdInput = useInput('',validPassword);
-  const addressInput = useInput('');
+  const id = useInput('');
+  const password = useInput('');
+  const [address, setAddress] = useState('');
+  const [card, setCard] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [showIdAlert, setIdAlert] = useState(false);
+
+  const history = useHistory();
+
+  const validateCheck = () => {
+    if (existUsername(id.value)) {
+      setIdAlert(true);
+      return false;
+    }
+    else {
+      setIdAlert(false);
+    }
+
+    if (!validPassword(password.value) || !validCardNumber(card) || address.trim() === '') {
+      setShowAlert(true);
+      return false;
+    }
+    else {
+      setShowAlert(false);
+    }
+
+    return true
+  }
+
+  const getLastId = () => {
+    const list = userListStorage.load();
+    return Math.max(...list.map(item => item.id))
+  }
+
+  const createUser = () => {
+    return {
+      id: getLastId() + 1,
+      userName: id.value,
+      password: password.value,
+      address: address,
+      cardNumber: card,
+      accessMenus: [],
+      isAdmin: 0,
+    }
+  }
 
   const onSubmit = event => {
     event.preventDefault();
 
-    const formData = {
-      id : idInput.value,
-      password : pwdInput.value,
+    if ( !validateCheck() ) {
+      return;
     }
 
-    console.log(formData);
+    const user = createUser();
+
+    userListStorage.push(user);
+    alert(`${user.userName}님 회원가입 되었습니다.`);
+
+    history.push('/')
   }
 
   return (
     <Container onSubmit={onSubmit}>
+
       <Input
         required
         type='text'
         placeholder='아이디'
-        {...idInput}
+        {...id}
       />
-      <Password 
-        {...pwdInput}
+      <Alert show={showIdAlert}>존재하는 아이디 입니다.</Alert>
+
+      <Password
+        {...password}
       />
-      <Address 
-        {...addressInput}
+
+      <Address
+        value={address}
+        setValue={setAddress}
       />
-      <Card />
+
+      <Card
+        value={card}
+        setValue={setCard}
+      />
+
       <Policy />
-      <Submit 
-        type='submit' 
-        value='가입하기' 
+
+      <Alert show={showAlert} big>올바른 값을 모두 입력해주세요</Alert>
+
+      <Submit
+        type='submit'
+        value='가입하기'
       />
+
     </Container>
   )
 }

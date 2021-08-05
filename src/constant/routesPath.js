@@ -5,4 +5,3 @@ export const ROUTES_PATH = {
   SIGNUP: '/signup',
   ERROR: '/error',
 };
-
