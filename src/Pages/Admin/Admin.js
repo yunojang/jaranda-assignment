@@ -6,7 +6,7 @@ import userListData from 'store/userList';
 import useInput from 'hooks/useInput';
 import UserSideNav from './userSideNav';
 import { userStorage } from 'store';
-// import Error from 'Pages/Error/Error';
+import Error from 'Pages/Error/Error';
 
 const Container = styled.div`
   display: flex;
@@ -88,7 +88,6 @@ function Admin() {
   const [users] = useState(userListData.load());
   const [user] = useState(userStorage.load());
   const [filterNumber, setFilterNumber] = useState(100);
-  // const [input, setInput] = useState('');
 
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
@@ -140,9 +139,9 @@ function Admin() {
     return Math.max(...userList.map(v => v.id));
   };
 
-  // if (!user || !user.isAdmin) {
-  //   return <Error />;
-  // }
+  if (!user || !user.isAdmin) {
+    return <Error />;
+  }
 
   return (
     <Container>
