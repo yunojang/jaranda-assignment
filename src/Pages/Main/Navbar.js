@@ -36,7 +36,7 @@ const SubBoard = styled.div`
   ${props => props.access && accessStyle}
 `;
 
-const Board = ({ board, isLogin, isAdmin, role, user, setBoard }) => {
+const Board = ({ board, user, setBoard }) => {
   const [showSubBoard, setShowSubBoard] = useState(false);
   const trueSubBoard = () => {
     setShowSubBoard(true);
