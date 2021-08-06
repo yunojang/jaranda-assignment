@@ -4,6 +4,7 @@ import Modal from '../../Components/modal';
 import Button from '../../Components/button';
 import useInput from '../../hooks/useInput';
 import Input from 'Components/input';
+
 const FormWrap = styled.form`
   padding: 2rem;
 `;
@@ -35,8 +36,9 @@ function LoginModal({ show, toggle, onLogin }) {
       onLogin({ userName: userName.value, password: password.value });
       userName.setValue('');
       password.setValue('');
+      toggle()
     } catch (e) {
-      alert('Failed to login');
+      alert('아이디 비밀번호가 틀립니다');
     }
   };
   return (
@@ -60,7 +62,7 @@ function LoginModal({ show, toggle, onLogin }) {
           />
         </Body>
         <Footer>
-          <Button type="submit" onClick={toggle}>
+          <Button type="submit">
             로그인
           </Button>
           <Button type="button" onClick={toggle}>
