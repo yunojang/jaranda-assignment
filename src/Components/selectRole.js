@@ -23,7 +23,7 @@ const SelectRole = ({ currentRoleId, callback, ...props }) => {
   const onChangehandler = e => {
     e.preventDefault();
     if (callback) {
-      callback(e.target.value);
+      callback(Number(e.target.value));
     }
   };
   return (
