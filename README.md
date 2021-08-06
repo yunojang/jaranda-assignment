@@ -72,10 +72,10 @@ signup 다음 주소 api 연결 및 팝업 페이지
 login 모달 및 동작 구현
 
 
-**장윤효**
+**장윤호**
 [signup페이지]
-localstorage 동작 함수, 클래스 구현
-signUp input 상태관리
+localstorage utils, 
+signUp form 구현, 
 signUp input validataion
 
 
