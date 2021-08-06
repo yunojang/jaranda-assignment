@@ -36,11 +36,16 @@ function LoginModal({ show, toggle, onLogin }) {
       onLogin({ userName: userName.value, password: password.value });
       userName.setValue('');
       password.setValue('');
-      toggle()
+      toggle();
     } catch (e) {
       alert('아이디 비밀번호가 틀립니다');
     }
   };
+  const onClose = () => {
+    userName.setValue('');
+    password.setValue('');
+    toggle();
+  }
   return (
     <Modal Small show={show} toggle={toggle}>
       <FormWrap onSubmit={onSubmitForm}>
@@ -65,7 +70,7 @@ function LoginModal({ show, toggle, onLogin }) {
           <Button type="submit">
             로그인
           </Button>
-          <Button type="button" onClick={toggle}>
+          <Button type="button" onClick={onClose}>
             닫기
           </Button>
         </Footer>
