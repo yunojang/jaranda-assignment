@@ -39,7 +39,7 @@ const User = styled.div`
 function Header({ history }) {
   const pathname = history.location.pathname;
   const [modal, setModal] = useState(false);
-  const isLoggedIn = userStorage.exist(); //로그인중인지확인userData 
+  const isLoggedIn = userStorage.exist();
   const currentUser = userStorage.load()
   const toggleModal = () => {
     setModal(!modal);
