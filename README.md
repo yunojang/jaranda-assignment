@@ -39,12 +39,32 @@ PreOnBoading-Assignment3-Jaranda
 ## 구현사항
 ***
 
-**이승열**
-[adimin페이지]
-모달, 버튼, 헤더 컴포넌트 구현
-admin 테이블 컴포넌트
-admin 계정 변경, 접근 권한 설정 변경
+**강동휘**
+[login, main페이지]
+login 모달 및 동작 구현
 
+**박세리**
+[login, main페이지]
+main header 버튼 , 링크 기능
+main navigation bar
+
+**장윤호**
+[signup페이지]
+localstorage utils, 
+signUp form 구현, 
+signUp input validataion
+
+**채준형**
+[signup페이지]
+signUp layout
+signUp 페이지 컴포넌트 리팩토링
+signup 다음 주소 api 연결 및 팝업 페이지
+
+**강준희**
+[admin페이지]
+전역 스타일링
+admin layout
+admin 유저 검색 필터링
 
 **노찬욱**
 [admin페이지]
@@ -53,39 +73,11 @@ admin 페이지네이션 기본설정
 admin 접근 제한 Error 페이지 구현
 admin 계정 생성 구현
 
-
-**박세리**
-[login, main페이지]
-main header 버튼 , 링크 기능
-main navigation bar
-
-
-**채준형**
-[signup페이지]
-signUp layout
-signUp 페이지 컴포넌트 리팩토링
-signup 다음 주소 api 연결 및 팝업 페이지
-
-
-**강동휘**
-[login, main페이지]
-login 모달 및 동작 구현
-
-
-**장윤호**
-[signup페이지]
-localstorage utils, 
-signUp form 구현, 
-signUp input validataion
-
-
-**강준희**
-[admin페이지]
-전역 스타일링
-admin layout
-admin 유저 검색 필터링
-
-
+**이승열**
+[adimin페이지]
+모달, 버튼, 헤더 컴포넌트 구현
+admin 테이블 컴포넌트
+admin 계정 변경, 접근 권한 설정 변경
 
 
 ------
