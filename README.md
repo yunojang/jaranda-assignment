@@ -1,7 +1,7 @@
 # Team Project
 PreOnBoading-Assignment3-Jaranda
 
-[미스터카멜](https://jaranda.kr/)
+[자란다](https://jaranda.kr/)
 
 ## 소개
 ***
@@ -16,7 +16,7 @@ PreOnBoading-Assignment3-Jaranda
 
 -**기술 스택**: React, styled-components, react-daum-postcode
 
--**배포 주소**: 
+-**배포 주소**: https://peaceful-wilson-9e6512.netlify.app/
 
 -**협업 도구**: slack, notion, github, visual studio code
 
@@ -25,7 +25,6 @@ PreOnBoading-Assignment3-Jaranda
 ***
 * [회원가입페이지]
 사용자로 부터 이름, 주소, 카드정보, 나이등의 정보를 입력받아 회원가입 기능이 되는 회원가입 페이지를 구현하기
-
 
 * [로그인페이지]
 계정과 비밀번호만 입력하여 로그인이 기능이 되는 페이지 구현하기
