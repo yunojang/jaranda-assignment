@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components/macro';
-import UserTable from './userTable';
-import OptionalAccount from './optionalAccount';
 import userListData from 'store/userList';
 import useInput from 'hooks/useInput';
-import UserSideNav from './userSideNav';
+import UserTable from './Components/userTable';
+import OptionalAccount from './Components/optionalAccount';
+import UserSideNav from './Components/userSideNav';
 import { userStorage } from 'store';
 import Error from 'Pages/Error/Error';
 
@@ -85,55 +85,39 @@ const Search = styled.div`
 const Input = styled.input``;
 
 function Admin() {
-  const [users] = useState(userListData.load());
-  const [user] = useState(userStorage.load());
+  const users = userListData.load();
+  const user = userStorage.load();
   const [filterNumber, setFilterNumber] = useState(100);
 
   const [userList, setUserList] = useState(users);
   const [isModal, setIsModal] = useState(false);
 
   const [page, setPage] = useState(0);
-  const [limit] = useState(5);
+  const [showUser, setShowUser] = useState(userList)
   const search = useInput('');
-
-  const [pageable, setPageable] = useState(
-    userListData.findAllByUsername(page, limit, search.value),
-  );
 
   const toggleModal = () => {
     setIsModal(prev => !prev);
   };
-
+  
+  useEffect(()=>{
+    const filteredUser = userList.filter(user => {
+      const roleFilter = filterNumber === 100 || user.role === filterNumber
+      if (!roleFilter){
+        return false
+      }
+      const nameFilter = search.value.length === 0 ||  user.userName.toLowerCase().includes(search.value.toLowerCase())
+      if (!nameFilter) {
+        return false
+      }
+      return true
+    })
+    setShowUser(filteredUser)
+    setPage(0)
+  },[search.value, filterNumber, userList])
   const onClickFilter = role => {
     setFilterNumber(role);
   };
-
-  console.log(user);
-
-  useEffect(() => {
-    const { value } = search;
-    let filteredList = [...users];
-
-    if (value !== '' && filterNumber === 100) {
-      filteredList = filteredList.filter(el =>
-        el.userName.toLowerCase().includes(value.toLowerCase()),
-      );
-    }
-    if (filterNumber !== 100) {
-      filteredList = filteredList.filter(
-        v =>
-          v.role === filterNumber &&
-          v.userName.toLowerCase().includes(value.toLowerCase()),
-      );
-    }
-    setPageable(userListData.findAllByUsername(page, limit, value));
-    setPage(0);
-    return setUserList(filteredList);
-  }, [search.value, users, filterNumber]);
-
-  useEffect(() => {
-    setPageable(userListData.findAllByUsername(page, limit));
-  }, [page, userList]);
 
   const findLastId = () => {
     return Math.max(...userList.map(v => v.id));
@@ -162,11 +146,11 @@ function Admin() {
               {/* <Link to={}>1페이지</Link> */}
             </Search>
             <UserTable
-              pageable={pageable}
+              allUserNum={userList.length}
               setPage={setPage}
               page={page}
+              showUser={showUser}
               setUserList={setUserList}
-              userList={userList}
             />
           </div>
         </Wrapper>

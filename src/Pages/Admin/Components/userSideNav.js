@@ -44,7 +44,6 @@ function UserSideNav({ onClickFilter, filterNumber }) {
           key={index}
           isChosen={filter?.role === filterNumber}
           onClick={() => {
-            console.log(filter.role);
             onClickFilter(filter?.role);
           }}
         >

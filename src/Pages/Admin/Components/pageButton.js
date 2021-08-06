@@ -11,31 +11,30 @@ const Button = styled.button`
     border-bottom: 1px solid gray;
   }
 `;
+const Prev = ({onClick})=> (
+  <Button onClick={onClick}>
+    {'이전'}
+  </Button>
+)
 
-function PageButton({ size, maxPage, page, setPage, next, prev }) {
+const Next = ({onClick}) => (
+  <Button onClick={onClick}>
+    {'다음'}
+  </Button>
+)
+function PageButton({ size, page, setPage, userCount ,limit}) {
   const [pageList, setPageList] = useState([]);
-
+  const maxPage = Math.ceil(userCount / limit)
   const onPaging = page => {
     setPage(page);
   };
-
   useEffect(() => {
     setPageList(Array.from({ length: maxPage }, (_, i) => i));
   }, [maxPage]);
 
   return (
     <>
-      {prev ? (
-        <Button
-          onClick={() => {
-            onPaging(page - 1);
-          }}
-        >
-          {'이전'}
-        </Button>
-      ) : (
-        <div style={{ width: '36px', display: 'inline-block' }} />
-      )}
+      {page !== 0 && <Prev onClick={()=>onPaging(page-1)}></Prev>}
       {maxPage < size
         ? pageList.map(v => (
             <Button
@@ -78,11 +77,7 @@ function PageButton({ size, maxPage, page, setPage, next, prev }) {
                 {v + 1}
               </Button>
             ))}
-      {next ? (
-        <Button onClick={() => onPaging(page + 1)}>{'다음'}</Button>
-      ) : (
-        <></>
-      )}
+      {page < maxPage-1 && <Next onClick={()=>onPaging(page+1)}/>}
     </>
   );
 }

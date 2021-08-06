@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
 
-import PageButton from 'Pages/Admin/pageButton';
+import PageButton from './pageButton';
 import UserModal from './userModal';
 import { ROLE } from 'constant/role';
 import { cardNumberFormat } from 'utils/format';
@@ -20,17 +20,18 @@ const Container = styled.div`
   }
 `;
 
-const Total = styled.div`
+const UserNumber = styled.div`
+
   margin-bottom: 35px;
   font-size: 17px;
   font-weight: bold;
+  display:flex;
+  justify-content : space-around;
   color: #252529;
-
-  span {
-    color: #1685fd;
-  }
 `;
-
+const Number = styled.span`
+  color: #1685fd;
+`
 const Td = styled.td`
   padding: 20px 30px 20px 0px;
   max-width: 150px;
@@ -96,13 +97,11 @@ const User = ({ user, onClickhandler }) => {
   );
 };
 
-const UserTable = ({ userList, setUserList, page, setPage, pageable }) => {
+const UserTable = ({ showUser, setUserList, page, setPage, allUserNum}) => {
   const [isModal, setIsModal] = useState(false);
   const [modalId, setModalId] = useState(0);
-  const { content, ...props } = pageable;
 
   const openModal = id => {
-    console.log(id);
     setIsModal(true);
     setModalId(id);
   };
@@ -110,12 +109,20 @@ const UserTable = ({ userList, setUserList, page, setPage, pageable }) => {
   const toggleModal = () => {
     setIsModal(!isModal);
   };
-
+  const LIMIT = 5
+  const sliceUser = () => {
+    return showUser.slice(page*LIMIT,(page+1)*LIMIT)
+  }
   return (
     <Container>
-      <Total>
-        전체 사용자 <span>{userList.length}</span>명
-      </Total>
+      <UserNumber>
+        <div>
+          해당 사용자 <Number>{showUser.length}</Number>명
+        </div>
+        <div>
+          전체 사용자 <Number>{allUserNum}</Number> 명
+        </div>
+      </UserNumber>
       <Table>
         <THead>
           <tr>
@@ -128,26 +135,20 @@ const UserTable = ({ userList, setUserList, page, setPage, pageable }) => {
           </tr>
         </THead>
         <TBody>
-          {content.map((user, idx) => (
+          {sliceUser().map((user, idx) => (
             <User
               key={idx}
               user={user}
               onClickhandler={() => openModal(user.id)}
             />
-            // {userList.map((user, idx) => (
-            //   <User
-            //     key={idx}
-            //     user={user}
-            //     onClickhandler={() => openModal(user.id)}
-            //   />
           ))}
         </TBody>
       </Table>
-      <PageButton {...props} setPage={setPage} page={page} size={5} />
+      <PageButton limit={LIMIT} userCount={showUser.length} setPage={setPage} page={page} size={5} />
       {isModal && (
         <UserModal
           show={isModal}
-          user={userList.find(v => v.id === modalId)}
+          user={showUser.find(v => v.id === modalId)}
           toggleModal={toggleModal}
           setUserList={setUserList}
         />

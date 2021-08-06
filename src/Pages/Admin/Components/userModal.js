@@ -79,7 +79,6 @@ const UserModal = ({ show, toggleModal, user, setUserList }) => {
   const [userState, setUserState] = useState(user);
   useEffect(() => {
     setUserState(user);
-    console.log(user);
   }, [user]);
   const toggleIsAdmin = () => {
     setUserState({ ...userState, isAdmin: !userState.isAdmin });
@@ -88,8 +87,6 @@ const UserModal = ({ show, toggleModal, user, setUserList }) => {
     setUserState({ ...userState, role: value });
   };
   const changeUserData = () => {
-    userListStorage.push(userState);
-    setUserList(prev => prev.map(v => (v.id === userState.id ? userState : v)));
     let changeData = '';
     if (userState.role !== user.role) {
       changeData += `권한이 ${ROLE[userState.role]}로 바뀌었습니다.`;
@@ -101,8 +98,14 @@ const UserModal = ({ show, toggleModal, user, setUserList }) => {
       }되었습니다`;
     }
     const noChangeMsg = '변경사항이 없습니다.';
-    const alertCheck = alert(changeData || noChangeMsg);
-    console.log(alertCheck, userState);
+    alert(changeData || noChangeMsg);
+    if (changeData){
+      const userList = userListStorage.load();
+      const newUserList = userList.map(user => user.id === userState.id ? userState: user)
+      userListStorage.save(newUserList)
+      setUserList(newUserList);
+    }
+    toggleModal()
   };
 
   return (
