@@ -94,3 +94,8 @@ admin 계정 변경, 접근 권한 설정 변경
 > git clone https://github.com/gugudanAssginment/jaranda-assignment.git
 
 > npm install
+
+------
+## 관리자 로그인
+관리자 페이지 확인을 위한, 관리자 로그인은 id : admin, password : a 입니다.
+
