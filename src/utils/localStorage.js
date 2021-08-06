@@ -48,37 +48,6 @@ class Storage {
 
     this.save(loadedData.map(v => (v.id === item.id ? item : v)));
   }
-
-  findAllByUsername(page, limit, username = null) {
-    let loadedData;
-
-    if (username) {
-      loadedData = getItem(this.keyName).filter(el =>
-        el.userName.toLowerCase().includes(username.toLowerCase()),
-      );
-    } else {
-      loadedData = getItem(this.keyName);
-    }
- 
-    const len = loadedData.length;
-    const maxPage =
-      loadedData.length % limit
-        ? parseInt(len / limit + 1)
-        : parseInt(len / limit); 
-
-    const next = page < maxPage - 1;
-    const prev = page > 0;
- 
-    const pageable = {
-      maxPage,
-      next,
-      prev,
-      content: loadedData.slice(page * limit, page * limit + limit),
-    };
-    console.log(pageable);
-
-    return pageable;
-  }
 }
 
 export default Storage;
