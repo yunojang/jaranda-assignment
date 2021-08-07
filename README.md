@@ -96,8 +96,13 @@ admin 계정 변경, 접근 권한 설정 변경
 > npm install
 
 ------
-## 관리자 로그인
-관리자 페이지 확인을 위한, 관리자 로그인
-> id : admin
-> password : a
+## 로그인
+권한 별 페이지 확인을 위한, 로그인
+> **ID / password**
+admin / a -> 관리자
+frontend / a -> 프론트엔드
+backend / a -> 백엔드
+server / a -> 서버
+customservice / a -> 고객지원
+HRresource / a -> 인사관리
 
