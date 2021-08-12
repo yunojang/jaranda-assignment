@@ -12,7 +12,7 @@ PreOnBoading-Assignment3-Jaranda
 ​    - 관리자 계정 로그인 시 관리자 전용페이지 구현
 
 
--**팀원** : 강동휘, 강준희, 노찬욱, 박세리, 이승열, 장윤호, 
+-**팀원** : 강동휘, 강준희, 노찬욱, 박세리, 이승열, 장윤호, 채준형
 
 -**기술 스택**: React, styled-components, react-daum-postcode
 
